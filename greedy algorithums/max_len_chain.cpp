@@ -3,25 +3,25 @@
 #include <algorithm>
 using namespace std;
 
-bool compare(pair<int, int> a, pair<int, int> b){
-    return a.second < b.second;
-}
+class Solution {
+public:
+    int findLongestChain(vector<vector<int>>& pairs) {
+        sort(pairs.begin(), pairs.end(), [](vector<int> a, vector<int> b){
+            return a[1]<b[1];
+        });
+        int chainlen =1;
+        int curr_end = pairs[0][1];
+        int n=pairs.size();
 
-int maxChainLength(vector<pair<int,int>> pairs){
-    sort(pairs.begin(), pairs.end(), compare);
-    
-    int chainlen = 1;
-    int currEnd = pairs[0].second;
-    
-    for(int i=0; i<pairs.size(); i++){
-        if(pairs[i].first > currEnd){
-            chainlen++;
-            currEnd = pairs[i].second;
+        for(int i=0; i<n; i++){
+            if(pairs[i][0] > curr_end){
+                chainlen++;
+                curr_end = pairs[i][1];
+            }
         }
+        return chainlen;
     }
-    
-    return chainlen;
-}
+};
 
 int main()
 {
@@ -32,7 +32,7 @@ int main()
     pairs[3] = make_pair(27,40);
     pairs[4] = make_pair(50,90);
 
-    cout<<maxChainLength(pairs)<<endl;
+    cout<<findLongestChain(pairs)<<endl;
     
 return 0;
 }

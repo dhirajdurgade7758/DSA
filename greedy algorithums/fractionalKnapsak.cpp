@@ -21,9 +21,11 @@ int fractionalKnapsack(vector<int> val, vector<int> wt, int w){
     sort(ratio.begin(), ratio.end(), compare);
     
     for(int i=0; i<n; i++){
-        if(wt[i] <= w){
-            ans += val[i];
-            w-=wt[i];
+
+        int indx = ratio[i].second;
+        if(wt[indx] <= w){
+            ans += val[indx];
+            w-=wt[indx];
         }
         else{
             ans += (ratio[i].first * w);
