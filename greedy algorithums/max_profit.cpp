@@ -36,3 +36,60 @@ int main()
     maxProfit(pairs);
 return 0;
 }
+
+
+// Max profit from GFG
+// class job {
+// public:
+//     int indx;
+//     int deadline;
+//     int profit;
+    
+//     job(int indx, int deadline, int profit){
+//         this->indx = indx;
+//         this->deadline = deadline;
+//         this->profit = profit;
+//     }
+// };
+
+// class Solution {
+// public:
+//     vector<int> jobSequencing(vector<int> &deadline, vector<int> &profit) {
+//         int n = profit.size();
+//         vector<job> jobs;
+
+//         for (int i = 0; i < n; i++) {
+//             jobs.emplace_back(i, deadline[i], profit[i]);
+//         }
+
+//         // Sort by profit descending
+//         sort(jobs.begin(), jobs.end(), [](job a, job b) {
+//             return a.profit > b.profit;
+//         });
+
+//         // Find the maximum deadline
+//         int maxDeadline = 0;
+//         for (auto &j : jobs) {
+//             maxDeadline = max(maxDeadline, j.deadline);
+//         }
+
+//         // Slot array to track filled time slots (1-based indexing)
+//         vector<int> slots(maxDeadline + 1, -1); // -1 indicates empty
+
+//         int count = 0, income = 0;
+
+//         for (auto &j : jobs) {
+//             // Try to find a free slot from j.deadline to 1
+//             for (int t = j.deadline; t >= 1; t--) {
+//                 if (slots[t] == -1) {
+//                     slots[t] = j.indx;
+//                     count++;
+//                     income += j.profit;
+//                     break;
+//                 }
+//             }
+//         }
+
+//         return {count, income};
+//     }
+// };
