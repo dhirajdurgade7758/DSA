@@ -19,12 +19,45 @@ class heap{
         }
         cout<<"pushed: "<<data<<endl;
     }
+    
+    void heapify(int indx){
+        if(indx >= h.size()){
+            return;
+        }
+        
+        int l=2*indx+1;
+        int r=2*indx+2;
+        int maxindx=indx;
+        
+        if(l<h.size() && h[l]>h[maxindx]){
+            maxindx=l;
+        }
+        
+        if(r<h.size() && h[r]>h[maxindx]){
+            maxindx=r;
+        }
+        
+        swap(h[maxindx], h[indx]);
+        
+        if(maxindx!=indx){
+            return heapify(maxindx);
+        }
+    }
+    
     void pop(){
+        //swap root and last
+        swap(h[0], h[h.size()-1]);
+        
+        //delete this lastindex
+        h.pop_back();
+        
+        //fix the heap
+        heapify(0);
         
     }
     
     int top(){
-        
+    
         return h[0];
     }
     
@@ -43,8 +76,11 @@ int main()
     pq.push(7);
     pq.push(3);
     pq.push(11);
-    cout<<pq.empty()<<endl;
-    cout<<pq.top();
+    
+    while(!pq.empty()){
+        cout<<"top: "<<pq.top()<<endl;
+        pq.pop();
+    }
 
 return 0;
 }
