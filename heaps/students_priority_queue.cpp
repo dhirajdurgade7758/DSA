@@ -1,35 +1,60 @@
 #include<iostream>
+#include<vector>
 #include<queue>
 using namespace std;
 
-class student{
+class Row{
 public:
-    string name;
-    int rank;
-    
-    student(string name, int rank){
-        this->name = name;
-        this->rank = rank;
+    int Scount;
+    int indx;
+
+    Row(int c, int i){
+        Scount = c;
+        indx = i;
     }
     
-    bool operator < (const student &obj) const {
-        return this->rank < obj.rank;
+    bool operator < (const Row &r )const {
+        if(this->Scount == r.Scount){
+            return this->indx > r.indx;
+        }
+        return this->Scount > r.Scount;
     }
+
 };
 
-int main()
-{
-    priority_queue<student> pq;
-    pq.push(student("dhiraj", 2));
-    pq.push(student("vishal", 6));
-    pq.push(student("darshan", 4));
-    pq.push(student("harshad", 1));
-    pq.push(student("harsh", 5));
-    
-    while(!pq.empty()){
-        cout<<"top: "<<pq.top().name<<endl;
-        pq.pop();
+vector<int> kWeakestRows(vector<vector<int>>& mat, int k) {
+        vector<Row> vec;
+        for(int i=0; i<mat.size(); i++){
+            int soldiersCount=0;
+            for(int j=0; j<mat[i].size(); j++){
+                if(mat[i][j]==1){
+                    soldiersCount++;
+                }
+                else{
+                    break;
+                }
+            }
+            vec.push_back(Row(soldiersCount, i));
+        }
+    priority_queue<Row> pq(vec.begin(), vec.end());
+        
+        vector<int> ans;
+        while(k>0){
+            ans.push_back(pq.top().indx);
+            pq.pop();
+            k--;
+        }
+        return ans;
+}
+
+int main(){
+    vector<vector<int>> mat = {{1,1,0,0,0}, {1,1,1,1,0},{1,0,0,0,0},{1,1,0,0,0},{1,1,1,1,1}};
+
+    int k = 3;
+    vector<int> ans = kWeakestRows(mat, k);
+    for(int i=0; i<ans.size(); i++){
+        cout<<"row: "<<ans[i]<<endl;
     }
 
-return 0;
+    return 0;
 }
