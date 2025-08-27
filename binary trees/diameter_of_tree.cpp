@@ -44,7 +44,7 @@ int height(Node* root){
     return currht;
 }
 
-int diam(Node* root){
+int diam(Node* root){// O(n^2)
     if(root == nullptr){
         return 0;
     }
@@ -52,22 +52,7 @@ int diam(Node* root){
     int currDiam = height(root->left) + height(root->right) + 1;
     int leftDiam = diam(root->left);
     int rightDiam = diam(root->right);
-    if(currDiam >= leftDiam){
-        if(currDiam >= rightDiam){
-            return currDiam;
-        }
-        else{
-            return rightDiam;
-        }
-    }
-    else{
-        if(leftDiam >= rightDiam){
-            return leftDiam;
-        }
-        else{
-            return leftDiam;
-        }
-    }
+    return max(currDiam, max(leftDiam, rightDiam));
 }
 
 int main()
