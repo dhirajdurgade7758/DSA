@@ -116,7 +116,7 @@ int main()
     cout << endl;
     
     int a=4;
-    int b=8;
+    int b=3;
     cout<<"Lowest Common Ancestor of "<<a<<" and "<<b<<" is "<<LCA(root, a,b)<<endl;
     
     return 0;
