@@ -26,33 +26,42 @@ void inorder(Node* root){
     
     while(true){
         if(node != nullptr){
+            // Traverse left and push nodes into stack
             s.push(node);
             node = node->left;
         }
         else{
-            if(s.empty()) break;
+            if(s.empty()) break;  // End when stack is empty
             
+            // Process current node
             node = s.top();
             s.pop();
             cout << node->data << "-";
             
+            // Move to right subtree
             node = node->right;
         }
     }
 }
 
+// Helper function to print all nodes at kth level
 void kthLevelHelper(Node* root, int k, int currLevel){
     if(root == nullptr){
         return;
     }
     
+    // If we reach the required level, print node data
     if(currLevel == k){
-        cout<<root->data<<"-";
+        cout << root->data << "-";
         return;
     }
-    kthLevelHelper(root->left, k, currLevel+1);
-    kthLevelHelper(root->right, k, currLevel+1);
+    
+    // Otherwise, go deeper into left and right subtrees
+    kthLevelHelper(root->left, k, currLevel + 1);
+    kthLevelHelper(root->right, k, currLevel + 1);
 }
+
+// Wrapper function to call helper with starting level = 1 (root level)
 void kthLevel(Node* root, int k){
     kthLevelHelper(root, k, 1);
 }
@@ -76,11 +85,13 @@ int main()
     root->left->right = new Node(5);
     root->left->right->left = new Node(8);
     
+    // Print inorder traversal
     cout << "Inorder Traversal: ";
     inorder(root);
     cout << endl;
     
-    cout<<"kth level of tree: ";
+    // Print all nodes at 3rd level of tree
+    cout << "kth level of tree: ";
     kthLevel(root, 3);
     
     return 0;
