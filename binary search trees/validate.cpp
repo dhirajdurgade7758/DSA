@@ -48,27 +48,22 @@ Node* buildBST(vector<int> arr, int n) {
     return root;
 }
 
-// Function to print all root-to-leaf paths
-void rootToLeaf(Node* root, vector<int> &path) {
-    if (root == nullptr) return;
-
-    // add current node to path
-    path.push_back(root->data);
-
-    // if leaf node found, print the path
-    if (root->left == nullptr && root->right == nullptr) {
-        for (int i = 0; i < path.size(); i++) {
-            cout << path[i] << " ";
-        }
-        cout << endl;
-        path.pop_back();
-        return;
+bool validateHelper(Node* root, Node* min, Node* max){
+    if(root == nullptr){
+        return true;
     }
 
-    // recursive calls for both children
-    rootToLeaf(root->left, path);
-    rootToLeaf(root->right, path);
-    path.pop_back();
+    if(min != nullptr && root->data < min->data){
+        return false;
+    }
+    if(max != nullptr && root->data > max->data){
+        return false;
+    }
+    return validateHelper(root->left, min, root) && validateHelper(root->right, root, max);
+}
+
+bool validateBST(Node* root){
+    return validateHelper(root, nullptr, nullptr);
 }
 
 int main() {
@@ -82,10 +77,6 @@ int main() {
     inorder(root);
     cout << endl;
 
-    // Print all root-to-leaf paths
-    cout << "Paths from root to leaf: " << endl;
-    vector<int> path;
-    rootToLeaf(root, path);
-
+    cout<<"the tree is validated: "<<validateBST(root);
     return 0;
 }
