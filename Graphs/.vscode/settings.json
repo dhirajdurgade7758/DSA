@@ -2,7 +2,9 @@
     "files.associations": {
         "vector": "cpp",
         "utility": "cpp",
-        "list": "cpp"
+        "list": "cpp",
+        "queue": "cpp",
+        "iostream": "cpp"
     },
     "C_Cpp.errorSquiggles": "disabled"
 }

@@ -22,15 +22,21 @@ public:
     }
 
 
-    void dfs(int u, vector<bool> &visited) {
+    void dfshelper(int u, vector<bool> &visited) {
         visited[u] = true;
         cout << u << " ";
 
         for (auto v : l[u]) {
             if (!visited[v.first]) {
-                dfs(v.first, visited);
+                dfshelper(v.first, visited);
             }
         }
+    }
+
+    void dfs(){
+        vector<bool> visited(6, false);
+        dfshelper(0, visited);
+        cout<<endl;
     }
 
     void dfsNonRecursive(int start) {
@@ -71,8 +77,7 @@ int main()
     g.addEdge(3, 4, 10);
     g.addEdge(4, 5, 10);
     g.addEdge(3, 5, 10);
-    vector<bool> visited(6, false);
-    g.dfs(0, visited);
+    g.dfs();
 
     return 0;
 }
