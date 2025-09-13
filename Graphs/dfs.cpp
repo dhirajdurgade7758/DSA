@@ -8,17 +8,17 @@ using namespace std;
 class Graph
 {
     int V;
-    list<pair<int,int>> *l;
+    list<int> *l;
 
 public:
     Graph(int V){
         this->V = V;
-        l = new list<pair<int, int>>[V];
+        l = new list<int>[V];
     }
 
-    void addEdge(int u, int v, int wt){
-        l[u].push_back(make_pair(v, wt));
-        l[v].push_back(make_pair(u, wt)); // fix for undirected graph
+    void addEdge(int u, int v){
+        l[u].push_back(v);
+        l[v].push_back(u); // fix for undirected graph
     }
 
 
@@ -27,8 +27,8 @@ public:
         cout << u << " ";
 
         for (auto v : l[u]) {
-            if (!visited[v.first]) {
-                dfshelper(v.first, visited);
+            if (!visited[v]) {
+                dfshelper(v, visited);
             }
         }
     }
@@ -38,46 +38,18 @@ public:
         dfshelper(0, visited);
         cout<<endl;
     }
-
-    void dfsNonRecursive(int start) {
-    vector<bool> visited(V, false);
-    stack<int> s;
-
-    s.push(start);
-
-    while (!s.empty()) {
-        int node = s.top();
-        s.pop();
-
-        if (!visited[node]) {
-            visited[node] = true;
-            cout << node << " ";
-
-            // Push neighbors to the stack
-            for (auto it = l[node].rbegin(); it != l[node].rend(); ++it) {
-                if (!visited[it->first]) {
-                    s.push(it->first);
-                }
-            }
-        }
-    }
-}
-
-    
-
-   
 };
 
 int main()
 {
-    Graph g(6); // fix: increase to 6 vertices (0 to 5)
-    g.addEdge(0, 1, 10);
-    g.addEdge(0, 2, 10);
-    g.addEdge(2, 3, 10);
-    g.addEdge(3, 4, 10);
-    g.addEdge(4, 5, 10);
-    g.addEdge(3, 5, 10);
-    g.dfs();
+    Graph g(5); // graph with 5 vertices (0 to 4)
 
+    // Add edges
+    g.addEdge(0, 1);
+    g.addEdge(1, 2);
+    g.addEdge(1, 3);
+    g.addEdge(2, 3);
+    g.addEdge(2, 4);
+    g.dfs();
     return 0;
 }
