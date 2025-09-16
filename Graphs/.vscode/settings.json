@@ -4,7 +4,8 @@
         "utility": "cpp",
         "list": "cpp",
         "queue": "cpp",
-        "iostream": "cpp"
+        "iostream": "cpp",
+        "xutility": "cpp"
     },
     "C_Cpp.errorSquiggles": "disabled"
 }
