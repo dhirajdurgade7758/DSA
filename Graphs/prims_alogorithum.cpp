@@ -20,18 +20,6 @@ public:
         l[v].push_back(make_pair(u, wt)); // fix for undirected graph
     }
 
-    void print(){
-        for(int u=0; u<V; u++){
-            list<pair<int,int>> neighbors = l[u];
-            cout<<u<<": ";
-            for (auto n: neighbors)
-            {
-                cout<<"node="<<n.first<<" edge="<<n.second<<", ";
-            }
-            cout<<endl;
-            
-        }
-    }
 
     void primsAlgo(int src){
         priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> pq;
@@ -73,7 +61,6 @@ int main()
     g.addEdge(4, 5, 10);
     g.addEdge(3, 5, 10);
     g.primsAlgo(0);
-    g.print();
 
     return 0;
 }
