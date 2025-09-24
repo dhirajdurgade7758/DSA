@@ -19,7 +19,7 @@ class DisjointSet{
             if(parr[x] == x){
                 return x;
             }
-            return find(parr[x]);
+            return parr[x] = find(parr[x]); //path compressions
         }
 
         void unionByRank(int a, int b){
@@ -58,6 +58,7 @@ int main()
     cout<<dj.find(2)<<endl;
     dj.unionByRank(0,4);
     cout<<dj.find(4)<<endl;
+    cout<<dj.find(3)<<endl;
     dj.getInfo();
 
 return 0;
