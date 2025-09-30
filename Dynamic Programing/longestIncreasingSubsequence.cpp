@@ -1,15 +1,11 @@
 #include<iostream>
 #include<vector>
 #include<unordered_set>
-#include<algorithm>
-
-
 using namespace std;
 
 int LIS(vector<int> arr1){
-    unordered_set<int> s(arr1.begin(), arr1.end());
+    unordered_set<int> s(arr1.begin(), arr.end());
     vector<int> arr2(s.begin(), s.end());
-    sort(arr2.begin(), arr2.end());
 
     int n=arr1.size();
     int m=arr2.size();
