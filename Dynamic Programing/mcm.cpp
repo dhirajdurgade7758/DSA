@@ -16,7 +16,6 @@ int mcm(vector<int> arr, int i, int j){
         //set2
         int cost2 = mcm(arr, k+1, j);
 
-        //current cost
         int currCost = cost1 + cost2 + (arr[i-1] * arr[k] * arr[j]);
         ans = min(ans, currCost);
     }
