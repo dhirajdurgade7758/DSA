@@ -2,7 +2,6 @@
 #include <vector>
 using namespace std;
 
-// Function to calculate the nth Tribonacci number using DP (Tabulation)
 int tribonacci(int n) {
     // Base cases
     if (n == 0) return 0;
