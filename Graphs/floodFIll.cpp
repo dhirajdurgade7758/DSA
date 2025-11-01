@@ -67,7 +67,7 @@ int main() {
         cout << endl;
     }
 
-    // Apply flood fill
+    // Apply flood fill algorithum
     vector<vector<int>> result = sol.floodFill(image, sr, sc, newColor);
 
     cout << "\nAfter Flood Fill:" << endl;
