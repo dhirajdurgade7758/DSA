@@ -26,7 +26,6 @@ void printUniqueElements(int arr[], int size) {
 int main() {
     int size;
 
-    // Input array size
     cout << "Enter the size of the array: ";
     cin >> size;
 
