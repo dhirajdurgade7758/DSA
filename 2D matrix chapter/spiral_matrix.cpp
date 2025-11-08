@@ -46,15 +46,17 @@ using namespace std;
 
     int main(){
         vector<vector<int>> mt = {
-            {1,2,3,4},
-            {5,6,7,8},
-            {9,10,11,12}
+             {1, 2, 3, 4},
+        {5, 6, 7, 8},
+        {9, 10, 11, 12},
+        {13, 14, 15, 16}
         };
 
         vector<int> result = spiralOrder(mt);
 
-        for(int i=0; i<mt.size(); i++){
-            cout<<result[i]<<" ";
-        }
+        for(int i=0; i<result.size(); i++){
+    cout << result[i] << " ";
+}
+
         return 0;
     }
