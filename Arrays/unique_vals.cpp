@@ -1,7 +1,7 @@
 #include <iostream>
 using namespace std;
 
-// Function to print unique elements in an array
+
 void printUniqueElements(int arr[], int size) {
     bool isUnique;
 
