@@ -15,7 +15,7 @@ struct Node {
     }
 };
 
-// Preorder traversal (Root → Left → Right)
+// Preorder traversal 
 void preorder(Node* node) {
     if (node == nullptr) return;
     cout << node->data << " ";
