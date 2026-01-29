@@ -11,7 +11,7 @@ struct Node{
         this->left = nullptr;
         this->right = nullptr;
     }
-}
+};
 
 int main()
 {
