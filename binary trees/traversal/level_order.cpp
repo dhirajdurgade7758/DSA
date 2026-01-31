@@ -16,6 +16,8 @@ struct Node{
 };
 
 vector<vector<int>> levelOrder(Node* root){
+    if(root == nullptr) return {};
+
     vector<vector<int>> ans;
     queue<Node*> q;
     q.push(root);
@@ -25,6 +27,7 @@ vector<vector<int>> levelOrder(Node* root){
             vector<int> level;
             for(int i=0; i<size; i++){
                 Node* node = q.front();
+                q.pop();
                 if(node->left != nullptr) q.push(node->left);
                 if(node->right != nullptr) q.push(node->right);
                 level.push_back(node->data);
