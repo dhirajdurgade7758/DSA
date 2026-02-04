@@ -1,6 +1,25 @@
-class Solution {
-public:
-    vector<int> kWeakestRows(vector<vector<int>>& mat, int k) {
+#include<iostream>
+#include<vector>
+#include<queue>
+using namespace std;
+
+class row{
+    public:
+    int count;
+    int indx;
+
+    row(int c, int i){
+        count = c;
+        indx = i;
+    }
+
+    
+
+    
+
+}
+
+vector<int> kWeakestRows(vector<vector<int>>& mat, int k) {
         priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> pq;
         for(int i=0; i<mat.size(); i++){
             int soldiersCount=0;
@@ -22,5 +41,12 @@ public:
         }
         return ans;
         
-    }
-};
+}
+
+int main(){
+    vector<vector<int>> mat = {{1,1,0,0,0}, {1,1,1,1,0},{1,0,0,0,0},{1,1,0,0,0},{1,1,1,1,1}};
+
+    int k = 3;
+
+    return 0;
+}
