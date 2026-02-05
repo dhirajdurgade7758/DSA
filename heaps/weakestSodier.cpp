@@ -3,22 +3,6 @@
 #include<queue>
 using namespace std;
 
-class row{
-    public:
-    int count;
-    int indx;
-
-    row(int c, int i){
-        count = c;
-        indx = i;
-    }
-
-    
-
-    
-
-}
-
 vector<int> kWeakestRows(vector<vector<int>>& mat, int k) {
         priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> pq;
         for(int i=0; i<mat.size(); i++){
