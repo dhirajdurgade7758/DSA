@@ -6,7 +6,7 @@ void binary_string(int n,int lastbit, string ans){
         cout<<ans<<endl;
         return;
     }
-    if (lastbit != 1) // we can't check with n==0 because the string is empty at the first time
+    if (lastbit == 0) 
     {
         binary_string(n-1,0, ans+'0');
         binary_string(n-1,1, ans+'1');
