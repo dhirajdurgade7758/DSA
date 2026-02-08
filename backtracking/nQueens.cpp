@@ -13,11 +13,13 @@ void printboards(vector<vector<char>> board){
 
 bool isSafe(vector<vector<char>> board, int row, int col){
     int n=board.size();
-    for(int i=0; i<n; i++){
-        if(board[row][i]=='Q'){
-            return false;
-        }
-    }
+    
+    // //horizontal test we dont need it becuse we have handeled it in backtracking itself
+    // for(int i=0; i<n; i++){
+    //     if(board[row][i]=='Q'){
+    //         return false;
+    //     }
+    // }
 
     //vertical test
     for(int i=0;i<=row;i++){
@@ -68,7 +70,7 @@ void nQueens(vector<vector<char>>& board, int row){
 int main()
 {
     vector<vector<char>> board;
-    int n=4;
+    int n=10;
     for(int i=0; i<n; i++){
         vector<char> newrow;
         for(int j=0; j<n; j++){
