@@ -29,7 +29,7 @@ using namespace std;
 
 int main()
 {
-    vector<string> ans = letterCombinations("2345");
+    vector<string> ans = letterCombinations("23");
     for(int i=0; i<ans.size(); i++){
         cout<<ans[i]<<endl;
     }
