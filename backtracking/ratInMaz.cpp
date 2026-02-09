@@ -3,74 +3,74 @@
 #include<vector>
 using namespace std;
 
-class Solution {
-public:
-    void helper(vector<vector<int>>& maze, int row, int col,
-                string path, vector<string>& ans,
-                vector<vector<bool>>& vis) {
+// class Solution {
+// public:
+//     void helper(vector<vector<int>>& maze, int row, int col,
+//                 string path, vector<string>& ans,
+//                 vector<vector<bool>>& vis) {
 
-        int n = maze.size();
+//         int n = maze.size();
 
-        // boundary + blocked + visited check
-        if (row < 0 || col < 0 || row >= n || col >= n ||
-            maze[row][col] == 0 || vis[row][col]) {
-            return;
-        }
+//         // boundary + blocked + visited check
+//         if (row < 0 || col < 0 || row >= n || col >= n ||
+//             maze[row][col] == 0 || vis[row][col]) {
+//             return;
+//         }
 
-        // destination reached
-        if (row == n - 1 && col == n - 1) {
-            ans.push_back(path);
-            return;
-        }
+//         // destination reached
+//         if (row == n - 1 && col == n - 1) {
+//             ans.push_back(path);
+//             return;
+//         }
 
-        vis[row][col] = true;
+//         vis[row][col] = true;
 
-        // move in all 4 directions
-        helper(maze, row + 1, col, path + "D", ans, vis); // Down
-        helper(maze, row - 1, col, path + "U", ans, vis); // Up
-        helper(maze, row, col + 1, path + "R", ans, vis); // Right
-        helper(maze, row, col - 1, path + "L", ans, vis); // Left
+//         // move in all 4 directions
+//         helper(maze, row + 1, col, path + "D", ans, vis); // Down
+//         helper(maze, row - 1, col, path + "U", ans, vis); // Up
+//         helper(maze, row, col + 1, path + "R", ans, vis); // Right
+//         helper(maze, row, col - 1, path + "L", ans, vis); // Left
 
-        vis[row][col] = false; // backtrack
-    }
+//         vis[row][col] = false; // backtrack
+//     }
 
-    vector<string> ratInMaze(vector<vector<int>>& maze) {
-        int n = maze.size();
-        vector<string> ans;
-        vector<vector<bool>> vis(n, vector<bool>(n, false));
+//     vector<string> ratInMaze(vector<vector<int>>& maze) {
+//         int n = maze.size();
+//         vector<string> ans;
+//         vector<vector<bool>> vis(n, vector<bool>(n, false));
 
-        if (maze[0][0] == 1)
-            helper(maze, 0, 0, "", ans, vis);
+//         if (maze[0][0] == 1)
+//             helper(maze, 0, 0, "", ans, vis);
 
-        sort(ans.begin(), ans.end());
-        return ans;
-    }
-};
+//         sort(ans.begin(), ans.end());
+//         return ans;
+//     }
+// };
 
-int main() {
-    int n;
-    cin >> n;
+// int main() {
+//     int n;
+//     cin >> n;
 
-    vector<vector<int>> maze(n, vector<int>(n));
-    for (int i = 0; i < n; i++) {
-        for (int j = 0; j < n; j++) {
-            cin >> maze[i][j];
-        }
-    }
+//     vector<vector<int>> maze(n, vector<int>(n));
+//     for (int i = 0; i < n; i++) {
+//         for (int j = 0; j < n; j++) {
+//             cin >> maze[i][j];
+//         }
+//     }
 
-    Solution obj;
-    vector<string> result = obj.ratInMaze(maze);
+//     Solution obj;
+//     vector<string> result = obj.ratInMaze(maze);
 
-    if (result.empty()) {
-        cout << "-1";
-    } else {
-        for (string s : result) {
-            cout << s << " ";
-        }
-    }
+//     if (result.empty()) {
+//         cout << "-1";
+//     } else {
+//         for (string s : result) {
+//             cout << s << " ";
+//         }
+//     }
 
-    return 0;
-}
+//     return 0;
+// }
 
 
 // optimized space complexity
