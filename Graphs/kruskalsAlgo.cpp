@@ -38,15 +38,8 @@ class Graph{
             return parr[x] = find(parr[x]);
         }
 
-        void unionByRank(int u, int v){
-            int  parrU = find(u);
-            int parrV = find(v);
-
-            if(rank[parrU] == rank[parrV]){
-                parr[parrV] = parrU;
-                rank[parrU]++;
-            }
-            else if(rank[parrU] > rank[parrV]){
+        void unionByRank(int parrU, int parrV){
+            if(rank[parrU] > rank[parrV]){
                 parr[parrV] = parrU;
             }
             else{
@@ -62,9 +55,9 @@ class Graph{
             sort(edges.begin(), edges.end(), [](Edge& a, Edge& b){return a.wt < b.wt;});
 
             int minCost = 0;
-            int count = 0;
+            int edgeCount = 0;
 
-            for(int i=0; i<edges.size() && count<V-1; i++){
+            for(int i=0; i<edges.size() && edgeCount<=V-2; i++){ // becuse v-1 edges in MST and we are counting edge from 0
                 Edge edge= edges[i];
                 int parrU = find(edge.u);
                 int parrV = find(edge.v);
@@ -72,7 +65,7 @@ class Graph{
                 if(parrU != parrV){
                     unionByRank(parrU, parrV);
                     minCost+=edge.wt;
-                    count++;
+                    edgeCount++;
                 }
             }
             cout<<"minimun cost is: "<< minCost<<endl;
