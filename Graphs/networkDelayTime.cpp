@@ -1,3 +1,6 @@
+#include <bits/stdc++.h>
+using namespace std;
+
 class Solution {
 public:
     
@@ -5,7 +8,7 @@ public:
         priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> pq;
         vector<int> dist(V+1, INT_MAX);
 
-        pq.push(make_pair(0, src));
+        pq.push({0, src});
         dist[src] = 0;
 
         while (!pq.empty())
@@ -13,29 +16,53 @@ public:
             int u = pq.top().second;
             pq.pop();
 
-            for(int i=0; i<graph.size(); i++){
-                if(u==graph[i][0]){
-                    if (dist[graph[i][1]] > dist[u] + graph[i][2])
+            for(int i = 0; i < graph.size(); i++){
+                if(u == graph[i][0]){
+                    int v = graph[i][1];
+                    int wt = graph[i][2];
+
+                    if (dist[v] > dist[u] + wt)
                     {
-                        dist[graph[i][1]] = dist[u] + graph[i][2];
-                        pq.push(make_pair(dist[graph[i][1]], graph[i][1]));
+                        dist[v] = dist[u] + wt;
+                        pq.push({dist[v], v});
                     }
                 }
             }
         }
 
-        int maxTime=0;
-        for(int i=1; i<dist.size(); i++){
-            maxTime=max(maxTime, dist[i]);
+        int maxTime = 0;
+        for(int i = 1; i < dist.size(); i++){
+            if(dist[i] == INT_MAX) return INT_MAX; // unreachable node
+            maxTime = max(maxTime, dist[i]);
         }
+
         return maxTime;
     }
 
     int networkDelayTime(vector<vector<int>>& times, int n, int k) {
-        int ans=dijkastrasAlgo(k,times, n);
+        int ans = dijkastrasAlgo(k, times, n);
         if(ans != INT_MAX){
             return ans;
         }
         return -1;
     }
 };
+
+int main() {
+    Solution sol;
+
+    vector<vector<int>> times = {
+        {2,1,1},
+        {2,3,1},
+        {3,4,1}
+    };
+
+    int n = 4;  // number of nodes
+    int k = 2;  // source node
+
+    int result = sol.networkDelayTime(times, n, k);
+
+    cout << "Network Delay Time: " << result << endl;
+
+    return 0;
+}
