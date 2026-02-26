@@ -1,4 +1,7 @@
 // User function Template for C++
+#include<iostream>
+#include<vector>
+using namespace std;
 
 class Solution {
   public:
@@ -21,4 +24,16 @@ class Solution {
         
     }
 };
+
+int main() {
+    Solution sol;
+    int N = 1245;
+    vector<int> result = sol.minPartition(N);
+    cout << "Coins needed for " << N << ": ";
+    for(int coin : result) {
+        cout << coin << " ";
+    }
+    cout << endl;
+    return 0;
+}
 

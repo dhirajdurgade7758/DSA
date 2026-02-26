@@ -1,3 +1,7 @@
+#include<iostream>
+#include<vector>
+using namespace std;
+
 class Solution {
 public:
     int candy(vector<int>& ratings) {
@@ -35,3 +39,10 @@ public:
         return sum;
     }
 };
+
+int main() {
+    Solution sol;
+    vector<int> ratings = {1, 0, 2};
+    cout << "Number of candies needed: " << sol.candy(ratings) << endl;
+    return 0;
+}

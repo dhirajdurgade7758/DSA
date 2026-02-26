@@ -1,3 +1,7 @@
+#include<iostream>
+#include<string>
+using namespace std;
+
 //bruteforce approach
 // class Solution {
 // public:
@@ -56,3 +60,13 @@ public:
         return min==0;
     }
 };
+
+int main() {
+    Solution sol;
+    string s1 = "(*)";
+    cout << "Is '" << s1 << "' valid? " << (sol.checkValidString(s1) ? "Yes" : "No") << endl;
+    
+    string s2 = "(*))";
+    cout << "Is '" << s2 << "' valid? " << (sol.checkValidString(s2) ? "Yes" : "No") << endl;
+    return 0;
+}

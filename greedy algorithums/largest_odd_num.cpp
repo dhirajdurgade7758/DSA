@@ -1,3 +1,7 @@
+#include<iostream>
+#include<string>
+using namespace std;
+
 class Solution {
 public:
     string largestOddNumber(string num) {
@@ -15,3 +19,13 @@ public:
         return "";
     }
 };
+
+int main() {
+    Solution sol;
+    string num = "52";
+    cout << "Largest odd number from " << num << ": " << sol.largestOddNumber(num) << endl;
+    
+    string num2 = "4206";
+    cout << "Largest odd number from " << num2 << ": " << sol.largestOddNumber(num2) << endl;
+    return 0;
+}

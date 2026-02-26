@@ -1,6 +1,6 @@
 #include<iostream>
 #include<vector>
-#include <algorithm>
+#include<algorithm>
 using namespace std;
 
 class Solution {
@@ -25,14 +25,11 @@ public:
 
 int main()
 {
-    vector<pair<int, int>> pairs(5, make_pair(0,0));
-    pairs[0] = make_pair(5,24);
-    pairs[1] = make_pair(39,60);
-    pairs[2] = make_pair(5,28);
-    pairs[3] = make_pair(27,40);
-    pairs[4] = make_pair(50,90);
-
-    cout<<findLongestChain(pairs)<<endl;
+    Solution sol;
+    // Using vector<vector<int>> to match the function signature
+    vector<vector<int>> pairs = {{5,24}, {39,60}, {5,28}, {27,40}, {50,90}};
     
-return 0;
+    cout << "Longest chain length: " << sol.findLongestChain(pairs) << endl;
+    
+    return 0;
 }

@@ -1,3 +1,8 @@
+#include<iostream>
+#include<vector>
+#include<algorithm>
+using namespace std;
+
 class Solution {
 public:
     vector<vector<int>> minimumAbsDifference(vector<int>& arr) {
@@ -19,4 +24,16 @@ public:
         return ans;
     }
 };
+
+int main() {
+    Solution sol;
+    vector<int> arr = {4, 2, 1, 3};
+    vector<vector<int>> result = sol.minimumAbsDifference(arr);
+    cout << "Pairs with minimum abs difference: ";
+    for(auto pair : result) {
+        cout << "[" << pair[0] << "," << pair[1] << "] ";
+    }
+    cout << endl;
+    return 0;
+}
 
