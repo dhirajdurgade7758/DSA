@@ -5,32 +5,34 @@ using namespace std;
 class Solution {
 public:
     int candy(vector<int>& ratings) {
+        // Initialize sum with 1 candy for the first person
         int sum=1;
         int i=1;
         int n=ratings.size();
 
+        // Traverse through all ratings and handle different cases
         while(i<n){
 
-            //for flat surface
+            // CASE 1: Flat surface - same rating as previous, give minimum 1 candy
             if(ratings[i] == ratings[i-1]){
                 sum+=1;
                 i++;
                 continue;
             }
 
-            //for incresing surface
+            // CASE 2: Increasing surface - ratings going up, increase candy count
             int peak=1;
             while(i<n && ratings[i] > ratings[i-1]){
                 peak++; sum+=peak; i++;
             }
 
-            // for decreasing surface
+            // CASE 3: Decreasing surface - ratings going down, add decreasing candy counts
             int down=1;
             while(i<n && ratings[i] < ratings[i-1]){
                 sum+=down; down++; i++;
             }
 
-            // for exceptional peak case
+            // CASE 4: Handle peak adjustment - ensure peak has max of both increasing and decreasing counts
             if(down > peak){
                 sum += down-peak;
             }

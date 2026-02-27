@@ -39,18 +39,22 @@ using namespace std;
 class Solution {
 public:
     string getSmallestString(int n, int k) {
+        // STEP 1: Create starting string with all 'a' (gives minimum value)
         vector<char> alphabets = {
        'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j',
        'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't',
        'u', 'v', 'w', 'x', 'y', 'z'
         };
-        string res(n, 'a');
-        k-=n;
+        string res(n, 'a');  // All characters start as 'a' (sum = n)
+        k-=n;  // Remaining budget to increase character values
 
+        // STEP 2: Greedily maximize characters from the end to keep lexicographically smallest
         while(k > 0){
+            // At each position from the end, use as large a character as budget allows
+            // Max difference from 'a' is 25 (when using 'z')
             res[n-1] = alphabets[min(25, k)];
-            k -= min(25, k);
-            n--;
+            k -= min(25, k);  // Deduct used budget
+            n--;  // Move to previous position
         }
         return res;
         

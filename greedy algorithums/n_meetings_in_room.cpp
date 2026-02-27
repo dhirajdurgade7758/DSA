@@ -5,14 +5,17 @@ using namespace std;
 class Solution{
     public:
     int maxMeetings(vector<int>& start, vector<int>& end) {
-        //your code goes here
-        int currend = end[0];
-        int count = 1;
+        // STEP 1: Initialize with first meeting (assumes input sorted by end time)
+        int currend = end[0];  // Track end time of last selected meeting
+        int count = 1;         // Start count with first meeting
         int n=start.size();
+        
+        // STEP 2: Greedy approach - select meetings that start after previous one ends
         for(int i=1; i<n; i++){
+            // If meeting starts after previous one ends, we can schedule it
             if(start[i] > currend){
-                count++;
-                currend=end[i];
+                count++;        // Increment meeting count
+                currend=end[i]; // Update end time of last selected meeting
             }
         }
         return count;

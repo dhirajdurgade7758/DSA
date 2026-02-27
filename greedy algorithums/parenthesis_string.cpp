@@ -29,34 +29,45 @@ using namespace std;
 // };
 
 
-// Optimized solution
+// Optimized solution using greedy approach with min/max balance counters
+// Time: O(n), Space: O(1) - much better than brute force
 
 class Solution {
 public:
     bool checkValidString(string s) {
+        // STEP 1: Track min and max possible open parentheses count at each position
+        // min: count if all '*' are treated as ')'
+        // max: count if all '*' are treated as '('
         int min=0;
         int max=0;
 
+        // STEP 2: Traverse string and update balance counters
         for(int i=0; i<s.length(); i++){
+            // Opening bracket increases both min and max
             if(s[i]=='('){
-                min++;
-                max++;
+                min++;  // Minimum increases
+                max++;  // Maximum increases
             }
+            // Closing bracket decreases both min and max
             else if(s[i]==')'){
-                min--;
-                max--;
+                min--;  // Minimum decreases
+                max--;  // Maximum decreases
             }
+            // Wildcard can be treated as either '(' or ')'
             else{
-                min--;
-                max++;
+                min--;  // Minimum if treated as ')'
+                max++;  // Maximum if treated as '('
             }
+            // If min goes negative, set to 0 (no need to track below 0)
             if(min<0){
                 min=0;
             }
+            // If max goes negative, impossible to balance (too many closing brackets)
             if(max<0){
                 return false;
             }
         }
+        // Valid if we can end with exactly 0 open parentheses
         return min==0;
     }
 };

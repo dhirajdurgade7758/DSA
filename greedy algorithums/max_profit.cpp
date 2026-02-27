@@ -8,15 +8,18 @@ bool compare(pair<int, int> p1, pair<int, int> p2){
 }
 
 int maxProfit(vector<pair<int, int>> jobs){
+    // STEP 1: Sort jobs by profit in descending order (greedy approach - pick highest profit first)
     sort(jobs.begin(), jobs.end(), compare);
     
-    int profit = jobs[0].second;
-    int safeDeadline = 2;
+    int profit = jobs[0].second;  // Start with first job's profit
+    int safeDeadline = 2;  // After first job, next available slot is at position 2
     
+    // STEP 2: For each remaining job, check if we can fit it in available time slots
     for(int i=1; i<jobs.size(); i++){
+        // If job's deadline allows us to schedule it, include it
         if(jobs[i].first >= safeDeadline){
-            profit+=jobs[i].second;
-            safeDeadline++;
+            profit+=jobs[i].second;  // Add this job's profit
+            safeDeadline++;  // Move to next available slot
         }
     }
     

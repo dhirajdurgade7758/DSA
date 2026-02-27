@@ -5,19 +5,23 @@ using namespace std;
 class Solution {
 public:
     int balancedStringSplit(string s) {
-        int count = 0;
-        int temp = 0;
+        // STEP 1: Track balance between 'R' and 'L' characters
+        int count = 0;  // Count of balanced substrings found
+        int temp = 0;   // Balance counter (R=+1, L=-1)
         
+        // STEP 2: Traverse string and find each balanced substring
         for(int i=0; i<s.size(); i++){
+            // When balance reaches 0, we found a balanced substring
             if(temp == 0){
-                count++;
+                count++;  // Found and counted a balanced substring
             }
 
+            // Update balance: R increases, L decreases
             if(s[i]=='R'){
-            temp++;
+                temp++;   // 'R' increases balance
             }
             else{
-                temp--;
+                temp--;   // 'L' decreases balance
             }
         }
         return count;
