@@ -1,24 +1,33 @@
 #include<iostream>
 #include<vector>
+#include<algorithm>
 using namespace std;
 
-class Solution{
-    public:
+class Solution {
+  public:
+    // Function to find the maximum number of meetings that can
+    // be performed in a meeting room.
     int maxMeetings(vector<int>& start, vector<int>& end) {
-        // STEP 1: Initialize with first meeting (assumes input sorted by end time)
-        int currend = end[0];  // Track end time of last selected meeting
-        int count = 1;         // Start count with first meeting
-        int n=start.size();
-        
-        // STEP 2: Greedy approach - select meetings that start after previous one ends
-        for(int i=1; i<n; i++){
-            // If meeting starts after previous one ends, we can schedule it
-            if(start[i] > currend){
-                count++;        // Increment meeting count
-                currend=end[i]; // Update end time of last selected meeting
-            }
+    int n = start.size();
+    
+    vector<pair<int,int>> meetings;
+    for(int i = 0; i < n; i++){
+        meetings.push_back({end[i], start[i]});
+    }
+
+    sort(meetings.begin(), meetings.end()); // sort by end time
+
+    int count = 1;
+    int currEnd = meetings[0].first;
+
+    for(int i = 1; i < n; i++){
+        if(meetings[i].second > currEnd){
+            count++;
+            currEnd = meetings[i].first;
         }
-        return count;
+    }
+    
+    return count;
     }
 };
 
