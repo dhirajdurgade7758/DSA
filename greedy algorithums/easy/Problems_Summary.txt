@@ -1,0 +1,66 @@
+EASY LEVEL - GREEDY PROBLEMS SUMMARY
+=====================================
+
+1. ASSIGN COOKIES - LeetCode 455
+   Link: https://leetcode.com/problems/assign-cookies/
+   Problem Explanation:
+   - You have cookies of different sizes and children with different hunger levels
+   - Each child needs minimum cookie size to be satisfied
+   - Give maximum number of cookies to satisfy maximum children
+   
+   Key Idea:
+   - Sort both cookies and children by size
+   - Use two pointers to match smallest cookies with greediest children
+   - If a cookie satisfies a child, mark as done and move to next
+   
+2. BEST TIME TO BUY AND SELL STOCK - LeetCode 121
+   Link: https://leetcode.com/problems/best-time-to-buy-and-sell-stock/
+   Problem Explanation:
+   - You have stock prices for each day
+   - Buy on one day and sell on a later day (only 1 transaction)
+   - Find the maximum profit possible
+   
+   Key Idea:
+   - Track minimum price seen so far
+   - At each price, calculate profit if we sell at that price
+   - Keep track of maximum profit
+   - Single pass through array O(n)
+   
+3. LARGEST ODD NUMBER IN STRING
+   Problem Explanation:
+   - You have a string of digits
+   - Find the largest number that can be formed using these digits
+   - The number must be odd (last digit is 1, 3, 5, 7, or 9)
+   
+   Key Idea:
+   - Greedily pick largest odd digits from left to right
+   - Form largest number using these odd digits
+   - Compare and keep the largest odd number possible
+   
+4. LEMONADE CHANGE - LeetCode 860
+   Link: https://leetcode.com/problems/lemonade-change/
+   Problem Explanation:
+   - You run a lemonade stand, lemonade costs $5
+   - Customers pay with $5, $10, or $20 bills
+   - You start with no money and must give correct change
+   - Can you serve all customers without running out of change?
+   
+   Key Idea:
+   - Keep count of $5 and $10 bills
+   - For $5 bill: just add to count
+   - For $10 bill: give one $5 as change
+   - For $20 bill: try to give one $10 and one $5, or three $5 bills
+   - Prioritize giving $10 to save $5 notes for $20 transactions
+   
+5. SPLIT A STRING IN BALANCED STRINGS - LeetCode 1221
+   Link: https://leetcode.com/problems/split-a-string-in-balanced-strings/
+   Problem Explanation:
+   - You have a string with 'L' and 'R' characters
+   - A balanced string has equal number of 'L' and 'R' characters
+   - Split the string into maximum number of balanced substrings
+   
+   Key Idea:
+   - Track balance of L and R characters (balance = count of L - count of R)
+   - Whenever balance becomes 0, we have a balanced substring
+   - Greedily count how many balanced substrings we can make
+   - Count becomes answer
