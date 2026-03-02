@@ -1,0 +1,41 @@
+HARD LEVEL - GREEDY PROBLEMS SUMMARY
+=====================================
+
+1. CANDY - LeetCode 135
+   Link: https://leetcode.com/problems/candy/
+   Problem Explanation:
+   - You have n children with ratings given in an array
+   - Distribute candies such that:
+     * Each child gets at least 1 candy
+     * Children with higher rating than neighbors must get more candies
+   - Find minimum total candies needed
+   
+   Key Idea:
+   - Use greedy approach with multiple passes
+   - Handle three cases: flat (equal ratings), increasing, and decreasing
+   - For increasing slope: increment candy count as we go up
+   - For decreasing slope: give decreasing candies going down
+   - Adjust peak when decreasing part is longer than increasing part
+   - Ensure peak child gets max of both left and right constraints
+   
+   Simple: Greedily handle slopes (increasing/decreasing) and adjust peaks accordingly
+
+2. SPLIT ARRAY LARGEST SUM / BOOK ALLOCATION - LeetCode 410
+   Link: https://leetcode.com/problems/split-array-largest-sum/
+   Problem Explanation:
+   - Given array of integers and number k
+   - Split array into k contiguous subarrays
+   - Minimize the largest sum among all subarrays
+   - Example: Split [7,2,5,10,8] with k=2 to get [7,2,5] and [10,8] with max=18
+   
+   Key Idea:
+   - Use binary search on the answer + greedy validation
+   - Search space: [max(array), sum(array)]
+   - For each mid value, check if we can split array into k parts with max sum ≤ mid
+   - In validation: greedily assign elements to current student until adding next exceeds mid
+   - If sum exceeds, assign to next student (greedy approach)
+   - If answer is valid, try smaller maximum (left side)
+   - If answer is not valid, try larger maximum (right side)
+   - Time Complexity: O(n * log(sum)) where log(sum) is binary search iterations
+   
+   Simple: Binary search on answer, use greedy validation to check if a max sum is achievable

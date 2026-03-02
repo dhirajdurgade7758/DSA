@@ -13,6 +13,8 @@ MEDIUM LEVEL - GREEDY PROBLEMS SUMMARY
    - Sort items by ratio in descending order
    - Greedily take items with highest ratio first
    - Take whole item if it fits, otherwise take fraction of it
+   
+   Simple: Sort by value-to-weight ratio and greedily pick highest ratio items
 
 2. GAS STATIONS - LeetCode 134
    Link: https://leetcode.com/problems/gas-station/
@@ -27,6 +29,8 @@ MEDIUM LEVEL - GREEDY PROBLEMS SUMMARY
    - Greedily pick starting point when previous balance goes negative
    - If current balance becomes negative, next station becomes new start
    - If total gas >= cost, this greedy choice guarantees a solution
+   
+   Simple: Check if solution exists, then greedily find starting point when balance goes negative
 
 3. INDIAN COINS - Minimum Coins for Amount
    Problem Explanation:
@@ -39,6 +43,8 @@ MEDIUM LEVEL - GREEDY PROBLEMS SUMMARY
    - Use as many of that coin as possible (integer division)
    - Reduce remaining amount after using coins
    - Move to next smaller denomination and repeat
+   
+   Simple: Greedily pick largest coins first until amount is satisfied
 
 4. MAXIMUM ACTIVITIES - Activity Selection
    Problem Explanation:
@@ -52,6 +58,8 @@ MEDIUM LEVEL - GREEDY PROBLEMS SUMMARY
    - Greedily select next activity that starts at/after current one ends
    - Always pick activity ending earliest (more future opportunities)
    - Count total activities selected
+   
+   Simple: Sort by end time, greedily select activities that don't overlap
 
 5. MAXIMUM LENGTH OF PAIR CHAIN - LeetCode 435
    Link: https://leetcode.com/problems/maximum-length-of-pair-chain/
@@ -65,6 +73,8 @@ MEDIUM LEVEL - GREEDY PROBLEMS SUMMARY
    - Greedily select pairs that start after previous pair ends
    - Always pick pair ending earliest for more future opportunities
    - When current pair starts > previous pair ends, extend chain
+   
+   Simple: Sort by end value, greedily extend chain with non-overlapping pairs
 
 6. MAXIMUM PROFIT VARIATION
    Problem Explanation:
@@ -77,6 +87,8 @@ MEDIUM LEVEL - GREEDY PROBLEMS SUMMARY
    - If price increases from day i to i+1, buy at i and sell at i+1
    - Sum all profitable differences
    - Simple approach: add all positive differences
+   
+   Simple: Capture all upward price movements by summing positive differences
 
 7. MAXIMUM PROFIT - Single Transaction
    Problem Explanation:
@@ -89,6 +101,8 @@ MEDIUM LEVEL - GREEDY PROBLEMS SUMMARY
    - At each price, calculate profit if selling at that price
    - Keep maximum profit found
    - Single pass through prices O(n)
+   
+   Simple: Track minimum price and maximum profit in single pass
 
 8. MINIMUM ABSOLUTE DIFFERENCE
    Problem Explanation:
@@ -101,6 +115,8 @@ MEDIUM LEVEL - GREEDY PROBLEMS SUMMARY
    - Find minimum difference between adjacent elements (after sorting)
    - All pairs with this minimum difference will be adjacent in sorted array
    - Iterate through sorted array and collect those pairs
+   
+   Simple: Sort array and find pairs with minimum difference in adjacent elements
 
 9. MINIMUM NUMBER OF PLATFORMS - GFG Problem
    Problem Explanation:
@@ -113,6 +129,8 @@ MEDIUM LEVEL - GREEDY PROBLEMS SUMMARY
    - Use two pointers to track train movements
    - When train arrives, need a platform; when departs, platform frees up
    - Track maximum platforms needed at any point
+   
+   Simple: Use two pointers on sorted arrivals/departures to track platforms needed
 
 10. N MEETINGS IN ONE ROOM - GFG Problem
     Problem Explanation:
@@ -125,6 +143,8 @@ MEDIUM LEVEL - GREEDY PROBLEMS SUMMARY
     - Select first meeting
     - For each subsequent meeting, if it starts after previous ends, select it
     - Count total meetings selected
+    
+    Simple: Sort by end time, greedily select non-overlapping meetings
 
 11. PAIRS GREEDY - Pairing Elements
     Problem Explanation:
@@ -136,6 +156,8 @@ MEDIUM LEVEL - GREEDY PROBLEMS SUMMARY
     - Sort array appropriately
     - Greedily pair elements following the optimal strategy
     - Take advantage of optimal ordering for pairing
+    
+    Simple: Sort and greedily pair elements following optimal strategy
 
 12. SMALLEST STRING WITH GIVEN NUMERIC VALUE - LeetCode 1663
     Link: https://leetcode.com/problems/smallest-string-with-a-given-numeric-value/
@@ -149,6 +171,8 @@ MEDIUM LEVEL - GREEDY PROBLEMS SUMMARY
     - Fill first (n-1) positions with 'a', leaving last position flexible
     - Calculate what letter goes in last position to reach sum k
     - This gives lexicographically smallest result
+    
+    Simple: Fill with 'a's and adjust last character to reach target sum
 
 13. VALID PARENTHESIS STRING - LeetCode 678
     Link: https://leetcode.com/problems/valid-parenthesis-string/
@@ -164,3 +188,5 @@ MEDIUM LEVEL - GREEDY PROBLEMS SUMMARY
     - For '*': min stays or decrements (treat as ')'), max increments (treat as '(')
     - If max < 0, more closes than opens (invalid)
     - At end, min should be 0 (all opens are closed)
+    
+    Simple: Track min/max open parentheses count to validate string

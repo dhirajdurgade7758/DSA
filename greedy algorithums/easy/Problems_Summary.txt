@@ -13,6 +13,8 @@ EASY LEVEL - GREEDY PROBLEMS SUMMARY
    - Use two pointers to match smallest cookies with greediest children
    - If a cookie satisfies a child, mark as done and move to next
    
+   Simple: Sort both and use two pointers to match smallest cookies with children
+   
 2. BEST TIME TO BUY AND SELL STOCK - LeetCode 121
    Link: https://leetcode.com/problems/best-time-to-buy-and-sell-stock/
    Problem Explanation:
@@ -26,6 +28,8 @@ EASY LEVEL - GREEDY PROBLEMS SUMMARY
    - Keep track of maximum profit
    - Single pass through array O(n)
    
+   Simple: Track minimum price and maximum profit in single pass
+   
 3. LARGEST ODD NUMBER IN STRING
    Problem Explanation:
    - You have a string of digits
@@ -36,6 +40,8 @@ EASY LEVEL - GREEDY PROBLEMS SUMMARY
    - Greedily pick largest odd digits from left to right
    - Form largest number using these odd digits
    - Compare and keep the largest odd number possible
+   
+   Simple: Greedily pick largest odd digits to form the largest odd number
    
 4. LEMONADE CHANGE - LeetCode 860
    Link: https://leetcode.com/problems/lemonade-change/
@@ -52,6 +58,8 @@ EASY LEVEL - GREEDY PROBLEMS SUMMARY
    - For $20 bill: try to give one $10 and one $5, or three $5 bills
    - Prioritize giving $10 to save $5 notes for $20 transactions
    
+   Simple: Count bills and greedily give change, prioritize $10 bills for $20 transactions
+
 5. SPLIT A STRING IN BALANCED STRINGS - LeetCode 1221
    Link: https://leetcode.com/problems/split-a-string-in-balanced-strings/
    Problem Explanation:
@@ -64,3 +72,5 @@ EASY LEVEL - GREEDY PROBLEMS SUMMARY
    - Whenever balance becomes 0, we have a balanced substring
    - Greedily count how many balanced substrings we can make
    - Count becomes answer
+   
+   Simple: Track balance and count substrings whenever balance becomes 0
