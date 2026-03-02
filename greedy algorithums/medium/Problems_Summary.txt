@@ -1,0 +1,166 @@
+MEDIUM LEVEL - GREEDY PROBLEMS SUMMARY
+=======================================
+
+1. FRACTIONAL KNAPSACK
+   Problem Explanation:
+   - You have a knapsack with weight capacity W
+   - You have n items, each with value and weight
+   - You can take items fully OR partially (fractional)
+   - Maximize total value without exceeding weight capacity
+   
+   Key Idea:
+   - Calculate value-to-weight ratio for each item
+   - Sort items by ratio in descending order
+   - Greedily take items with highest ratio first
+   - Take whole item if it fits, otherwise take fraction of it
+
+2. GAS STATIONS - LeetCode 134
+   Link: https://leetcode.com/problems/gas-station/
+   Problem Explanation:
+   - You have n gas stations arranged in circle, each gives some gas
+   - Each station costs some gas to travel to next station
+   - Find starting station index where you can complete full circle
+   - Return -1 if impossible (total gas < total cost)
+   
+   Key Idea:
+   - First check if total gas >= total cost (solution exists)
+   - Greedily pick starting point when previous balance goes negative
+   - If current balance becomes negative, next station becomes new start
+   - If total gas >= cost, this greedy choice guarantees a solution
+
+3. INDIAN COINS - Minimum Coins for Amount
+   Problem Explanation:
+   - You have Indian coin denominations: 1, 2, 5, 10, 20, 50, 100, 200, 500, 2000
+   - Given an amount N, find minimum coins needed to make that amount
+   - You can use any coin multiple times
+   
+   Key Idea:
+   - Greedily pick largest coin denomination first
+   - Use as many of that coin as possible (integer division)
+   - Reduce remaining amount after using coins
+   - Move to next smaller denomination and repeat
+
+4. MAXIMUM ACTIVITIES - Activity Selection
+   Problem Explanation:
+   - You have activities with start and end times
+   - You can only do one activity at a time (no overlap)
+   - Select maximum number of activities you can complete
+   - Input is already sorted by end time
+   
+   Key Idea:
+   - Start with first activity (ends earliest)
+   - Greedily select next activity that starts at/after current one ends
+   - Always pick activity ending earliest (more future opportunities)
+   - Count total activities selected
+
+5. MAXIMUM LENGTH OF PAIR CHAIN - LeetCode 435
+   Link: https://leetcode.com/problems/maximum-length-of-pair-chain/
+   Problem Explanation:
+   - You have pairs of numbers [a, b]
+   - A chain is valid if each pair's first value > previous pair's second value
+   - Find maximum length chain you can form from given pairs
+   
+   Key Idea:
+   - Sort pairs by their end value (second element)
+   - Greedily select pairs that start after previous pair ends
+   - Always pick pair ending earliest for more future opportunities
+   - When current pair starts > previous pair ends, extend chain
+
+6. MAXIMUM PROFIT VARIATION
+   Problem Explanation:
+   - Multiple buy-sell transactions allowed
+   - Find maximum profit from stock prices
+   - Can hold at most one stock at a time
+   
+   Key Idea:
+   - Capture every upward movement in price
+   - If price increases from day i to i+1, buy at i and sell at i+1
+   - Sum all profitable differences
+   - Simple approach: add all positive differences
+
+7. MAXIMUM PROFIT - Single Transaction
+   Problem Explanation:
+   - Given stock prices for multiple days
+   - Buy on one day, sell on another later day (exactly 1 transaction)
+   - Find maximum profit possible
+   
+   Key Idea:
+   - Track minimum price seen so far
+   - At each price, calculate profit if selling at that price
+   - Keep maximum profit found
+   - Single pass through prices O(n)
+
+8. MINIMUM ABSOLUTE DIFFERENCE
+   Problem Explanation:
+   - Given array of integers
+   - Find pair of elements with minimum absolute difference
+   - Return all such pairs
+   
+   Key Idea:
+   - Sort the array first
+   - Find minimum difference between adjacent elements (after sorting)
+   - All pairs with this minimum difference will be adjacent in sorted array
+   - Iterate through sorted array and collect those pairs
+
+9. MINIMUM NUMBER OF PLATFORMS - GFG Problem
+   Problem Explanation:
+   - Given arrival and departure times of trains at a station
+   - Find minimum number of platforms needed to accommodate all trains
+   - A platform becomes free after a train departs
+   
+   Key Idea:
+   - Sort both arrival and departure arrays
+   - Use two pointers to track train movements
+   - When train arrives, need a platform; when departs, platform frees up
+   - Track maximum platforms needed at any point
+
+10. N MEETINGS IN ONE ROOM - GFG Problem
+    Problem Explanation:
+    - Given n meetings with start and end times
+    - One room can host only one meeting at a time
+    - Find maximum meetings that can be scheduled in the room
+    
+    Key Idea:
+    - Sort meetings by end time (greedy choice)
+    - Select first meeting
+    - For each subsequent meeting, if it starts after previous ends, select it
+    - Count total meetings selected
+
+11. PAIRS GREEDY - Pairing Elements
+    Problem Explanation:
+    - Given array of numbers
+    - Pair elements such that condition is satisfied
+    - Maximize or minimize based on problem requirements
+    
+    Key Idea:
+    - Sort array appropriately
+    - Greedily pair elements following the optimal strategy
+    - Take advantage of optimal ordering for pairing
+
+12. SMALLEST STRING WITH GIVEN NUMERIC VALUE - LeetCode 1663
+    Link: https://leetcode.com/problems/smallest-string-with-a-given-numeric-value/
+    Problem Explanation:
+    - Given length n and numeric value k
+    - Form a string of lowercase letters where sum = k (a=1, b=2, ... z=26)
+    - String should be lexicographically smallest
+    
+    Key Idea:
+    - Greedily place 'a' (value 1) as much as possible
+    - Fill first (n-1) positions with 'a', leaving last position flexible
+    - Calculate what letter goes in last position to reach sum k
+    - This gives lexicographically smallest result
+
+13. VALID PARENTHESIS STRING - LeetCode 678
+    Link: https://leetcode.com/problems/valid-parenthesis-string/
+    Problem Explanation:
+    - String contains '(', ')', and '*' (wildcard)
+    - '*' can be treated as '(', ')', or empty character
+    - Check if string can be made valid by choosing '*' values wisely
+    
+    Key Idea:
+    - Track range of possible open parentheses [min, max]
+    - For '(': increment both min and max (more opens needed)
+    - For ')': decrement both min and max (close one open)
+    - For '*': min stays or decrements (treat as ')'), max increments (treat as '(')
+    - If max < 0, more closes than opens (invalid)
+    - At end, min should be 0 (all opens are closed)
