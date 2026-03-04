@@ -208,3 +208,19 @@ MEDIUM LEVEL - GREEDY PROBLEMS SUMMARY
     - If any required consecutive card is missing, return false
     
     Simple: Use min heap to greedily form consecutive groups starting from smallest cards
+
+15. MERGE TRIPLETS TO FORM TARGET TRIPLET - LeetCode 1899
+    Link: https://leetcode.com/problems/merge-triplets-to-form-target-triplet/
+    Problem Explanation:
+    - You have a list of triplets and a target triplet
+    - A triplet can be selected if all its values are <= corresponding target values
+    - From valid triplets, take maximum value at each position
+    - Determine if resulting triplet equals target triplet
+    
+    Key Idea:
+    - Filter triplets: keep only those where all values <= corresponding target values
+    - For valid triplets, take maximum at each position (index 0, 1, 2)
+    - Check if result equals target
+    - Greedy choice: only consider triplets that don't exceed any target dimension
+    
+    Simple: Filter valid triplets and take max at each position, check if equals target
