@@ -218,9 +218,10 @@ MEDIUM LEVEL - GREEDY PROBLEMS SUMMARY
     - Determine if resulting triplet equals target triplet
     
     Key Idea:
+    - Use three boolean flags (a, b, c) to track if each position reaches target value
     - Filter triplets: keep only those where all values <= corresponding target values
-    - For valid triplets, take maximum at each position (index 0, 1, 2)
-    - Check if result equals target
-    - Greedy choice: only consider triplets that don't exceed any target dimension
+    - For each valid triplet, check if each element matches its target position
+    - If all three flags are true, all positions have reached their target values
+    - Return true only if all three flags are true
     
-    Simple: Filter valid triplets and take max at each position, check if equals target
+    Simple: Use boolean flags to check if each position reaches target, return true if all do
