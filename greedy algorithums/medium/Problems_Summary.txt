@@ -225,3 +225,20 @@ MEDIUM LEVEL - GREEDY PROBLEMS SUMMARY
     - Return true only if all three flags are true
     
     Simple: Use boolean flags to check if each position reaches target, return true if all do
+
+16. PARTITION LABELS - LeetCode 763
+    Link: https://leetcode.com/problems/partition-labels/
+    Problem Explanation:
+    - Given a string of lowercase letters
+    - Partition the string such that each letter appears in at most one part
+    - Return the sizes of each partition
+    - Goal is to maximize the number of partitions
+    
+    Key Idea:
+    - First pass: store the last occurrence index of each character
+    - Second pass: traverse string and track the farthest index any character extends to
+    - When current index reaches the partition boundary, record partition size
+    - Expand boundary if current character extends beyond it
+    - Greedy choice: end partition as soon as possible while keeping all occurrences together
+    
+    Simple: Track last occurrence of each char, expand partition by farthest extending char, partition when boundary reached
