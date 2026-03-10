@@ -1,3 +1,7 @@
+#include<iostream>
+#include<vector>
+using namespace std;
+
 class Solution {
 public:
     int secondLargestElement(vector<int>& nums) {
@@ -26,3 +30,21 @@ public:
         return -1;
     }
 };
+
+int main(){
+    Solution sol;
+    
+    vector<int> nums1 = {1, 5, 3, 9, 2};
+    cout << "Second largest in [1,5,3,9,2]: " << sol.secondLargestElement(nums1) << endl;
+    
+    vector<int> nums2 = {10, 10, 10};
+    cout << "Second largest in [10,10,10]: " << sol.secondLargestElement(nums2) << endl;
+    
+    vector<int> nums3 = {1};
+    cout << "Second largest in [1]: " << sol.secondLargestElement(nums3) << endl;
+    
+    vector<int> nums4 = {5, 2, 8, 3};
+    cout << "Second largest in [5,2,8,3]: " << sol.secondLargestElement(nums4) << endl;
+    
+    return 0;
+}
