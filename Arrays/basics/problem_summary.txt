@@ -1,0 +1,287 @@
+ARRAY BASICS - PROBLEM SUMMARIES
+==========================================
+
+1. LINEAR SEARCH
+   Problem Explanation:
+   - Given an array and a target value
+   - Search for the target in the array
+   - Return the index if found, -1 if not found
+   
+   Key Idea:
+   - Iterate through array sequentially
+   - Compare each element with target
+   - Return index immediately when found
+   - Return -1 if loop completes without finding match
+   
+   Simple: Iterate array, return index when element matches target
+
+=====================================
+
+2. LARGEST ELEMENT
+   Problem Explanation:
+   - Given an array of integers
+   - Find and return the maximum/largest element
+   
+   Key Idea:
+   - Initialize max with INT_MIN (smallest possible integer)
+   - Iterate through array
+   - Update max whenever a larger element is found
+   - Return max at the end
+   
+   Simple: Keep track of maximum value, update when larger element found
+
+=====================================
+
+3. SECOND LARGEST ELEMENT
+   Problem Explanation:
+   - Given an array with at least 2 elements
+   - Find the second largest/maximum element
+   - Return -1 if all elements are equal or array size < 2
+   
+   Key Idea:
+   - Maintain two variables: largest and secondLargest
+   - For each element, if it's greater than largest, update both
+   - If element is between largest and secondLargest, update secondLargest
+   - Ensure element is not equal to largest to avoid duplicates
+   - Single pass O(n) solution
+   
+   Simple: Track two largest values, update appropriately when new max found
+
+=====================================
+
+4. SMALLEST VALUE
+   Problem Explanation:
+   - Given an array of integers
+   - Find and return the minimum/smallest element
+   
+   Key Idea:
+   - Initialize min with INT_MAX (largest possible integer)
+   - Iterate through array
+   - Update min whenever a smaller element is found
+   - Return min at the end
+   
+   Simple: Keep track of minimum value, update when smaller element found
+
+=====================================
+
+5. SMALLEST VALUE INDEX
+   Problem Explanation:
+   - Given an array of integers
+   - Find the smallest/minimum element
+   - Return the index position of the smallest element
+   
+   Key Idea:
+   - Initialize min with INT_MAX and index with 0
+   - Iterate through array
+   - When a smaller element is found, update both min and index
+   - Return the index at the end
+   
+   Simple: Track both minimum value and its index, return index
+
+=====================================
+
+6. INTERSECTION OF TWO ARRAYS
+   Problem Explanation:
+   - Given two arrays of same size
+   - Find and print all common elements (elements present in both arrays)
+   - Print each common element once in order of first array
+   
+   Key Idea:
+   - For each element in first array
+   - Search for it in second array
+   - If found, print it and move to next element in first array
+   - Use nested loop approach: O(n^2) time complexity
+   
+   Simple: For each element in arr1, check if it exists in arr2, print if found
+
+=====================================
+
+7. REVERSE ARRAY IN PLACE
+   Problem Explanation:
+   - Given an array
+   - Reverse the array in place (no extra array needed)
+   - Modify the original array directly
+   
+   Key Idea:
+   - Use two pointers: start (beginning) and end (last)
+   - Swap elements at start and end positions
+   - Move start forward and end backward
+   - Continue until start >= end (handles both odd and even sizes)
+   - O(n) time, O(1) space complexity
+   
+   Simple: Use two pointers from ends, swap and move towards center
+
+=====================================
+
+8. SWAP MINIMUM AND MAXIMUM ELEMENTS
+   Problem Explanation:
+   - Given an array of integers
+   - Find the minimum and maximum elements
+   - Swap their positions in the array
+   - Print the modified array
+   
+   Key Idea:
+   - First pass: find minimum element and its index
+   - Second pass: find maximum element and its index
+   - Use swap function to exchange elements at min_index and max_index
+   - O(n) time complexity with two passes
+   
+   Simple: Find min and max indices separately, then swap them
+
+=====================================
+
+9. MAXIMUM CONSECUTIVE ONES
+   Problem Explanation:
+   - Given an array of 0s and 1s
+   - Find the maximum count of consecutive 1s
+   - Return the count
+   
+   Key Idea:
+   - Maintain current count and max count variables
+   - When element is 1, increment current count
+   - Update maxCount if current count is higher
+   - When element is 0, reset current count to 0
+   - Single pass O(n) solution
+   
+   Simple: Count consecutive 1s, reset at 0, track maximum count
+
+=====================================
+
+10. PRINT ALL SUBARRAYS
+    Problem Explanation:
+    - Given an array
+    - Print all possible subarrays (contiguous subsequences)
+    - Example: [1,2,3] -> [1], [1,2], [1,2,3], [2], [2,3], [3]
+    
+    Key Idea:
+    - Use three nested loops
+    - First loop: starting position (start from 0)
+    - Second loop: ending position (start from current start)
+    - Third loop: print elements from start to end
+    - Time complexity: O(n^3)
+    
+    Simple: Three nested loops for start, end, and element printing
+
+=====================================
+
+11. MAXIMUM SUBARRAY SUM (BRUTE FORCE)
+    Problem Explanation:
+    - Given an array of integers
+    - Find the maximum sum of any contiguous subarray
+    - Includes negative numbers
+    
+    Key Idea:
+    - Use two nested loops: start and end positions
+    - For each start position, calculate sum of subarrays ending at each position
+    - Inner loop calculates running sum from start to current end
+    - Track maximum sum found
+    - Time complexity: O(n^2)
+    
+    Simple: Two pointers for start/end, accumulate sum, track maximum
+
+=====================================
+
+12. MAXIMUM SUBARRAY SUM (OPTIMIZED)
+    Problem Explanation:
+    - Given an array of integers
+    - Find the maximum sum of any contiguous subarray
+    - Optimize beyond brute force approach
+    
+    Key Idea:
+    - Use Kadane's Algorithm for optimal solution
+    - Maintain current sum (reset to 0 if negative)
+    - Track maximum sum seen so far
+    - For each element, decide: extend previous subarray or start new
+    - Time complexity: O(n), Space: O(1)
+    
+    Simple: Keep running sum, reset if negative, track max
+
+=====================================
+
+13. MISSING NUMBER (0 to N)
+    Problem Explanation:
+    - Given array of n numbers containing integers from 0 to n
+    - One number is missing
+    - Find and return the missing number
+    - Cannot use extra space
+    
+    Key Idea:
+    - Use mathematical approach without extra space
+    - Initialize result with n (max possible missing number)
+    - For each index i: result += i - nums[i]
+    - This works because sum(0 to n) - sum(actual array) = missing number
+    - Time: O(n), Space: O(1)
+    
+    Simple: Use XOR logic or mathematical equation solving
+
+=====================================
+
+14. SINGLE NUMBER (Find Non-Duplicate)
+    Problem Explanation:
+    - Given array where every element appears twice except one
+    - Find the element that appears only once
+    - Use O(1) extra space
+    
+    Key Idea:
+    - Use XOR (bitwise exclusive OR) property
+    - XOR of same numbers is 0: a ^ a = 0
+    - XOR with 0 gives the number: a ^ 0 = a
+    - XOR is commutative and associative
+    - Initialize result to 0, XOR all elements
+    - Pairs cancel out, only single number remains
+    - Time: O(n), Space: O(1)
+    
+    Simple: XOR all elements, pairs cancel leaving single number
+
+=====================================
+
+15. PRINT UNIQUE ELEMENTS
+    Problem Explanation:
+    - Given an array with duplicate elements
+    - Print all unique elements (elements appearing only once)
+    - Print in order of first occurrence
+    
+    Key Idea:
+    - For each element, check if it appears elsewhere in array
+    - Use nested loop comparison
+    - If element found only at current position, it's unique
+    - Print unique elements
+    - Time complexity: O(n^2)
+    
+    Simple: For each element, check if duplicate exists, print if unique
+
+=====================================
+
+16. PASS BY REFERENCE - ARRAYS
+    Problem Explanation:
+    - Demonstrate how arrays are passed to functions
+    - Show that arrays are passed by reference (modifications affect original)
+    - Modify array in function and verify changes persist
+    
+    Key Idea:
+    - Arrays decay to pointers when passed to functions
+    - Modifications inside function affect original array
+    - No need to explicitly use & reference operator for arrays
+    - Function can change array elements directly
+    - Useful for in-place modifications
+    
+    Simple: Array passed to function, modifications persist in original
+
+=====================================
+
+17. SUM AND PRODUCT OF ALL ELEMENTS
+    Problem Explanation:
+    - Given an array of integers
+    - Calculate and return two values:
+      1. Sum of all elements
+      2. Product of all elements
+    
+    Key Idea:
+    - For sum: initialize to 0, add each element
+    - For product: initialize to 1, multiply by each element
+    - Use separate functions for each calculation
+    - Both require single array traversal O(n)
+    
+    Simple: Sum starts at 0 (add all), Product starts at 1 (multiply all)
+
+=====================================

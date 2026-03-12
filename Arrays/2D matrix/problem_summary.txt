@@ -1,16 +1,132 @@
-16. PARTITION LABELS - LeetCode 763
-    Link: https://leetcode.com/problems/partition-labels/
+2D MATRIX PROBLEMS
+
+1. COUNT ELEMENT 7 - 2D Array Element Count
     Problem Explanation:
-    - Given a string of lowercase letters
-    - Partition the string such that each letter appears in at most one part
-    - Return the sizes of each partition
-    - Goal is to maximize the number of partitions
+    - Given a 2D array of integers
+    - Count and return the total number of 7's in the array
+    - Traverse all elements and count occurrences
+    - Example: arr = {{4,7,8}, {8,8,7}} returns 2
     
     Key Idea:
-    - First pass: store the last occurrence index of each character
-    - Second pass: traverse string and track the farthest index any character extends to
-    - When current index reaches the partition boundary, record partition size
-    - Expand boundary if current character extends beyond it
-    - Greedy choice: end partition as soon as possible while keeping all occurrences together
+    - Use nested loops to iterate through each element
+    - Check if current element equals 7
+    - Increment counter when match found
+    - Return final count
     
-    Simple: Track last occurrence of each char, expand partition by farthest extending char, partition when boundary reached
+    Simple: Iterate through all elements, count occurrences of 7
+
+---
+
+2. ROW SUM - Sum of Elements in a Row
+    Problem Explanation:
+    - Given a 2D array and a row index
+    - Calculate the sum of all elements in that specific row
+    - Use pointer arithmetic to access row efficiently
+    - Example: arr = {{1,4,9}, {11,4,3}, {2,2,3}}, row=1 returns 18
+    
+    Key Idea:
+    - Use pointer arithmetic: ptr = (int*)(arr + row_index)
+    - Iterate through m columns using the pointer
+    - Increment pointer to access each element in the row
+    - Sum all elements in that row
+    - Time Complexity: O(m) where m is number of columns
+    
+    Simple: Use pointer to access row, iterate through columns and sum elements
+
+---
+
+3. DIAGONAL SUM - Sum of Matrix Diagonals
+    Problem Explanation:
+    - Given a square n×n matrix
+    - Calculate sum of both diagonals (primary and secondary)
+    - Avoid double counting the center element if matrix has odd dimensions
+    - Primary diagonal: elements where i == j
+    - Secondary diagonal: elements where j == n-i-1
+    
+    Key Idea:
+    - First approach: O(n²) - nested loops checking all elements
+    - Optimized approach: O(n) - single loop through matrix
+    - For each row i, add mat[i][i] (primary diagonal)
+    - If i != n-i-1, add mat[i][n-i-1] (secondary diagonal)
+    - Condition prevents double counting middle element in odd-sized matrix
+    
+    Simple: Single loop, add primary diagonal and secondary diagonal elements (avoid double counting center)
+
+---
+
+4. MATRIX TRANSPOSE - Swap Rows to Columns
+    Problem Explanation:
+    - Given an m×n matrix
+    - Create transpose where rows become columns and columns become rows
+    - Original matrix[i][j] becomes transpose[j][i]
+    - For 2×3 matrix, result is 3×2 matrix
+    
+    Key Idea:
+    - Create new matrix with swapped dimensions: transpose[column][row]
+    - Use nested loops: for each element at [i][j]
+    - Place it at position [j][i] in transpose matrix
+    - Time Complexity: O(m×n)
+    - Space Complexity: O(m×n) for new matrix
+    
+    Simple: Nested loops to swap rows and columns - transpose[j][i] = matrix[i][j]
+
+---
+
+5. SEARCH SORTED MATRIX - Linear Search (O(m+n))
+    Problem Explanation:
+    - Given an m×n matrix where rows and columns are sorted
+    - Search for a target element
+    - Cannot use simple binary search due to unsorted structure
+    - Two approaches: start from top-right or bottom-left corner
+    
+    Key Idea:
+    - Start from bottom-left corner: i = n-1, j = 0
+    - If current element equals target, found (return true)
+    - If current element > target, move up (i--)
+    - If current element < target, move right (j++)
+    - Eliminate one row or column in each iteration
+    - Time Complexity: O(m+n) instead of O(m×n)
+    - Alternative: start from top-right corner (mirror logic)
+    
+    Simple: Start from bottom-left corner, move up if element too large, right if too small
+
+---
+
+6. SEARCH SORTED MATRIX BINARY - Binary Search (O(log n))
+    Problem Explanation:
+    - Given an m×n matrix where each row is sorted
+    - Search for a target element
+    - Each row is independently sorted (not necessarily across rows)
+    - Use binary search on each row for faster lookup
+    
+    Key Idea:
+    - For each row, apply binary search independently
+    - Use two pointers: low = 0, high = m-1 (column boundaries)
+    - Calculate mid = (low + high) / 2
+    - Compare matrix[row][mid] with target
+    - Adjust low or high based on comparison
+    - Time Complexity: O(n × log m) where n = rows, m = columns
+    - Assume sorted rows but not across rows
+    
+    Simple: Binary search on each row independently - O(n log m) approach
+
+---
+
+7. SPIRAL MATRIX - Traverse Matrix in Spiral Order
+    Problem Explanation:
+    - Given an m×n matrix
+    - Traverse all elements in spiral clockwise order
+    - Start from top-left, go right → down → left → up → inward
+    - Return elements in order they were visited
+    
+    Key Idea:
+    - Use four boundaries: srow (start row), erow (end row), scol (start col), ecol (end col)
+    - Traverse top row: scol to ecol, then increment srow
+    - Traverse right column: srow to erow, then decrement ecol
+    - Traverse bottom row: ecol to scol (if srow != erow), then decrement erow
+    - Traverse left column: erow to srow (if scol != ecol), then increment scol
+    - Shrink boundaries after each direction until srow > erow and scol > ecol
+    - Time Complexity: O(m×n)
+    
+    Simple: Use four boundaries and traverse top→right→bottom→left, shrinking boundaries each iteration
+
