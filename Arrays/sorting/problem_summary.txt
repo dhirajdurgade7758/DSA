@@ -1,0 +1,131 @@
+SORTING ALGORITHMS SUMMARY
+
+1. BUBBLE SORT
+    File: bubble_sort.cpp
+    Algorithm Type: Comparison-Based Sorting
+    Time Complexity: O(n²) worst & average case, O(n) best case
+    Space Complexity: O(1)
+    
+    Problem Explanation:
+    - Compare adjacent elements in the array
+    - Swap them if they are in the wrong order
+    - Repeat until the array is sorted
+    - After each pass, the largest unsorted element "bubbles" to its correct position
+    
+    Key Idea:
+    - Outer loop: iterate through n-1 passes
+    - Inner loop: compare adjacent elements and swap if arr[j] > arr[j+1]
+    - Optimization: use a swapped flag to detect if array is already sorted
+    - Early termination: break if no swaps occur in a pass (array is sorted)
+    
+    Simple: Compare adjacent elements, swap if out of order, repeat until sorted. Stop early if already sorted.
+
+
+2. INSERTION SORT
+    File: insertion_sort.cpp
+    Algorithm Type: Comparison-Based Sorting
+    Time Complexity: O(n²) worst & average case, O(n) best case
+    Space Complexity: O(1)
+    
+    Problem Explanation:
+    - Build the sorted array one element at a time
+    - Take each element and insert it into the correct position in the already-sorted portion
+    - Similar to how people sort playing cards in their hands
+    
+    Key Idea:
+    - Start from the second element (index 1)
+    - For each element, compare it with sorted portion to the left
+    - Shift larger elements one position right
+    - Insert the current element in its correct position
+    - Repeat for all elements from left to right
+    
+    Simple: Take each element and insert it into sorted portion, shifting larger elements right.
+
+
+3. SELECTION SORT
+    File: selection_sort.cpp
+    Algorithm Type: Comparison-Based Sorting
+    Time Complexity: O(n²) in all cases (best, average, worst)
+    Space Complexity: O(1)
+    
+    Problem Explanation:
+    - Divide array into sorted and unsorted portions
+    - Repeatedly find the minimum element from unsorted portion
+    - Place it at the beginning of unsorted portion (end of sorted portion)
+    - Repeat until entire array is sorted
+    
+    Key Idea:
+    - Outer loop: for each position i from 0 to n-2
+    - Find index of minimum element in arr[i..n-1]
+    - Swap arr[i] with the minimum element
+    - After i iterations, first i+1 elements are in their correct positions
+    - Array is divided into sorted (left) and unsorted (right) portions
+    
+    Simple: Find minimum element in unsorted portion, swap with first unsorted position, repeat.
+
+
+4. NEXT PERMUTATION - LeetCode 31
+    File: nextPermutation.cpp
+    Link: https://leetcode.com/problems/next-permutation/
+    Algorithm Type: Sequence Manipulation
+    Time Complexity: O(n)
+    Space Complexity: O(1)
+    
+    Problem Explanation:
+    - Given an array of integers, modify it to the next lexicographically greater permutation
+    - If array is the last permutation (descending order), arrange it to the first permutation (ascending order)
+    - Do this in-place with O(1) extra space
+    
+    Key Idea:
+    - Step 1: Find pivot - rightmost element that is smaller than its next element (arr[i] < arr[i+1])
+    - Step 2: If no pivot exists, entire array is in descending order, reverse it to get first permutation
+    - Step 3: Find rightmost element greater than pivot (from right side)
+    - Step 4: Swap pivot with that element
+    - Step 5: Reverse the suffix after pivot position to get the next lexicographically smallest arrangement
+    
+    Simple: Find rightmost position where arr[i] < arr[i+1], swap arr[i] with rightmost element > arr[i], reverse suffix.
+
+
+5. MERGE SORT
+    File: merge_sorts/merge_sort.cpp
+    Algorithm Type: Divide & Conquer, Comparison-Based Sorting
+    Time Complexity: O(n log n) in all cases (best, average, worst)
+    Space Complexity: O(n) - requires extra space for merging
+    
+    Problem Explanation:
+    - Divide the array into two halves recursively until single elements remain
+    - Merge the sorted halves back together in sorted order
+    - Guaranteed O(n log n) performance, stable sorting algorithm
+    
+    Key Idea:
+    - Divide phase: recursively split array at midpoint until arrays of size 1
+    - Conquer phase (merge): merge two sorted subarrays into one sorted array
+    - Use two pointers to compare elements from both halves
+    - Copy smaller element to temp array and advance that pointer
+    - After one half is exhausted, copy remaining elements from other half
+    - Copy merged result back to original array
+    
+    Simple: Divide array in half, recursively sort both halves, merge sorted halves using two-pointer technique.
+
+
+6. QUICK SORT
+    File: merge_sorts/quick_Sort.cpp
+    Algorithm Type: Divide & Conquer, Comparison-Based Sorting
+    Time Complexity: O(n log n) average case, O(n²) worst case, O(n log n) best case
+    Space Complexity: O(log n) - due to recursive call stack
+    
+    Problem Explanation:
+    - Select a pivot element and partition array around it
+    - Recursively sort left and right partitions
+    - Elements smaller than pivot go left, larger go right
+    - Efficient in-place sorting with better space complexity than merge sort
+    
+    Key Idea:
+    - Partition function: rearrange array so pivot is in final sorted position
+    - Use two pointers (i starts at si-1, j iterates from si to ei-1)
+    - Move i forward and swap arr[i] with arr[j] when arr[j] <= pivot
+    - Finally, swap arr[i+1] with pivot to place it in correct position
+    - Return pivot index (i+1)
+    - Recursively quick_sort left partition (si to pivot-1) and right partition (pivot+1 to ei)
+    
+    Simple: Pick pivot, partition array with smaller left and larger right, recursively sort both partitions.
