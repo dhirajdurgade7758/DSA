@@ -1,0 +1,22 @@
+==========================
+EASY - SLIDING WINDOW PROBLEMS
+==========================
+
+1. BEST TIME TO BUY AND SELL STOCK - LeetCode 121
+    Link: https://leetcode.com/problems/best-time-to-buy-and-sell-stock/
+    
+    Problem Explanation:
+    - Given an array of stock prices
+    - Find the maximum profit from buying once and selling once
+    - Must buy before you sell (earlier index < later index)
+    - Return the maximum profit possible, or 0 if no profit
+    
+    Key Idea:
+    - Use single pass with two variables: minimum price seen so far (bestbuy) and maximum profit
+    - Track the lowest price encountered as we traverse
+    - At each price, calculate profit if we sell at current price
+    - Update maximum profit if current profit is better
+    - Time: O(n), Space: O(1)
+    
+    Simple: Keep track of minimum price seen so far, calculate profit at each step, return max profit
+

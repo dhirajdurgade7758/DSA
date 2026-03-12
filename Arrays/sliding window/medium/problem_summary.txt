@@ -1,0 +1,62 @@
+==========================
+MEDIUM - SLIDING WINDOW PROBLEMS
+==========================
+
+1. LONGEST SUBSTRING WITHOUT REPEATING CHARACTERS - LeetCode 3
+    Link: https://leetcode.com/problems/longest-substring-without-repeating-characters/
+    
+    Problem Explanation:
+    - Given a string, find the length of the longest substring without repeating characters
+    - Characters can appear multiple times in the string, but not in the same substring
+    - Return the length of the longest valid substring
+    
+    Key Idea:
+    - Use sliding window with two pointers (st and end) and hashset to track characters
+    - Expand window by moving 'end' pointer and adding characters
+    - When duplicate found, shrink window from left (st) until duplicate is removed
+    - Track maximum length seen at each valid state
+    - Time: O(n), Space: O(min(m, n)) where m is character set size
+    
+    Simple: Use hashset with two pointers, expand right and shrink left when duplicate found
+
+
+2. LONGEST SUBARRAY WITH SUM K
+    Link: LeetCode (Similar to Subarray Sum Equals K)
+    
+    Problem Explanation:
+    - Given an array of positive integers and a target sum k
+    - Find the length of the longest subarray with sum equal to k
+    - Return the maximum length, or 0 if no subarray exists
+    
+    Key Idea:
+    - Use sliding window with two pointers (left and right)
+    - Maintain cumulative sum of current window
+    - Expand window by moving right pointer and adding elements
+    - When sum exceeds k, shrink from left by removing elements
+    - When sum equals k, update maximum length
+    - Works only with positive integers (no negative numbers)
+    - Time: O(n), Space: O(1)
+    
+    Simple: Two pointers track a window, expand right and shrink left to maintain sum <= k
+
+
+3. PERMUTATION IN STRING - LeetCode 567
+    Link: https://leetcode.com/problems/permutation-in-string/
+    
+    Problem Explanation:
+    - Given two strings s1 and s2
+    - Check if s2 contains a permutation of s1 as a substring
+    - Permutation means same characters with same frequencies, different order allowed
+    - Return true if permutation exists, false otherwise
+    
+    Key Idea:
+    - First, count frequency of each character in s1
+    - Use sliding window of size len(s1) on s2
+    - Track frequency of characters in the current window
+    - Compare window frequency with s1 frequency
+    - If frequencies match, we found a permutation
+    - Slide window by adding character on right and removing from left
+    - Time: O(n) where n is length of s2, Space: O(1) (fixed 26 letters)
+    
+    Simple: Fixed-size sliding window, compare character frequencies between s1 and current window
+

@@ -1,0 +1,76 @@
+==========================
+HARD - SLIDING WINDOW PROBLEMS
+==========================
+
+1. LONGEST REPEATING CHARACTER REPLACEMENT - LeetCode 424
+    Link: https://leetcode.com/problems/longest-repeating-character-replacement/
+    
+    Problem Explanation:
+    - Given a string s and integer k
+    - You can replace at most k characters with any other character
+    - Find the length of the longest substring with repeating characters after replacements
+    - Goal: maximize the length of substring where all characters can be made the same
+    
+    Key Idea:
+    - Use sliding window with two pointers (st and end)
+    - Track frequency of each character in current window using hashmap
+    - Track the maximum frequency of any single character in window
+    - A valid window requires: (window_length - max_frequency) <= k
+    - This means we can replace (window_length - max_frequency) characters to make all same
+    - Expand window while condition is satisfied
+    - Shrink window from left when condition is violated
+    - Update result with valid window length
+    - Time: O(n), Space: O(26) for character frequencies
+    
+    Approaches:
+    - APP1: Recalculate maxcount from entire hashmap each iteration (less efficient)
+    - APP2: Only update maxcount with current character (more efficient)
+    
+    Simple: Track max frequency of any char, maintain (length - max_freq) <= k, expand greedily
+
+
+2. MINIMUM WINDOW SUBSTRING - LeetCode 76
+    Link: https://leetcode.com/problems/minimum-window-substring/
+    
+    Problem Explanation:
+    - Given two strings s and t
+    - Find the minimum window in s that contains all characters from t
+    - Window must include all characters with at least the same frequencies as in t
+    - Return the smallest such window substring, or empty string if impossible
+    
+    Key Idea:
+    - Build frequency map of characters needed from string t
+    - Use sliding window with two pointers (left and right)
+    - Expand window by moving right pointer until we have all required characters
+    - Track how many unique characters have their required frequency (have counter)
+    - Once we have all characters (have == need), try to shrink the window
+    - Keep shrinking from left while maintaining all required characters
+    - Track the minimum window found so far
+    - Time: O(|s| + |t|), Space: O(|t|) for hashmaps
+    
+    Simple: Expand window until all chars found, shrink to minimize size, track minimum
+
+
+3. SLIDING WINDOW MAXIMUM - LeetCode 239
+    Link: https://leetcode.com/problems/sliding-window-maximum/
+    
+    Problem Explanation:
+    - Given array of integers and window size k
+    - Slide a window of size k across the array
+    - Find the maximum value in each window
+    - Return array of all window maximums
+    
+    Key Idea:
+    - Use deque (double-ended queue) to efficiently track maximum in each window
+    - Store pairs of (value, index) in deque
+    - Deque remains in decreasing order of values
+    - For each element:
+        1. Remove elements outside current window (index <= i - k)
+        2. Remove elements from back that are smaller than current element
+        3. Add current element to back
+        4. Front of deque is the maximum for current window
+    - This optimizes from O(nk) to O(n)
+    - Time: O(n), Space: O(k) for deque
+    
+    Simple: Use deque in decreasing order, remove outliers and smaller elements, front is max
+
