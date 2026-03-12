@@ -1,0 +1,87 @@
+MEDIUM LEVEL - PROBLEM SUMMARIES
+=====================================
+
+1. CONTAINER WITH MOST WATER - LeetCode 11
+    Link: https://leetcode.com/problems/container-with-most-water/
+    Problem Explanation:
+    - Given array of heights representing vertical lines
+    - Find two lines that form container with maximum water
+    - Water capacity = distance * min(height[left], height[right])
+    
+    Key Idea:
+    - Use two pointers: left at start, right at end
+    - Calculate area with current pointers
+    - Move the pointer pointing to smaller height (greedy)
+    - Moving taller container inward won't help (limited by shorter side)
+    - Keep track of maximum area seen
+    
+    Simple: Two pointers approach - move shorter height pointer inward to find larger area
+
+---
+
+2. ROTATE ARRAY - LeetCode 189
+    Link: https://leetcode.com/problems/rotate-array/
+    Problem Explanation:
+    - Given array, rotate right by k positions
+    - Example: [1,2,3,4,5] with k=2 becomes [4,5,1,2,3]
+    - Must do this in-place with O(1) extra space
+    
+    Key Idea:
+    - Reverse entire array
+    - Reverse first k elements
+    - Reverse remaining elements
+    - Example: [1,2,3,4,5] -> [5,4,3,2,1] -> [4,5,3,2,1] -> [4,5,1,2,3]
+    - Handle k > n using modulo: k = k % n
+    
+    Simple: Use reversal trick - reverse whole, then reverse two parts
+
+---
+
+3. REARRANGE ARRAY ELEMENTS BY SIGN - LeetCode 2149
+    Link: https://leetcode.com/problems/rearrange-array-elements-by-sign/
+    Problem Explanation:
+    - Given array with equal positive and negative integers
+    - Rearrange so that positive and negative alternate
+    - Start with positive (if possible)
+    - Example: [3,1,-2,-5,2,-4] becomes [3,-2,1,-5,2,-4]
+    
+    Key Idea:
+    - Create output array with fixed size
+    - Use two indices: posIndex at 0 (even), negIndex at 1 (odd)
+    - Iterate through input array
+    - Place positive at posIndex (increment by 2)
+    - Place negative at negIndex (increment by 2)
+    - Works because equal number of positive and negative elements
+    
+    Simple: Alternate placement - positive at even indices, negative at odd indices
+
+---
+
+4. REARRANGE ARRAY ELEMENTS BY SIGN VARIATION - LeetCode 2149 Variation
+    Link: https://leetcode.com/problems/rearrange-array-elements-by-sign/
+    Problem Explanation:
+    - Variation where positive and negative counts may NOT be equal
+    - Handle unequal distribution of positive and negative numbers
+    - Rearrange alternating, then append remaining elements
+    
+    Key Idea:
+    - Separate positive and negative numbers into two arrays
+    - Determine which has more elements
+    - Pair elements alternately up to smaller count
+    - Append remaining elements from larger array
+    - Handle both cases: more positives or more negatives
+    
+    Simple: Separate into pos/neg arrays, alternate pair, append remainder
+
+---
+
+TIME COMPLEXITY SUMMARY:
+- Container With Most Water: O(n) time, O(1) space
+- Rotate Array: O(n) time, O(1) space
+- Rearrange By Sign: O(n) time, O(n) space
+- Rearrange By Sign Variation: O(n) time, O(n) space
+
+KEY PATTERNS:
+- Two pointers for optimization (Container)
+- Array manipulation techniques (Rotation via reversal)
+- Space-time tradeoff with separate arrays (Rearrange variations)

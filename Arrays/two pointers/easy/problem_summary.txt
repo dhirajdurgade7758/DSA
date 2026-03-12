@@ -1,0 +1,113 @@
+EASY LEVEL - PROBLEM SUMMARIES
+=====================================
+
+1. TWO SUM II - LeetCode 167
+    Link: https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/
+    Problem Explanation:
+    - Given a sorted array of integers and a target sum
+    - Find two numbers that add up to the target (1-based indexing)
+    - Exactly one solution exists and you cannot use the same element twice
+    
+    Key Idea:
+    - Use two pointers: left at start, right at end
+    - If sum equals target, return indices
+    - If sum < target, move left pointer right
+    - If sum > target, move right pointer left
+    - Works because array is sorted
+    
+    Simple: Use two pointers from both ends, move based on sum comparison
+
+---
+
+2. INTERSECTION OF TWO ARRAYS
+    Link: https://www.geeksforgeeks.org/union-and-intersection-of-two-arrays/
+    Problem Explanation:
+    - Given two arrays, find common elements present in both
+    - Print/return the intersection (duplicate elements in both arrays)
+    
+    Key Idea:
+    - For each element in first array, search in second array
+    - If found, include in result
+    - For optimal solution with sorted arrays: use two pointers
+    - Handle duplicates based on requirements
+    
+    Simple: Find elements that appear in both arrays
+
+---
+
+3. MOVE ZEROES - LeetCode 283
+    Link: https://leetcode.com/problems/move-zeroes/
+    Problem Explanation:
+    - Given an array of integers
+    - Move all zeroes to end while maintaining relative order of non-zero elements
+    - Modify array in-place
+    
+    Key Idea:
+    - Use one pointer to track position for next non-zero element
+    - Iterate through array, when non-zero found, place at pointer position
+    - After iteration, fill remaining positions with zeros
+    - Two-pass approach: one to collect non-zeros, one to fill zeros
+    
+    Simple: Compact non-zero elements forward, then fill remaining positions with zeros
+
+---
+
+4. REMOVE DUPLICATES FROM SORTED ARRAY - LeetCode 26
+    Link: https://leetcode.com/problems/remove-duplicates-from-sorted-array/
+    Problem Explanation:
+    - Given a sorted array, remove duplicates in-place
+    - Return the number of unique elements
+    - Array must be modified such that first k elements are unique
+    
+    Key Idea:
+    - Use pointer k starting at 0
+    - Compare each element with previous element
+    - If different, place at k position and increment k
+    - Works because array is sorted - duplicates are adjacent
+    
+    Simple: Track unique position, only move forward when new element found
+
+---
+
+5. UNION OF TWO ARRAYS
+    Link: https://www.geeksforgeeks.org/union-and-intersection-of-two-arrays/
+    Problem Explanation:
+    - Given two sorted arrays
+    - Find all unique elements from both arrays (union)
+    - Return result in sorted order
+    
+    Key Idea:
+    - Use two pointers on both arrays
+    - Compare elements, add smaller to result
+    - Skip duplicates
+    - Add remaining elements from non-empty array
+    
+    Simple: Merge two sorted arrays while removing duplicates
+
+---
+
+6. VALID PALINDROME - LeetCode 125
+    Link: https://leetcode.com/problems/valid-palindrome/
+    Problem Explanation:
+    - Given a string s, determine if it is a palindrome
+    - Consider only alphanumeric characters
+    - Ignore spaces, punctuation, and case
+    
+    Key Idea:
+    - Convert to lowercase
+    - Use two pointers from both ends
+    - Skip non-alphanumeric characters
+    - Compare characters at both pointers
+    - If any mismatch, return false
+    
+    Simple: Two pointers check if alphanumeric chars match ignoring case and spaces
+
+---
+
+TIME COMPLEXITY SUMMARY:
+- Two Sum II: O(n)
+- Intersection: O(n*m) naive, O(n+m) with sorted arrays
+- Move Zeroes: O(n)
+- Remove Duplicates: O(n)
+- Union: O(n+m)
+- Valid Palindrome: O(n)

@@ -1,0 +1,102 @@
+HARD LEVEL - PROBLEM SUMMARIES
+=====================================
+
+1. 3SUM - LeetCode 15
+    Link: https://leetcode.com/problems/3sum/
+    Problem Explanation:
+    - Given array of integers, find all unique triplets that sum to zero
+    - Return list of triplets (no duplicates in result)
+    - Example: [-1,0,1,2,-1,-4] returns [[-1,-1,2],[-1,0,1]]
+    
+    Key Idea:
+    - Sort the array first
+    - Fix one element and find two-sum for remaining (two pointers)
+    - Use outer loop to fix first element
+    - Two pointers approach for remaining two elements
+    - Skip duplicate elements at each position
+    - When sum found, move both pointers after handling duplicates
+    - When sum < 0, move left pointer right
+    - When sum > 0, move right pointer left
+    
+    Simple: Sort array, fix one element, use two pointers for remaining elements, handle duplicates
+
+---
+
+2. TRAPPING RAIN WATER - LeetCode 42
+    Link: https://leetcode.com/problems/trapping-rain-water/
+    Problem Explanation:
+    - Given elevation map represented by array heights
+    - Calculate how much rain water can be trapped after raining
+    - Water trapped at position i = min(leftMax, rightMax) - height[i]
+    - Example: [0,1,0,2,1,0,1,3,2,1,2,1] traps 6 units of water
+    
+    Key Idea:
+    - For each position, find maximum height to its left and right
+    - Water trapped = min(leftMax, rightMax) - current height (if positive)
+    - Build leftMax array: leftMax[i] = max height from 0 to i-1
+    - Build rightMax array: rightMax[i] = max height from i+1 to n-1
+    - Iterate and sum up water trapped at each position
+    
+    Alternative (Two Pointers - O(1) space):
+    - Maintain left and right pointers from both ends
+    - Track leftMax and rightMax as you move
+    - Move pointer with smaller height (bottleneck principle)
+    - Water trapped depends on min of boundaries and current height
+    
+    Simple: At each position, trapped water = min(leftMax, rightMax) - height
+
+---
+
+DETAILED APPROACH COMPARISON:
+
+3SUM Approach:
+- Time: O(n²) - one loop with two pointers inside
+- Space: O(1) not counting output
+- Must sort first: O(n log n)
+- Handle duplicates carefully to avoid repeated triplets
+- Fix one element and find pair summing to its negative
+
+TRAPPING RAINWATER Approach:
+- Prefix-Suffix Array: O(n) time, O(n) space
+  * Build leftMax and rightMax arrays
+  * Iterate and calculate water at each position
+- Two Pointers: O(n) time, O(1) space
+  * Don't need to store all max values
+  * Only track current max from both sides
+  * Move pointer with smaller value
+
+---
+
+KEY DIFFERENCES FROM LOWER LEVELS:
+1. Requires handling multiple conditions and pointers simultaneously
+2. Duplicate handling becomes critical (especially 3Sum)
+3. Block optimization techniques needed (prefix-suffix, smart traversal)
+4. More complex state management during iteration
+
+---
+
+PROBLEM DIFFICULTY FACTORS:
+3Sum:
+- Multiple nested loops
+- Duplicate element management
+- Understanding why greedy pointer movement works
+- Recognizing as extension of Two Sum problem
+
+Trapping Rainwater:
+- Spatial reasoning required
+- Understanding max height concept
+- Space-time tradeoff interpretation
+- Multiple valid approaches with different complexities
+
+---
+
+TIME/SPACE COMPLEXITY SUMMARY:
+3Sum:
+- Time: O(n²)
+- Space: O(1) excluding output
+
+Trapping Rainwater:
+- Prefix-Suffix: O(n) time, O(n) space
+- Two Pointers: O(n) time, O(1) space
+
+Both require sorting or preprocessing as key step.
