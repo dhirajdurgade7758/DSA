@@ -1,0 +1,39 @@
+====== EASY LEVEL PROBLEMS ======
+
+1. CHECK IF ARRAY IS SORTED AND ROTATED - LeetCode 1752
+   Link: https://leetcode.com/problems/check-if-array-is-sorted-and-rotated/
+   Problem Explanation:
+   - Given an array, check if it is sorted and rotated
+   - A sorted array rotated means elements are shifted but order is preserved
+   - Example: [3,4,5,1,2] is sorted [1,2,3,4,5] rotated 3 times
+   - Return true if array could have been sorted then rotated, false otherwise
+   
+   Key Idea:
+   - Count how many positions have nums[i] > nums[i+1] (break points)
+   - There should be exactly 0 or 1 break point
+   - If 0 break points, array is already sorted
+   - If 1 break point, check if last element <= first element (rotation valid)
+   - This ensures rotation property is maintained
+   
+   Simple: Count positions where nums[i] > nums[i+1]. Valid if count is 0 (sorted) or 1 with nums[last] <= nums[first] (rotated)
+
+---
+
+2. TWO SUM II - INPUT ARRAY IS SORTED - LeetCode 167
+   Link: https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/
+   Problem Explanation:
+   - Given a sorted array of integers and a target sum
+   - Find two numbers that add up to the target
+   - Return 1-based indices of the two numbers
+   - Cannot use the same element twice
+   
+   Key Idea:
+   - Use binary search approach: for each element, search for its complement
+   - Iterate through array, for each number at index i
+   - Use binary search to find if (target - numbers[i]) exists in range [0, i-1]
+   - If found, return both indices (1-based)
+   - Time Complexity: O(n log n) due to n binary searches
+   
+   Simple: For each number, binary search for its complement in the elements before it. Return indices when complement is found.
+
+====== END OF EASY PROBLEMS ======

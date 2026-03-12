@@ -1,0 +1,88 @@
+====== MEDIUM LEVEL PROBLEMS ======
+
+1. SEARCH IN ROTATED SORTED ARRAY - LeetCode 33
+   Link: https://leetcode.com/problems/search-in-rotated-sorted-array/
+   Problem Explanation:
+   - Given a rotated sorted array and a target value
+   - Find the index of the target in the array
+   - Array was originally sorted, then rotated at an unknown pivot
+   - Return index if found, -1 otherwise
+   - Must have O(log n) time complexity (binary search required)
+   
+   Key Idea:
+   - Use binary search but identify which half is sorted
+   - Compare target with nums[start] to determine which half is properly sorted
+   - If left half is sorted (nums[start] <= nums[mid]):
+     - If target is in sorted range, search left
+     - Otherwise search right
+   - If right half is sorted (nums[mid] < nums[end]):
+     - If target is in sorted range, search right
+     - Otherwise search left
+   - This efficiently narrows search space despite rotation
+   
+   Simple: Use binary search. Identify sorted half, check if target is in sorted range, search accordingly.
+
+---
+
+2. FIND MINIMUM IN ROTATED SORTED ARRAY - LeetCode 153
+   Link: https://leetcode.com/problems/find-minimum-in-rotated-sorted-array/
+   Problem Explanation:
+   - Given a sorted array rotated at an unknown pivot point
+   - Find the minimum element in the array
+   - Array contains unique elements
+   - Example: [3,4,5,1,2] minimum is 1
+   - Must have O(log n) time complexity
+   
+   Key Idea:
+   - Use binary search to find the rotation point
+   - If array is already sorted (nums[left] < nums[right]), return nums[left]
+   - Compare nums[mid] with nums[right]:
+     - If nums[mid] > nums[right], minimum is in right half, move left = mid + 1
+     - If nums[mid] <= nums[right], minimum is in left half (including mid), move right = mid
+   - Continue until left == right, which points to minimum
+   
+   Simple: Binary search on the rotation point. Minimum is before rotation point. Compare mid with right to determine which half contains minimum.
+
+---
+
+3. SEARCH A 2D MATRIX - LeetCode 74
+   Link: https://leetcode.com/problems/search-a-2d-matrix/
+   Problem Explanation:
+   - Given an m x n 2D matrix and a target value
+   - Matrix is sorted row-wise and column-wise
+   - Each row is sorted left to right
+   - Integer at end of row is less than integer at start of next row
+   - Return true if target exists, false otherwise
+   
+   Key Idea:
+   - Apply binary search on each row independently
+   - For each row, use standard binary search to find target
+   - Compare target with mid element:
+     - If equal, target found, return true
+     - If mid < target, search right half
+     - If mid > target, search left half
+   - Time Complexity: O(m log n) where m is rows, n is columns
+   
+   Simple: Iterate through each row and apply binary search to find target. Return true if found in any row.
+
+---
+
+4. KOKO EATING BANANAS - LeetCode 875
+   Link: https://leetcode.com/problems/koko-eating-bananas/
+   Problem Explanation:
+   - Koko has piles of bananas and h hours to eat them all
+   - Each hour, Koko picks one pile and eats at most k bananas
+   - If pile has less than k bananas, eats all and stops for that hour
+   - Find minimum eating speed k such that all bananas are eaten in h hours
+   
+   Key Idea:
+   - Binary search on the eating speed (k)
+   - Minimum speed is 1, maximum speed is max(piles)
+   - For each speed, calculate total hours needed using ceiling division: (pile + k - 1) / k
+   - If hours needed <= h, speed is feasible, try slower (smaller) speed
+   - If hours needed > h, speed is too slow, try faster (larger) speed
+   - Greedy optimization: always use minimum feasible speed
+   
+   Simple: Binary search on eating speed. For each speed, calculate hours needed using ceiling division. Find minimum speed that fits within h hours.
+
+====== END OF MEDIUM PROBLEMS ======
