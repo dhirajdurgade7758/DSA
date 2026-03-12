@@ -1,0 +1,166 @@
+EASY LEVEL PROBLEMS - SUMMARY
+
+================================================================================
+1. CONTAINS DUPLICATE - LeetCode 217
+    Link: https://leetcode.com/problems/contains-duplicate/
+    
+    Problem Explanation:
+    - Given an integer array nums
+    - Return true if any value appears at least twice in the array
+    - Return false if every element is distinct
+    - Constraint: -10^9 <= nums[i] <= 10^9
+    
+    Key Idea:
+    - Use a hash map to store elements as we iterate
+    - For each element, check if it already exists in the map
+    - If element exists, we found a duplicate - return true
+    - If we complete the loop, no duplicates exist - return false
+    - HashSet/HashMap makes lookup O(1) on average
+    
+    Simple: Store each element in a hash map, if we find an element that's already stored, return true; otherwise return false at end
+
+================================================================================
+2. TWO SUM II - INPUT ARRAY IS SORTED - LeetCode 167
+    Link: https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/
+    
+    Problem Explanation:
+    - Given a 1-indexed array numbers that is already sorted in non-decreasing order
+    - Find two numbers such that they add up to a specific target number
+    - Return the indices of the two numbers (1-indexed, not 0-indexed)
+    - Each input has exactly one solution and you may not use the same element twice
+    - The array is sorted, so we can use two pointers
+    
+    Key Idea:
+    - Use two pointers: one at start (left) and one at end (right)
+    - If sum of left and right equals target, return indices
+    - If sum is less than target, increment left pointer to get larger sum
+    - If sum is greater than target, decrement right pointer to get smaller sum
+    - Continue until left and right meet
+    - Time Complexity: O(n), Space Complexity: O(1)
+    
+    Simple: Use two pointers from both ends, move them towards each other based on whether current sum is less than or greater than target
+
+================================================================================
+3. VALID ANAGRAM - LeetCode 242
+    Link: https://leetcode.com/problems/valid-anagram/
+    
+    Problem Explanation:
+    - Given two strings s and t
+    - Determine if t is an anagram of s
+    - An anagram is a word or phrase formed by rearranging the letters of another
+    - Both strings only contain lowercase English letters
+    - Constraint: 1 <= s.length, t.length <= 5 * 10^4
+    
+    Key Idea:
+    - Count the frequency of each character in string s using a hash map
+    - For each character in string t, decrement its count in the hash map
+    - If any character in t is not found in the map or count goes negative, return false
+    - If all characters match with correct frequencies, return true
+    - Alternative: Sort both strings and compare if they're equal
+    - Time Complexity: O(n), Space Complexity: O(1) since alphabet size is fixed (26)
+    
+    Simple: Count character frequencies in both strings, if counts match for all characters then they are anagrams
+
+================================================================================
+4. MAJORITY ELEMENT - LeetCode 169
+    Link: https://leetcode.com/problems/majority-element/
+    
+    Problem Explanation:
+    - Given an array nums of size n, return the majority element
+    - The majority element is the element that appears more than ⌊n/2⌋ times
+    - You may assume that the majority element always exists in the array
+    - Constraint: 1 <= nums.length <= 5 * 10^4, -10^9 <= nums[i] <= 10^9
+    
+    Key Idea:
+    - Use a hash map to count the frequency of each element
+    - As you count, if any element's frequency exceeds n/2, return that element
+    - Since majority element always exists, we will find it
+    - Alternative (optimal): Use Boyer-Moore Voting Algorithm
+    - The voting algorithm works without extra space and is O(n) time
+    
+    Time Complexity (HashMap): O(n)
+    Space Complexity (HashMap): O(n)
+    Time Complexity (Voting): O(n)
+    Space Complexity (Voting): O(1)
+    
+    Simple: Count frequency of each element using hash map, return element with frequency > n/2
+
+================================================================================
+5. UNION AND INTERSECTION OF ARRAYS
+    Link: https://www.geeksforgeeks.org/union-of-two-arrays/ (GFG Problem)
+    
+    Problem Explanation:
+    - Given two arrays arr1 and arr2
+    - Find the Union: all unique elements from both arrays
+    - Find the Intersection: elements common to both arrays
+    - Union example: [7,3,9] and [6,3,9,2,9,4] -> Union: {7,3,9,6,2,4}, Intersection: {3,9}
+    
+    Key Idea for Union:
+    - Insert all elements from both arrays into a hash set
+    - Hash set automatically handles duplicates
+    - Print all elements from the hash set
+    
+    Key Idea for Intersection:
+    - Insert all elements from first array into a hash set
+    - For each element in second array, check if it exists in the set
+    - If found, print the element and remove it from set (to avoid duplicates)
+    - Or use another set to track already printed elements
+    
+    Time Complexity: O(m + n) where m and n are sizes of both arrays
+    Space Complexity: O(m + n) for hash sets
+    
+    Simple: Union - add all elements from both arrays to a set; Intersection - add first array to set, then check which elements from second array exist in set
+
+================================================================================
+6. MAXIMUM SUBARRAY - LeetCode 53 (Kadane's Algorithm)
+    Link: https://leetcode.com/problems/maximum-subarray/
+    
+    Problem Explanation:
+    - Given an integer array nums, find the contiguous subarray with the largest sum
+    - Return the maximum sum value
+    - The array must contain at least one element
+    - Constraint: 1 <= nums.length <= 10^5, -10^4 <= nums[i] <= 10^4
+    - Example: [-2,1,-3,4,-1,2,1,-5,4] -> Output: 6 (subarray [4,-1,2,1])
+    
+    Key Idea:
+    - Use Kadane's Algorithm for optimal O(n) solution
+    - Maintain two variables: currSum (current subarray sum) and maxSum (maximum found so far)
+    - For each element, decide: extend current subarray or start fresh
+    - currSum = max(currSum + nums[i], nums[i])
+    - Update maxSum whenever currSum is larger
+    - This greedy approach guarantees optimal solution
+    
+    Alternative Approach:
+    - If currSum becomes negative, reset it to 0 (start fresh subarray)
+    - Keep tracking the maximum sum seen
+    
+    Time Complexity: O(n)
+    Space Complexity: O(1)
+    
+    Simple: Track current sum as you iterate, keep extending only if current sum is positive, update maximum sum found
+
+================================================================================
+7. LARGEST SUBARRAY WITH SUM ZERO (or equal sum)
+    Link: https://www.geeksforgeeks.org/largest-subarray-with-sum-zero/ (GFG Problem)
+    
+    Problem Explanation:
+    - Given an array of integers, find the length of largest subarray with sum = 0
+    - A prefix sum approach is used to solve this efficiently
+    - If we see the same prefix sum twice, the elements between them sum to zero
+    - Example: [15,-2,2,-8,1,7,10] -> Subarray [-2,2] sums to 0
+    
+    Key Idea:
+    - Keep track of cumulative/prefix sum as we iterate through the array
+    - Store each prefix sum with its first occurrence index in a hash map
+    - If we encounter a prefix sum that we've seen before, calculate subarray length
+    - Length = current index - index where we first saw this prefix sum
+    - Track the maximum length found
+    - This works because: prefix[j] - prefix[i] = sum of elements between i and j
+    - When prefix[j] == prefix[i], the sum between them is 0
+    
+    Time Complexity: O(n)
+    Space Complexity: O(n) for hash map
+    
+    Simple: Use prefix sum with hash map to store first occurrence of each sum, when sum repeats the subarray between has sum zero
+
+================================================================================

@@ -1,0 +1,77 @@
+HARD LEVEL PROBLEMS - SUMMARY
+
+================================================================================
+1. LONGEST CONSECUTIVE SEQUENCE - LeetCode 128
+    Link: https://leetcode.com/problems/longest-consecutive/
+    
+    Problem Explanation:
+    - Given an unsorted array of integers nums
+    - Return the length of the longest consecutive elements sequence
+    - The sequence does not need to be contiguous in the original array
+    - Must run in O(n) time complexity
+    - Constraint: 0 <= nums.length <= 10^5, -10^9 <= nums[i] <= 10^9
+    - Example: [100,4,200,1,3,2] -> 4 (sequence: [1,2,3,4])
+    
+    Key Idea:
+    - Naive approach (sorting) would be O(n log n), not acceptable
+    - Use hash set to store all numbers for O(1) lookup
+    - For each number, check if it's the start of a sequence (num-1 not in set)
+    - If it is the start, count how long the sequence extends (num+1, num+2, etc.)
+    - Only start counting from sequence starts to avoid recounting
+    - This ensures O(n) despite nested loop because each number is visited at most twice
+    
+    Time Complexity: O(n) - each number examined at most twice
+    Space Complexity: O(n) - for hash set
+    
+    Key Insight:
+    - Sorting would give O(n log n)
+    - Using sorted set (multiset) would be O(n log n)
+    - Hash set gives true O(n) by skipping non-start numbers
+    - The trick is only starting from sequence beginnings
+    
+    Simple: Insert all numbers in a set, for each number that marks start of sequence (no num-1), count consecutive sequence length; track maximum
+
+================================================================================
+2. ITINERARY FROM TICKETS (RECONSTRUCT ITINERARY) - LeetCode 332 / GeeksforGeeks
+    Link: https://leetcode.com/problems/reconstruct-itinerary/ (LeetCode 332)
+    Link: https://www.geeksforgeeks.org/reconstruct-itinerary-from-given-tickets/ (GFG)
+    
+    Problem Explanation:
+    - Given a list of tickets in the form [from, to]
+    - Reconstruct the itinerary (path) from start to end
+    - Each ticket can be used at most once
+    - There is exactly one valid itinerary starting from an airport with no incoming edge
+    - Example: ["Mumbai"->"Delhi", "Delhi"->"Goa", "Goa"->"Chennai", "Chennai"->"Bangalore"]
+    - Output: Mumbai->Delhi->Goa->Chennai->Bangalore
+    
+    Key Idea - Graph approach:
+    - Build a directed graph where edge from=to represents a ticket
+    - Find the starting airport: the one that has no incoming edges
+    - Alternative: the one whose in-degree != out-degree (must start here)
+    
+    Two Approaches:
+    
+    1. Simple approach (from given code):
+       - Create a hash set of all destinations
+       - Find starting airport: the one NOT in destinations set
+       - Use hash map to store next flight from each airport
+       - Follow the chain: start -> next -> next -> ... until no more flights
+       - Works only if there's clear start/end and each airport has at most one outgoing flight
+    
+    2. Complex approach (Eulerian Path):
+       - Use DFS with backtracking (for duplicates)
+       - Build adjacency list (multiset to handle duplicates)
+       - Use Hierholzer's algorithm to find Eulerian path
+       - Needed when airports have multiple outgoing flights
+    
+    Time Complexity: O(E log E) for complex, O(V+E) for simple case
+    Space Complexity: O(V + E) for graph storage
+    
+    Graph Properties:
+    - Finding valid itinerary = finding Eulerian path in directed graph
+    - Starting point = node with out-degree > in-degree (or no incoming edges)
+    - Valid itinerary exists only if Eulerian path is possible
+    
+    Simple: Find starting airport (no incoming flights), follow chain of flights using hash map until all tickets used
+
+================================================================================

@@ -1,0 +1,204 @@
+MEDIUM LEVEL PROBLEMS - SUMMARY
+
+================================================================================
+1. GROUP ANAGRAMS - LeetCode 49
+    Link: https://leetcode.com/problems/group-anagrams/
+    
+    Problem Explanation:
+    - Given an array of strings strs, group the anagrams together
+    - You can return the answer in any order
+    - Two strings are anagrams if they contain the same characters but in different order
+    - Example: ["eat","tea","tan","ate","nat","bat"] -> [["bat"],["nat","tan"],["ate","eat","tea"]]
+    
+    Key Idea:
+    - Sort the characters in each string to get a canonical form
+    - Two anagrams will have the same sorted form
+    - Use a hash map where key is sorted string and value is group index
+    - For each string, sort it and check if we've seen this sorted form before
+    - If yes, add to existing group; if no, create new group
+    - Alternative: Use character frequency as key instead of sorted string
+    
+    Time Complexity: O(n * k log k) where n = number of strings, k = length of longest string
+    Space Complexity: O(n * k) for storing all strings in groups
+    
+    Simple: Sort characters in each string, group strings with same sorted form together, strings with same sorted form are anagrams
+
+================================================================================
+2. TOP K FREQUENT ELEMENTS - LeetCode 347
+    Link: https://leetcode.com/problems/top-k-frequent-elements/
+    
+    Problem Explanation:
+    - Given an integer array nums and an integer k
+    - Return the k most frequent elements
+    - You may return the answer in any order
+    - Constraint: 1 <= nums.length <= 10^5, -10^4 <= nums[i] <= 10^4, 1 <= k <= number of unique elements
+    - Example: [1,1,1,2,2,3], k=2 -> [1,2] (frequencies: 1->3 times, 2->2 times, 3->1 time)
+    
+    Key Idea:
+    - Count frequency of each number using hash map
+    - Create a bucket array where index represents frequency (1 to n)
+    - Place each number in bucket[frequency]
+    - Traverse buckets from highest frequency to lowest, collect k elements
+    - Time Complexity: O(n) - much better than sorting which would be O(n log n)
+    - Alternative: Use min heap of size k
+    
+    Time Complexity: O(n)
+    Space Complexity: O(n) for hash map and buckets
+    
+    Simple: Count frequency of each element, bucket elements by frequency, return k elements from highest frequency buckets
+
+================================================================================
+3. PRODUCT OF ARRAY EXCEPT SELF - LeetCode 238
+    Link: https://leetcode.com/problems/product-of-array-except-self/
+    
+    Problem Explanation:
+    - Given an integer array nums, return an array answer
+    - Where answer[i] is the product of all elements except nums[i]
+    - Do not use division operator
+    - Constraint: 2 <= nums.length <= 10^5
+    - Example: [1,2,3,4] -> [24,12,8,6] (24=2*3*4, 12=1*3*4, 8=1*2*4, 6=1*2*3)
+    
+    Key Idea:
+    - Use prefix and suffix products
+    - First pass: calculate prefix product (product of all elements to the left)
+    - Store in answer array: answer[i] = product of all elements before i
+    - Second pass: calculate suffix product (product of all elements to the right)
+    - Multiply answer[i] with suffix: answer[i] *= product of all elements after i
+    - This avoids division and handles zeros correctly
+    
+    Time Complexity: O(n)
+    Space Complexity: O(1) if not counting output array
+    
+    Simple: Two passes - first calculate prefix products (product of all left elements), then multiply with suffix products (product of all right elements)
+
+================================================================================
+4. MAXIMUM PRODUCT SUBARRAY - LeetCode 152
+    Link: https://leetcode.com/problems/maximum-product-subarray/
+    
+    Problem Explanation:
+    - Given an integer array nums, find the contiguous subarray with the largest product
+    - Return the maximum product
+    - The array must contain at least one element
+    - Constraint: 1 <= nums.length <= 2 * 10^4, -10 <= nums[i] <= 10
+    - Example: [2,3,-2,4] -> 6 (subarray [2,3])
+    - Tricky: negative numbers can flip signs, so can't just track max
+    
+    Key Idea:
+    - Similar to Kadane's algorithm but for products
+    - Track both maximum and minimum product ending at current position
+    - Minimum is important because negative * negative = positive
+    - At each index: update currMax = max of (currMax*nums[i], currMin*nums[i], nums[i])
+    - Also update currMin = min of (currMax*nums[i], currMin*nums[i], nums[i])
+    - Reset to 0 if product becomes negative (can start fresh)
+    - Update global maximum as we go
+    
+    Time Complexity: O(n)
+    Space Complexity: O(1)
+    
+    Simple: Track maximum and minimum products ending at each position, because negatives can flip signs from min to max
+
+================================================================================
+5. SUBARRAY SUM EQUALS K - LeetCode 560
+    Link: https://leetcode.com/problems/subarray-sum-equals-k/
+    
+    Problem Explanation:
+    - Given an integer array nums and an integer k
+    - Find the total number of continuous subarrays whose sum equals k
+    - Constraint: 1 <= nums.length <= 2 * 10^4, -10^3 <= nums[i] <= 10^3
+    - Example: [10,2,-2,-20,10], k=-10 -> 3 subarrays: [10,2,-2,-20,10], [2,-2,-20,10], [-20,10]
+    
+    Key Idea:
+    - Use prefix sum with hash map to count subarrays
+    - If prefixSum[j] - prefixSum[i] = k, then sum between i and j is k
+    - Rearranged: prefixSum[j] - k = prefixSum[i]
+    - For each position j, check if (currentSum - k) exists in hash map
+    - If it does, it means there are subarrays ending at j with sum = k
+    - Initialize map[0] = 1 to handle case where prefixSum itself = k
+    - Count all occurrences of (currentSum - k) and increment for current sum
+    
+    Time Complexity: O(n)
+    Space Complexity: O(n) for hash map
+    
+    Simple: Use prefix sum with hash map, for each position check how many previous prefix sums would give us sum k when subtracted
+
+================================================================================
+6. LONGEST SUBARRAY WITH SUM K - GeeksforGeeks
+    Link: https://www.geeksforgeeks.org/longest-subarray-with-sum-k/
+    
+    Problem Explanation:
+    - Given an array of integers and a sum k
+    - Find the length of the longest subarray with sum equal to k
+    - Constraint: Array can have positive and negative integers
+    - Example: [10,5,2,7,1], k=15 -> Length 4 (subarray [10,5] has sum 15, but [10,5,2] has sum 17, [5,2,7,1] has sum 15 with length 4)
+    - Return 0 if no such subarray exists
+    
+    Key Idea:
+    - Use prefix sum with hash map similar to subarray sum equals k
+    - Store first occurrence of each prefix sum (not count, just position)
+    - For each position: if currentSum == k, subarray from start is valid
+    - If (currentSum - k) exists in map, current subarray has sum k
+    - Calculate length = current index - first occurrence index of (currentSum - k)
+    - Track maximum length found
+    - Only store first occurrence of each sum because we want longest subarray
+    
+    Time Complexity: O(n)
+    Space Complexity: O(n) for hash map
+    
+    Simple: Use prefix sum with hash map storing first occurrence, subarray from first occurrence to current index has sum k
+
+================================================================================
+7. VALID SUDOKU - LeetCode 36
+    Link: https://leetcode.com/problems/valid-sudoku/
+    
+    Problem Explanation:
+    - Given a 9 x 9 Sudoku board
+    - Validate if it's valid (does not validate if it's solvable, just if constraints are met)
+    - Constraint: 1-9 in rows, columns; 1-9 in 3x3 subgrids; repeated 0s and empty cells are ok
+    - A valid Sudoku board may not be solvable, just must satisfy basic constraints
+    - Example: Can partially filled board with valid constraints = valid Sudoku
+    
+    Key Idea:
+    - Create storage for rows, columns, and 3x3 grids
+    - Iterate through each cell (skip empty cells '.')
+    - For each number, check:
+      1. Does it appear in current row? If yes, invalid
+      2. Does it appear in current column? If yes, invalid
+      3. Does it appear in 3x3 grid? If yes, invalid
+    - To find 3x3 grid index: row_index = i/3, col_index = j/3
+    - If all cells pass checks, return true
+    - Use vectors/sets to store seen numbers
+    
+    Time Complexity: O(1) - always 9x9 board, fixed size
+    Space Complexity: O(1) - fixed size storage
+    
+    Simple: For each non-empty cell, check if number already exists in its row, column, and 3x3 grid; if all unique, sudoku is valid
+
+================================================================================
+8. ENCODE AND DECODE STRINGS - LeetCode 271 (Premium)
+    Link: https://leetcode.com/problems/encode-and-decode-strings/
+    
+    Problem Explanation:
+    - Encode: Convert a list of strings to a single string
+    - Decode: Convert the encoded string back to original list of strings
+    - Handle edge cases: empty strings, strings with special characters, long strings
+    - Example: ["Hello","World"] -> "5#Hello5#World" -> ["Hello","World"]
+    - Challenge: Must preserve all characters and handle any input
+    
+    Key Idea for Encoding:
+    - For each string, prepend its length followed by a delimiter '#'
+    - Concatenate all encoded strings
+    - Example: "cat" -> "3#cat", "ab" -> "2#ab" -> final: "3#cat2#ab"
+    - Why this works: Length tells us exactly how many characters belong to this string
+    
+    Key Idea for Decoding:
+    - Read ahead until you find '#' to get string length
+    - Extract exactly that many characters after '#'
+    - Move pointer to the next string and repeat
+    - Using length prevents any ambiguity with delimiters in content
+    
+    Time Complexity: O(n) for both encode and decode, where n = total characters
+    Space Complexity: O(n) for storing encoded string
+    
+    Simple: Encode: prepend each string with its length and delimiter '#'; Decode: parse length, extract that many characters, repeat until end
+
+================================================================================
