@@ -1,0 +1,49 @@
+PYRAMID PATTERN PROBLEMS
+=======================
+
+1. NUMBER PYRAMID
+   Problem Explanation:
+   - Create a pyramid pattern using numbers
+   - Each row i contains numbers from 1 to (i+1) and back down to 1
+   - Leading spaces are added for alignment with n-i-1 spaces
+   - n is the number of rows to print
+   
+   Example (n=5):
+       1
+      121
+     12321
+    1234321
+   123454321
+   
+   Key Idea:
+   - Use outer loop for rows (0 to n-1)
+   - Print leading spaces: n-i-1
+   - Print ascending numbers: 1 to i+1
+   - Print descending numbers: i down to 1
+   - Each row forms a palindrome number pattern
+   
+   Simple: For each row, print spaces, then numbers ascending and descending to create palindrome
+
+
+2. INVERTED NUMBER PYRAMID
+   Problem Explanation:
+   - Create an inverted pyramid pattern using numbers
+   - Each row i contains numbers from 1 to (n-i)
+   - Numbers are reversed from n-1 down to 1 after the ascending part
+   - Leading spaces increase as you move down (i spaces)
+   
+   Example (n=5):
+   12345
+    1234
+     123
+      12
+       1
+   
+   Key Idea:
+   - Use outer loop for rows (0 to n-1)
+   - Print leading spaces: i spaces
+   - Print ascending numbers: 1 to (n-i)
+   - Print descending numbers: (n-1) down to (i+1)
+   - Creates inverted pyramid structure
+   
+   Simple: For each row, print spaces then decreasing range of numbers to create inverted pyramid

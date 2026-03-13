@@ -1,0 +1,25 @@
+INVERTED PATTERN PROBLEMS
+=========================
+
+1. INVERTED PYRAMID NUMBERS
+   Problem Explanation:
+   - Create an inverted pyramid with repeated numbers
+   - Each row i is indented with i leading spaces
+   - Each row contains (n-i) copies of the number (i+1)
+   - n is the number of rows to print
+   
+   Example (n=5):
+   5
+    4444
+     333
+      22
+       1
+   
+   Key Idea:
+   - Use outer loop for rows (0 to n-1)
+   - Print leading spaces: i spaces
+   - Print repeated digit: (i+1) repeated (n-i) times
+   - Each row starts with more indentation than previous
+   - Number decreases and count decreases as we go down
+   
+   Simple: For each row, indent more, print the row number repeated fewer times to create inverted pyramid

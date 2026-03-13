@@ -1,0 +1,45 @@
+SQUARE PATTERN PROBLEMS
+=======================
+
+1. LETTER SQUARE
+   Problem Explanation:
+   - Create a square grid filled with sequential letters
+   - n x n grid where n is the dimensions
+   - Letters start from 'A' and increment continuously
+   - Letters reset with each row only for display purposes
+   
+   Example (n=3):
+   ABC
+   DEF
+   GHI
+   
+   Key Idea:
+   - Use outer loop for rows (0 to n-1)
+   - Use inner loop for columns (0 to n-1)
+   - Initialize character 'A' before outer loop
+   - Print current character and increment
+   - Creates continuous letter sequence in square format
+   
+   Simple: Fill an n x n grid with letters A-Z continuously to create letter square
+
+
+2. NUMBER SQUARE
+   Problem Explanation:
+   - Create a square grid filled with sequential numbers
+   - n x n grid where n is the dimensions
+   - Numbers start from 1 and increment continuously
+   - Each number is printed sequentially filling the grid
+   
+   Example (n=3):
+   123
+   456
+   789
+   
+   Key Idea:
+   - Use outer loop for rows (0 to n-1)
+   - Use inner loop for columns (0 to n-1)
+   - Initialize number counter to 1 before loops
+   - Print current number and increment counter
+   - Fills entire n x n grid with sequential numbers
+   
+   Simple: Fill an n x n grid with numbers 1 onwards continuously to create number square

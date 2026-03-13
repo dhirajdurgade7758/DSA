@@ -1,0 +1,35 @@
+DIAMOND PATTERN PROBLEMS
+=======================
+
+1. HOLLOW DIAMOND
+   Problem Explanation:
+   - Create a hollow diamond pattern using asterisks (*)
+   - Diamond consists of an upper half and lower half
+   - Upper half: rows expand with hollow interior
+   - Lower half: rows contract with hollow interior
+   - n is the size of the diamond
+   
+   Example (n=4):
+      *
+     * *
+    *   *
+   *     *
+    *   *
+     * *
+      *
+   
+   Key Idea (Upper Half):
+   - Use outer loop for rows (0 to n-1)
+   - Print leading spaces: n-i-1
+   - Print opening asterisk
+   - Print interior spaces: 2*i-1 (for i > 0)
+   - Print closing asterisk (for i > 0)
+   
+   Key Idea (Lower Half):
+   - Use outer loop for rows (0 to n-2)
+   - Print leading spaces: i+1
+   - Print asterisk
+   - Print interior spaces (if not last row)
+   - Print closing asterisk (if not last row)
+   
+   Simple: Create upper half by expanding spaces, then lower half by contracting to form hollow diamond

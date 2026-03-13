@@ -1,0 +1,117 @@
+TRIANGLE PATTERN PROBLEMS
+=========================
+
+1. STAR TRIANGLE
+   Problem Explanation:
+   - Create a right-angled triangle using asterisks (*)
+   - Each row i contains (i+1) asterisks
+   - Forms a triangular shape
+   - n is the number of rows
+   
+   Example (n=5):
+   *
+   **
+   ***
+   ****
+   *****
+   
+   Key Idea:
+   - Use outer loop for rows (0 to n-1)
+   - Use inner loop to print (i+1) asterisks
+   - Each row increases by one asterisk
+   - Simple and straightforward pattern
+   
+   Simple: For each row i, print (i+1) asterisks to create right triangle
+
+
+2. LETTER TRIANGLE
+   Problem Explanation:
+   - Create a triangle using letters
+   - Row i contains letter starting from 'A' and repeated (i+1) times
+   - Each row uses the next letter in sequence
+   - n is the number of rows
+   
+   Example (n=5):
+   A
+   BB
+   CCC
+   DDDD
+   EEEEE
+   
+   Key Idea:
+   - Use outer loop for rows (0 to n-1)
+   - Start with character 'A'
+   - Inner loop prints current character (i+1) times
+   - Increment character after each row
+   - Creates letter triangle pattern
+   
+   Simple: For each row, print letter repeated (i+1) times, and increment letter for next row
+
+
+3. NUMBER TRIANGLE
+   Problem Explanation:
+   - Create a triangle using sequential numbers 1 to (i+1)
+   - Each row i contains numbers from 1 to (i+1)
+   - n is the number of rows
+   
+   Example (n=5):
+   1
+   12
+   123
+   1234
+   12345
+   
+   Key Idea:
+   - Use outer loop for rows (0 to n-1)
+   - Inner loop prints numbers from 1 to (i+1)
+   - Each row adds one more number than previous
+   - Creates numerical triangle pattern
+   
+   Simple: For each row i, print numbers from 1 to (i+1) to create number triangle
+
+
+4. CONTINUOUS NUMBER TRIANGLE
+   Problem Explanation:
+   - Create a triangle using continuously incrementing numbers
+   - Numbers don't reset, they continue from previous row
+   - Each row i contains (i+1) numbers
+   - n is the number of rows
+   - Starting number is 1
+   
+   Example (n=5):
+   1
+   23
+   456
+   78910
+   1112131415
+   
+   Key Idea:
+   - Use a global counter 'num' starting from 1
+   - Outer loop for rows (0 to n-1)
+   - Inner loop prints (i+1) numbers
+   - Increment counter after each number printed
+   - Numbers continue across rows without reset
+   
+   Simple: For each row, print (i+1) numbers continuously from a running counter
+
+
+5. REVERSE NUMBER TRIANGLE
+   Problem Explanation:
+   - Create a triangle using reverse numbers
+   - Each row i contains numbers from (i+1) down to 1
+   - n is the number of rows
+   
+   Example (n=5):
+   1
+   21
+   321
+   4321
+   54321
+   
+   Key Idea:
+   - Use outer loop for rows (0 to n-1)
+   - Inner loop prints numbers from (i+1) down to 1
+   - Each row has one more number than previous
+   - Numbers are in descending order for each row
+   
+   Simple: For each row i, print numbers from (i+1) down to 1 to create reverse triangle
