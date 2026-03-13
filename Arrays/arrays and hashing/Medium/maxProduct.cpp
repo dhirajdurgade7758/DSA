@@ -4,17 +4,21 @@ using namespace std;
 
 int maxProduct(vector<int>& nums) {
         int n=nums.size();
-        int maxProduct=INT_MIN;
-        int currProduct=1;
+        int leftProduct=1;
+        int rightProduct=1;
+        int ans=nums[0];
+
         for(int i=0; i<n; i++){
-            currProduct*=nums[i];
-            maxProduct=max(maxProduct, currProduct);
-            if(currProduct < 0){
-                currProduct=0;
-            }
+            if(leftProduct == 0) leftProduct=1;
+            if(rightProduct == 0) rightProduct=1;
+            
+            leftProduct*=nums[i];
+            rightProduct*=nums[n-i-1];
+
+            ans=max(ans, max(leftProduct, rightProduct));
         }
-        return maxProduct;
-}
+        return ans;
+ }
 
 
 int main()
