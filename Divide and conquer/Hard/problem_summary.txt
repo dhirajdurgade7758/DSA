@@ -1,0 +1,26 @@
+================================================================================
+                    HARD - DIVIDE AND CONQUER PROBLEMS
+================================================================================
+
+1. INVERSION COUNT
+   Link: https://leetcode.com/problems/reverse-pairs/
+   
+   Problem Explanation:
+   - Count total number of inversions in an array
+   - Inversion: pair of indices (i, j) where i < j but arr[i] > arr[j]
+   - Example in [2,4,1,3,5]: inversions are (2,1), (4,1), (4,3) = 3 inversions
+   - Must solve in O(n log n) time - brute force O(n²) won't work
+   
+   Key Idea:
+   - Combine merge sort with inversion counting
+   - When merging two sorted halves:
+     - If left element > right element: it's an inversion
+     - Left element and all remaining elements in left half form inversions
+     - Count: invCount += (mid - i + 1) when right is picked before left
+   - Recursively count inversions in left, right, and across partitions
+   - Total inversions = left_inversions + right_inversions + merge_inversions
+   - Key insight: Merge operation efficiently counts cross-inversions
+   
+   Simple: Use merge sort but count when we pick from right array before left array. That indicates inversions, and we can count multiple at once.
+
+================================================================================

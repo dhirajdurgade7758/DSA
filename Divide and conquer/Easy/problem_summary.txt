@@ -1,0 +1,59 @@
+================================================================================
+                    EASY - DIVIDE AND CONQUER PROBLEMS
+================================================================================
+
+1. MERGE SORT
+   Link: https://leetcode.com/problems/sort-an-array/
+   
+   Problem Explanation:
+   - Sort an array of integers in ascending order
+   - Must use divide and conquer approach (not comparison-based in-place sort)
+   - Time complexity must be O(n log n)
+   
+   Key Idea:
+   - Divide: Split array into two halves recursively until single elements
+   - Conquer: Merge two sorted arrays back together maintaining order
+   - Merge operation: Compare elements from both halves, pick smaller first
+   - Use temporary vector to store merged results, then copy back
+   
+   Simple: Divide array in half, sort each half, then merge them back in sorted order.
+
+================================================================================
+
+2. QUICK SORT
+   Link: https://leetcode.com/problems/sort-an-array/
+   
+   Problem Explanation:
+   - Sort an array of integers using Quick Sort algorithm
+   - Uses pivot-based partitioning strategy
+   - Average case: O(n log n), Worst case: O(n²)
+   
+   Key Idea:
+   - Choose last element as pivot
+   - Partition: Move all elements >= pivot to left, < pivot to right
+   - Partition pointer tracks correct position of pivot
+   - Recursively sort left and right partitions
+   - In-place sorting (no extra data structure like merge sort)
+   
+   Simple: Pick a pivot, partition array around it, then recursively sort left and right parts.
+
+================================================================================
+
+3. MERGE SORT WITH STRINGS
+   Link: https://leetcode.com/problems/sort-the-students-by-their-kth-score/
+   
+   Problem Explanation:
+   - Sort an array of strings in lexicographic (alphabetical) order
+   - Apply merge sort algorithm to string arrays
+   - Demonstrate merge sort works with any comparable data type
+   
+   Key Idea:
+   - Same merge sort structure as integer sorting
+   - String comparison: use <= operator (lexicographic comparison)
+   - Use vector<string> instead of vector<int>
+   - Merge maintains alphabetical order by comparing strings directly
+   - Works for names, words, or any lexicographic data
+   
+   Simple: Apply merge sort logic to strings instead of numbers. Comparison is alphabetical order.
+
+================================================================================

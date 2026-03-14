@@ -1,0 +1,45 @@
+================================================================================
+                   MEDIUM - DIVIDE AND CONQUER PROBLEMS
+================================================================================
+
+1. MAJORITY ELEMENT
+   Link: https://leetcode.com/problems/majority-element/
+   
+   Problem Explanation:
+   - Find the element that appears more than n/2 times in array
+   - Guaranteed that majority element always exists
+   - Must solve in O(n) time and O(1) space
+   
+   Key Idea:
+   - Use Boyer-Moore Voting Algorithm
+   - Maintain candidate and vote count
+   - When vote = 0, set new candidate and vote = 1
+   - If current element == candidate: increment vote
+   - If current element != candidate: decrement vote
+   - At end, candidate is always the majority element
+   - Logic: Majority element will survive all cancellations
+   
+   Simple: Track a candidate and votes. Increment for matching element, decrement for different. Remaining candidate is majority.
+
+================================================================================
+
+2. SEARCH IN ROTATED SORTED ARRAY
+   Link: https://leetcode.com/problems/search-in-rotated-sorted-array/
+   
+   Problem Explanation:
+   - Search for target value in a rotated sorted array
+   - Array was sorted but then rotated at some pivot index
+   - Example: [4,5,6,7,0,1,2] is [0,1,2,4,5,6,7] rotated at index 3
+   - Must solve in O(log n) time - implies binary search
+   
+   Key Idea:
+   - Use binary search with rotation awareness
+   - Determine which half (left or right of mid) is properly sorted
+   - Check if nums[si] <= nums[mid]: left half is sorted
+   - If target in sorted half range: search that half
+   - Otherwise: search the other half (which contains rotation point)
+   - Divide array intelligently based on sorted segments
+   
+   Simple: Use binary search but identify which half is sorted. Search in sorted half if target is in its range, else search other half.
+
+================================================================================
