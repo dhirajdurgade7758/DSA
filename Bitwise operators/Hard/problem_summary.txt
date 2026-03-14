@@ -1,0 +1,44 @@
+BITWISE OPERATORS - HARD LEVEL PROBLEMS
+========================================
+
+1. CLEAR RANGE OF BITS
+   
+   Problem Explanation:
+   - Clear all bits in range [i, j] (both inclusive) in a given number
+   - Keep all bits outside this range unchanged
+   - Example: n=15 (1111), i=1, j=3 → 1111 with bits 1,2,3 cleared → 0001 = 1
+   
+   Key Idea:
+   - Two masks needed:
+     1. Mask for clearing left side (bits > j): bitM1 = ~0 << (j+1)
+        Creates all 1s from position (j+1) onwards
+     2. Mask for clearing right side (bits < i): bitM2 = (1 << i) - 1
+        Creates all 1s from position 0 to (i-1)
+   - Combine masks: bitMask = bitM1 | bitM2
+   - Result: n & bitMask (keeps bits where both masks are 1)
+   
+   Simple: Create two masks - one for bits > j, one for bits < i. OR them, then AND with number.
+
+---
+
+2. FAST EXPONENTIATION
+   Link: https://leetcode.com/problems/powx-n/
+   
+   Problem Explanation:
+   - Calculate x^n efficiently without naive repeated multiplication
+   - Naive approach: x * x * x ... (n times) is O(n)
+   - This is critical for large n values (n = 10^18)
+   
+   Key Idea:
+   - Use binary representation of n to reduce complexity to O(log n)
+   - Process each bit of n from right to left:
+     - If bit is 1: multiply current x to answer (ans *= x)
+     - Square x for next iteration (x *= x)
+     - Right shift n to process next bit (n >>= 1)
+   - Example: 3^5 (5 = 101 in binary)
+     - Bit 0 (1): ans = 3, x = 9
+     - Bit 1 (0): x = 81
+     - Bit 2 (1): ans = 3 * 81 = 243
+     - Result: 3^5 = 243
+   
+   Simple: Use binary representation of exponent. Multiply for 1 bits, square x each step.

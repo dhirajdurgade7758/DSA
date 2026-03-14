@@ -1,0 +1,78 @@
+BITWISE OPERATORS - EASY LEVEL PROBLEMS
+========================================
+
+1. BITWISE OPERATORS INTRODUCTION
+   
+   Problem Explanation:
+   - Learn fundamental bitwise operations: AND, OR, XOR, NOT, left shift, right shift
+   - Understand how these operations work on binary representations
+   
+   Key Idea:
+   - AND (&): Both bits must be 1 → Result is 1
+   - OR (|): At least one bit is 1 → Result is 1
+   - XOR (^): Bits are different → Result is 1
+   - NOT (~): Flip all bits (two's complement for negative)
+   - Left shift (<<): Multiply by 2^n
+   - Right shift (>>): Divide by 2^n
+   
+   Simple: Understand how bits interact. AND for common bits, OR for combined bits, XOR for differences.
+
+---
+
+2. GET ITH BIT
+   
+   Problem Explanation:
+   - For a given number and position i, retrieve/extract the bit at that position
+   - Position 0 is the rightmost (least significant) bit
+   
+   Key Idea:
+   - Use right shift to move the desired bit to position 0: num >> i
+   - Check the last bit using AND with 1: (num >> i) & 1
+   - If result is 1, bit is set; if 0, bit is unset
+   
+   Simple: Shift the bit to the rightmost position, then check if it's 1 or 0.
+
+---
+
+3. SET BIT
+   
+   Problem Explanation:
+   - Set the bit at position i to 1 in a given number
+   - If already 1, no change; if 0, make it 1
+   
+   Key Idea:
+   - Create a mask with 1 at position i: 1 << i
+   - Use OR operation to set that bit: num | (1 << i)
+   - OR ensures the bit becomes 1 regardless of current value
+   
+   Simple: Create a mask with 1 at target position, then OR with the number.
+
+---
+
+4. CLEAR ITH BIT
+   
+   Problem Explanation:
+   - Clear/unset the bit at position i to 0 in a given number
+   - If already 0, no change; if 1, make it 0
+   
+   Key Idea:
+   - Method 1 (AND): Create mask with 0 at position i, 1s elsewhere: ~(1 << i), then AND
+   - Method 2 (XOR): Use XOR to toggle bit if set: (1 << i) to flip at position i
+   - Both methods clear the bit effectively
+   
+   Simple: Create a mask with 0 at target position and XOR or AND with it.
+
+---
+
+5. CLEAR I BITS
+   
+   Problem Explanation:
+   - Clear all bits from position 0 to position i-1 (clear rightmost i bits)
+   - Keep bits from position i onwards
+   
+   Key Idea:
+   - Create mask with 0s in rightmost i positions: ~0 << i
+   - This creates all 1s shifted left by i positions
+   - AND the mask with the number to clear rightmost bits
+   
+   Simple: Shift all 1s left by i positions to create mask, then AND with number.
