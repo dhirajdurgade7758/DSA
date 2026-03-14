@@ -1,0 +1,145 @@
+MEDIUM LEVEL - PROBLEM SUMMARIES
+==================================
+
+1. COUNT UNIQUE SUBSTRINGS (Two implementations)
+   Link: Similar to LeetCode 1698 (Number of Distinct Substrings in a String)
+   
+   Problem Explanation:
+   - Count all distinct substrings of a given string
+   - Empty string counts as 1 substring
+   - Multiple occurrences of same substring count as 1
+   
+   Key Idea:
+   - Generate all suffixes of the string (s[0:], s[1:], s[2:], ...)
+   - Insert each suffix into Trie
+   - Every NEW node created represents a NEW unique substring
+   - Each new node = new substring (that didn't exist before)
+   
+   Simple: Each suffix creates unique branches. New nodes = new substrings.
+   
+   Time Complexity: O(n²) for generating suffixes + O(n²) Trie operations
+   Space Complexity: O(n²) for Trie storage (worst case)
+   
+   Example: "aa" → suffixes: "aa", "a"
+            Insert "aa" → creates 2 nodes
+            Insert "a" → finds existing 'a', count stays 2
+            Total unique substrings = count + 1 = 3 ("aa", "a", "")
+
+
+2. GROUP ANAGRAMS
+   Link: https://leetcode.com/problems/group-anagrams/
+   LeetCode: 49
+   
+   Problem Explanation:
+   - Group words that are anagrams of each other
+   - Return groups of anagrams from given list
+   - All anagrams must be in same group
+   
+   Key Idea:
+   - Sort characters of each word → anagrams have same sorted form
+   - Use sorted string as Trie path (not original string)
+   - All anagrams end at SAME node, insert original word there
+   - DFS through Trie and collect words at endOfWord nodes
+   
+   Simple: Same sorted characters = same Trie path = same group.
+   
+   Time Complexity: O(n * m log m) where n = words, m = avg word length (for sorting)
+   Space Complexity: O(n * m) for Trie storage
+   
+   Example: ["eat", "tea", "ate"] → all sort to "aet"
+            All three words stored at node "aet" and collected together
+
+
+3. LONGEST WORD WITH ALL PREFIXES
+   Link: https://leetcode.com/problems/longest-word-with-all-prefixes/
+   LeetCode: 1858
+   
+   Problem Explanation:
+   - Find longest word where ALL its prefixes are also valid words
+   - Example: "apple" is valid if "a", "ap", "app", "appl" all exist in dictionary
+   - Longer words preferred, then lexicographically smaller
+   
+   Key Idea:
+   - Build Trie from all dictionary words
+   - DFS through Trie, but only continue if current node marks endOfWord
+   - This ensures all prefixes to that point are valid words
+   - Track longest valid complete path
+   
+   Simple: Only traverse paths where every step is a complete word (endOfWord = true).
+   
+   Time Complexity: O(n * m) for insertion + O(n * m) for DFS search
+   Space Complexity: O(n * m) for Trie storage
+   
+   Example: dict = ["a", "ap", "app", "apple", "banana"]
+            "apple" is valid: path a→p→p→l→e all have endOfWord = true
+
+
+4. WORD BREAK (Trie-based approach)
+   Link: https://leetcode.com/problems/word-break/
+   LeetCode: 139
+   
+   Problem Explanation:
+   - Check if string can be segmented into dictionary words
+   - Each word in dictionary can be used multiple times
+   - Return true if entire string can be segmented
+   
+   Key Idea:
+   - Build Trie from all dictionary words
+   - Use recursion: try all possible split positions
+   - At each position, check if first part exists in Trie
+   - If yes, recursively check remaining part
+   - Base case: empty string = success
+   
+   Simple: Try every split. If first part in dictionary, check rest recursively.
+   
+   Time Complexity: O(2^n) worst case (exponential due to recursion)
+   Space Complexity: O(n) for recursion stack
+
+
+5. WORD BREAK (Dynamic Programming approach)
+   Link: https://leetcode.com/problems/word-break/
+   LeetCode: 139 (Optimized)
+   
+   Problem Explanation:
+   - Same as above but with optimization
+   - Check if string can be segmented into dictionary words
+   - Use memoization to avoid recalculating same substrings
+   
+   Key Idea:
+   - Build Trie from dictionary words
+   - Use DP map: unordered_map<string, bool> to store results
+   - Before recursion: check if result already computed
+   - Store result before backtracking
+   - Avoid exponential recalculations
+   
+   Simple: Remember previous results. Don't recalculate same subproblems.
+   
+   Time Complexity: O(n²) with memoization (n = string length)
+   Space Complexity: O(n) for DP map + recursion stack
+
+
+6. DESIGN ADD AND SEARCH WORDS DATA STRUCTURE
+   Link: https://leetcode.com/problems/design-add-and-search-words-data-structure/
+   LeetCode: 211
+   
+   Problem Explanation:
+   - Create data structure with addWord() and search() methods
+   - search() supports wildcard '.' that matches any single character
+   - Example: search("b..") matches "bad", "bag", "bat", etc.
+   
+   Key Idea:
+   - Trie insertion is standard (addWord)
+   - Search uses DFS with backtracking for wildcard handling
+   - When encountering '.': try ALL 26 possible characters recursively
+   - When encountering regular char: follow that character's path
+   
+   Simple: Each '.' becomes 26 possible branches. Use DFS to explore all.
+   
+   Time Complexity:
+   - addWord: O(m) where m = word length
+   - search: O(n * 26^m) worst case (n = nodes, m = word length with wildcards)
+   Space Complexity: O(n * m) for Trie storage
+   
+   Example: search(".ad") checks if any word matches pattern
+            '.' → try a,b,c,...,z
+            For each: check if "ad" follows in Trie

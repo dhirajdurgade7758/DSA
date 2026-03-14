@@ -1,0 +1,78 @@
+EASY LEVEL - PROBLEM SUMMARIES
+================================
+
+1. BUILDING A TRIE
+   Link: N/A (Foundational)
+   
+   Problem Explanation:
+   - Create a Trie data structure from scratch
+   - Build a Trie by inserting a collection of words
+   - Understand the basic structure of Trie nodes
+   
+   Key Idea:
+   - Each Node has: unordered_map<char, Node*> children + bool endOfWord
+   - For each character in word, create node if not exists
+   - Mark the last character's node as endOfWord = true
+   
+   Simple: Store characters as tree nodes. Each path from root to endOfWord node is a word.
+   
+   Time Complexity: O(m * n) where m = word length, n = number of words
+   Space Complexity: O(n * m) for Trie storage
+
+
+2. SEARCHING IN TRIE
+   Link: N/A (Foundational)
+   
+   Problem Explanation:
+   - Insert words into Trie
+   - Search if a complete word exists in Trie
+   - Differentiate between prefix and complete word
+   
+   Key Idea:
+   - Search traverses from root following character path
+   - Return true only if we reach a node with endOfWord = true
+   - If character not found at any step, return false
+   
+   Simple: Follow the path of characters. Valid only if last node marks end of word.
+   
+   Time Complexity: O(m) for search/insert where m = word length
+   Space Complexity: O(m) for recursive call stack
+
+
+3. IMPLEMENT TRIE (PREFIX TREE)
+   Link: https://leetcode.com/problems/implement-trie-prefix-tree/
+   LeetCode: 208
+   
+   Problem Explanation:
+   - Implement Trie class with three methods: insert, search, startsWith
+   - search() checks if complete word exists
+   - startsWith() checks if any word starts with given prefix
+   
+   Key Idea:
+   - Insert: Create nodes and mark endOfWord at last character
+   - search(): Traverse word and check if last node has endOfWord = true
+   - startsWith(): Traverse prefix and check if path exists (endOfWord not required)
+   
+   Simple: Prefix check doesn't require endOfWord. Word check does.
+   
+   Time Complexity: O(m) for all operations (m = length of word/prefix)
+   Space Complexity: O(n * m) where n = number of words
+
+
+4. PREFIX PROBLEM (UNIQUE PREFIXES)
+   Link: N/A (Custom implementation)
+   
+   Problem Explanation:
+   - For each word, find shortest unique prefix
+   - Track frequency of each prefix (how many words share this prefix)
+   - A prefix becomes unique when only 1 word has it
+   
+   Key Idea:
+   - Add frequency counter to each Trie node
+   - When inserting, if character is new: freq = 1, else: freq++
+   - When finding prefix, stop at first node where freq = 1
+   
+   Simple: Find shortest distinct prefix by tracking how many words pass through each node.
+   
+   Time Complexity: O(m) per word where m = word length
+   Space Complexity: O(n * m) for Trie storage

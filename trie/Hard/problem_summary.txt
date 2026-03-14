@@ -1,0 +1,64 @@
+HARD LEVEL - PROBLEM SUMMARIES
+================================
+
+1. WORD SEARCH II
+   Link: https://leetcode.com/problems/word-search-ii/
+   LeetCode: 212
+   
+   Problem Explanation:
+   - Find all dictionary words present in a 2D character board
+   - Words are formed by adjacent cells (up, down, left, right)
+   - Each cell can be used at most once per word
+   - Return all words found from the dictionary
+   
+   Key Idea:
+   - Build Trie from all dictionary words
+   - For each cell in board, perform DFS starting from that cell
+   - DFS simultaneously traverses Trie and board
+   - Mark visited cells with '#' during DFS, restore during backtrack
+   - When reaching endOfWord node in Trie: add word to result
+   - Mark endOfWord = false to avoid duplicate results
+   
+   Algorithm Steps:
+   1. Build Trie from word list
+   2. For each cell (i,j) in board: helper(board, Trie.root, result, i, j)
+   3. In helper function:
+      - Check boundary
+      - Get current character from board[i][j]
+      - Check if character path exists in current Trie node
+      - If word found (endOfWord = true): add to result, mark endOfWord = false
+      - Mark cell as visited '#'
+      - Explore 4 directions with DFS
+      - Restore cell to original character (backtrack)
+   
+   Time Complexity: O(N * 4^L) where N = board cells, L = max word length
+                    With Trie pruning: significantly better in practice
+   Space Complexity: O(T + L) where T = Trie size, L = recursion depth
+   
+   Key Challenges:
+   - Correct backtracking: must restore cell after DFS
+   - Trie pruning optimization: remove nodes after finding words
+   - Avoid duplicate results: mark endOfWord = false after adding word
+   - Boundary checking for 2D grid
+   - 4-directional traversal (up, down, left, right)
+   
+   Optimization: Trie Pruning
+   - After finding a word, remove the node from Trie
+   - Reduces search space for remaining words
+   - Optional but significantly improves performance
+   
+   Example:
+   Board:  o a a n
+           e t a e
+           i h k r
+           i f l v
+   Words: ["oath", "pea", "eat", "rain"]
+   
+   Process:
+   - Start from each cell
+   - DFS explores adjacent cells while following Trie paths
+   - "oath": o(0,0) → a(0,1) → t(1,1) → h(2,1) ✓
+   - "eat": e(1,0) → a(1,2) → t(1,1) ✓
+   - "pea": p not found in board ✗
+   - "rain": r(2,3) → a(1,2) → i(2,0) ✗ (not adjacent)
+   - Result: ["oath", "eat"]

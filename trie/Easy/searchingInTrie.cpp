@@ -9,7 +9,7 @@ class Node{
     public:
         unordered_map<char, Node*> children;
         bool endOfWord;
-        int freq;
+
         Node(){
             endOfWord = false;
         }
@@ -21,7 +21,6 @@ class Trie{
     public:
         Trie(){
             root = new Node();
-            root->freq = -1;
         }
         
         void insert(string key){
@@ -30,10 +29,6 @@ class Trie{
             for(int i=0; i<key.size(); i++){
                 if(temp->children.count(key[i]) == 0){
                     temp->children[key[i]] = new Node();
-                    temp->children[key[i]]->freq = 1;
-                }
-                else{
-                    temp->children[key[i]]->freq++;
                 }
                 temp = temp->children[key[i]];
             }
@@ -57,41 +52,24 @@ class Trie{
             return false;
 
         }
-
-        string getPrefix(string key){
-            Node* temp = root;
-            string prefix = "";
-
-                for(int i=0; i<key.size(); i++){
-                    prefix+=key[i];
-                    if(temp->children[key[i]]->freq == 1){
-                        break;
-                    }
-                    temp = temp->children[key[i]];
-                }
-            return prefix;
-        }
 };
-
-void prefixProblem(vector<string> dict){
-    Trie trie;
-    for(int i=0; i<dict.size(); i++){
-        trie.insert(dict[i]);
-        cout<<"inserted word: "<<dict[i]<<endl;
-    }
-
-    for (int i = 0; i < dict.size(); i++)
-    {
-        cout<<trie.getPrefix(dict[i])<<endl;
-    }
-    
-}
-
 
 int main()
 {
-    vector<string> dict = {"zebra", "duck", "dove", "dog"};
-    prefixProblem(dict);
+    vector<string> words = {"the", "a", "there", "their", "any", "thee"};
+    Trie trie;
+    for(int i=0; i<words.size(); i++){
+        trie.insert(words[i]);
+        cout<<"inserted word: "<<words[i]<<endl;
+    }
+    
+    if(trie.search("any")){
+        cout<<"any is found";
+    }
+    else{
+        cout<<"any is not found";
+    }
+    
 
 return 0;
 }

@@ -143,4 +143,3 @@ int main() {
     cout<<"number of unique substrings count is: "<<t.count;
     return 0;
 }
-
