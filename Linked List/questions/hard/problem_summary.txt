@@ -1,0 +1,74 @@
+HARD PROBLEMS - LINKED LIST
+
+================================================================================
+1. LRU CACHE
+   Link: https://leetcode.com/problems/lru-cache/
+   
+   Problem Explanation:
+   - Design LRU (Least Recently Used) Cache with fixed capacity
+   - get(key): Return value if exists, mark as recently used
+   - put(key, value): Set key-value pair, evict LRU if at capacity
+   
+   Key Idea:
+   - Use doubly linked list to maintain usage order
+   - Least recently used at front (left), most recently used at back (right)
+   - Use hash map for O(1) access to nodes
+   - On get/put, move node to right (MRU position)
+   - Evict from left when capacity exceeded
+   
+   Simple: Doubly linked list tracks usage order, hash map provides O(1) access.
+
+================================================================================
+2. MERGE K SORTED LINKED LISTS
+   Link: https://leetcode.com/problems/merge-k-sorted-lists/
+   
+   Problem Explanation:
+   - Merge K sorted linked lists into one sorted list
+   - All lists are sorted, result should be sorted
+   
+   Key Idea:
+   - Use min-heap (priority queue) to efficiently find minimum element
+   - Push head of all K lists into priority queue
+   - Repeatedly extract min, add its next node to queue
+   - Build merged list from priority queue
+   
+   Simple: Priority queue maintains minimum across K lists for efficient merging.
+
+================================================================================
+3. REVERSE NODES IN K-GROUP (ITERATIVE)
+   Link: https://leetcode.com/problems/reverse-nodes-in-k-group/
+   
+   Problem Explanation:
+   - Reverse every K consecutive nodes in a linked list
+   - If less than K nodes remain, don't reverse them
+   - [1,2,3,4,5] with K=2 becomes [2,1,4,3,5]
+   
+   Key Idea:
+   - Use dummy node to handle head changes
+   - For each group of K nodes:
+     a) Find Kth node (check if K nodes exist)
+     b) Reverse K nodes in place
+     c) Connect reversed group to rest of list
+     d) Move to next group
+   
+   Simple: Iteratively reverse K nodes at a time using dummy node for connection.
+
+================================================================================
+4. REVERSE NODES IN K-GROUP (RECURSIVE)
+   Link: https://leetcode.com/problems/reverse-nodes-in-k-group/
+   
+   Problem Explanation:
+   - Reverse every K consecutive nodes in a linked list (recursive approach)
+   - If less than K nodes remain, don't reverse them
+   
+   Key Idea:
+   - Base case: Check if K nodes exist from current position
+   - If yes:
+     a) Recursively reverse K nodes in remaining list
+     b) Reverse current K nodes
+     c) Connect current reversed group to result
+   - If no: Return current head (no reversal for incomplete group)
+   
+   Simple: Recursively reverse K nodes and connect to reversed remaining list.
+
+================================================================================

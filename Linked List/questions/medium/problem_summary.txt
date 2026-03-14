@@ -1,0 +1,140 @@
+MEDIUM PROBLEMS - LINKED LIST
+
+================================================================================
+1. ADD TWO NUMBERS
+   Link: https://leetcode.com/problems/add-two-numbers/
+   
+   Problem Explanation:
+   - Add two numbers represented as linked lists
+   - Each node contains one digit; digits stored in reverse order
+   - [2,4,3] represents 342; [5,6,4] represents 465
+   
+   Key Idea:
+   - Traverse both lists simultaneously
+   - Add corresponding digits along with carry
+   - Create new nodes for result with digit % 10
+   - Carry = digit / 10 for next iteration
+   
+   Simple: Simulate addition like we do manually, handling carry from previous digits.
+
+================================================================================
+2. COPY LIST WITH RANDOM POINTER
+   Link: https://leetcode.com/problems/copy-list-with-random-pointer/
+   
+   Problem Explanation:
+   - Copy a linked list where each node has a random pointer to any node
+   - Create deep copy preserving all connections
+   
+   Key Idea:
+   - First pass: Create copy of each node and store mapping in hash map
+   - Second pass: Use map to set random pointers of copied nodes
+   - Map links original nodes to their copies
+   
+   Simple: Create new nodes first, then use hash map to link random pointers.
+
+================================================================================
+3. DELETE N NODES AFTER M NODES
+   Link: https://leetcode.com/problems/delete-n-nodes-after-m-nodes/
+   
+   Problem Explanation:
+   - Delete N nodes after every M nodes in a linked list
+   - Pattern: Keep M nodes, delete N nodes, repeat
+   
+   Key Idea:
+   - Traverse M-1 nodes to reach Mth node
+   - Delete next N nodes
+   - Continue pattern for remaining list
+   
+   Simple: Keep repeating the pattern of traversing M nodes and deleting N nodes.
+
+================================================================================
+4. FIND THE DUPLICATE NUMBER
+   Link: https://leetcode.com/problems/find-the-duplicate-number/
+   
+   Problem Explanation:
+   - Find duplicated number in array where n+1 integers between 1 to n
+   - Array can be treated as linked list where nums[i] is next index
+   
+   Key Idea:
+   - Treat array as linked list: index is node, value is next index
+   - Phase 1: Use slow/fast pointers to detect cycle
+   - Phase 2: Reset slow to start, move both one step at a time
+   - Where they meet is the cycle entry (duplicate)
+   
+   Simple: Use Floyd's algorithm on array as linked list to find cycle start.
+
+================================================================================
+5. ODD EVEN LINKED LIST
+   Link: https://leetcode.com/problems/odd-even-linked-list/
+   
+   Problem Explanation:
+   - Rearrange list so odd positioned nodes come first, then even positioned
+   - Maintain relative order within odd and even groups
+   
+   Key Idea:
+   - Separate odd and even positioned nodes into two lists
+   - Use two pointers: one for odd, one for even positions
+   - Connect end of odd list to start of even list
+   
+   Simple: Separate odd and even positioned nodes, then merge them.
+
+================================================================================
+6. REMOVE NTH NODE FROM END OF LIST
+   Link: https://leetcode.com/problems/remove-nth-node-from-end-of-list/
+   
+   Problem Explanation:
+   - Remove the Nth node from the end of list
+   - Handle edge case of removing head node
+   
+   Key Idea:
+   - Calculate total size of list
+   - Find node before the one to remove (size - n)th node
+   - Skip the Nth node by changing next pointer
+   
+   Simple: Find size, then locate node before removal target and skip it.
+
+================================================================================
+7. REORDER LIST
+   Link: https://leetcode.com/problems/reorder-list/
+   
+   Problem Explanation:
+   - Reorder list L0->L1->...->Ln to L0->Ln->L1->Ln-1->...
+   - Rearrange by interleaving first and last nodes
+   
+   Key Idea:
+   - Find middle of list using slow/fast pointers
+   - Reverse the second half
+   - Interleave nodes from first half and reversed second half
+   
+   Simple: Split at middle, reverse second half, then merge by alternating.
+
+================================================================================
+8. SWAPPING NODES IN PAIRS
+   Link: https://leetcode.com/problems/swap-nodes-in-pairs/
+   
+   Problem Explanation:
+   - Swap every two adjacent nodes in a linked list
+   - [1,2,3,4] becomes [2,1,4,3]
+   
+   Key Idea:
+   - Use dummy node to handle head swaps
+   - For each pair, reverse their connection
+   - Move to next pair
+   
+   Simple: Swap every pair of adjacent nodes using pointer manipulation.
+
+================================================================================
+9. ZIGZAG LEVEL ORDER TRAVERSAL (Zig Zag Linked List)
+   Link: Description based on implementation with reverse and split
+   
+   Problem Explanation:
+   - Process linked list in alternating directions using reverse and split
+   - Separate odd and even nodes using split operation
+   
+   Key Idea:
+   - Reverse list segments and split at middle
+   - Process left and right portions separately
+   
+   Simple: Use reverse and split operations to rearrange list in zigzag pattern.
+
+================================================================================

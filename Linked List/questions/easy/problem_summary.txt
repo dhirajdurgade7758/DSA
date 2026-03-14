@@ -1,0 +1,78 @@
+EASY PROBLEMS - LINKED LIST
+
+================================================================================
+1. CYCLE DETECTION
+   Link: https://leetcode.com/problems/linked-list-cycle/
+   
+   Problem Explanation:
+   - Detect if a linked list has a cycle
+   - A cycle exists if a node can be reached again by following next pointers
+   
+   Key Idea:
+   - Use slow and fast pointers (Floyd's cycle detection algorithm)
+   - Slow pointer moves 1 step, fast pointer moves 2 steps
+   - If they meet, cycle exists; if fast reaches null, no cycle
+   
+   Simple: Two pointers moving at different speeds. If they meet, there's a cycle.
+
+================================================================================
+2. INTERSECTION OF TWO LINKED LISTS
+   Link: https://leetcode.com/problems/intersection-of-two-linked-lists/
+   
+   Problem Explanation:
+   - Find the intersection node of two linked lists
+   - Two lists may have different lengths
+   
+   Key Idea:
+   - Calculate sizes of both lists
+   - Move the pointer of longer list ahead by size difference
+   - Traverse both lists together until they meet
+   
+   Simple: Align both lists by moving longer list pointer ahead first.
+
+================================================================================
+3. PALINDROME LINKED LIST
+   Link: https://leetcode.com/problems/palindrome-linked-list/
+   
+   Problem Explanation:
+   - Check if a linked list is a palindrome
+   - Read values same in both directions
+   
+   Key Idea:
+   - Store all values in a vector
+   - Reverse the linked list
+   - Compare original vector with reversed list values
+   
+   Simple: Store values, reverse list, and compare values in order.
+
+================================================================================
+4. MERGE TWO SORTED LINKED LISTS
+   Link: https://leetcode.com/problems/merge-two-sorted-lists/
+   
+   Problem Explanation:
+   - Merge two sorted linked lists into one sorted list
+   - Maintain sorted order in result
+   
+   Key Idea:
+   - Use dummy node to simplify logic
+   - Compare values from both lists and attach smaller node
+   - Attach remaining nodes of non-empty list
+   
+   Simple: Compare nodes from both lists and pick smaller one to add to result.
+
+================================================================================
+5. REVERSE LINKED LIST
+   Link: https://leetcode.com/problems/reverse-linked-list/
+   
+   Problem Explanation:
+   - Reverse a linked list
+   - Change direction of all pointers
+   
+   Key Idea:
+   - Use three pointers: prev, curr, next
+   - Store next node before changing current's next pointer
+   - Move pointers one step forward
+   
+   Simple: Iterate through list, reverse each pointer to point to previous node.
+
+================================================================================
