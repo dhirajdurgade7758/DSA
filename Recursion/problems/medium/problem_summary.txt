@@ -1,0 +1,74 @@
+MEDIUM PROBLEMS SUMMARY
+=======================
+
+1. BINARY STRINGS
+   Link: https://leetcode.com/problems/binary-string-with-alternating-characters/
+   
+   Problem Explanation:
+   - Generate all binary strings of length n that do not contain consecutive 1s
+   - Example: n=2 generates "01", "00", "01" (not "11")
+   - Print all valid binary strings
+   
+   Key Idea:
+   - Use recursion with lastbit tracking (0 or 1)
+   - Base case: if n == 0, print the string (all digits placed)
+   - If lastbit == 0: can place both 0 and 1 in next position
+   - If lastbit == 1: can only place 0 (avoid consecutive 1s)
+   - Recursively build string by appending valid digits
+   
+   Simple: Recursively build binary strings respecting the rule that after 1, you can only place 0, but after 0, you can place both 0 and 1.
+
+
+2. COUNT MATCHING SUBSTRINGS
+   Link: https://leetcode.com/problems/count-matching-subsequences/
+   
+   Problem Explanation:
+   - Given a string, count all substrings where characters match according to a pattern
+   - Uses nested recursion with index tracking (i for outer, j for inner iteration)
+   - Counts occurrence of matching patterns in the string
+   
+   Key Idea:
+   - Use double recursion: outer index i, inner index j
+   - When j reaches end of string (j == n): increment i and reset j = i
+   - When both indices are valid: compare str[i] and str[j]
+   - If characters match: increment count
+   - Recurse with j+1 to continue checking
+   - Combine results from recursive calls
+   
+   Simple: Use nested recursion to compare characters at different positions, counting how many times a pattern or matching sequence occurs.
+
+
+3. FRIENDS PAIRING PROBLEM
+   Link: https://leetcode.com/problems/friends-of-appropriate-ages/
+   
+   Problem Explanation:
+   - n friends need to be divided into pairs or remain single
+   - Each friend can either remain single or pair with one other friend
+   - Find total number of ways to arrange n friends
+   
+   Key Idea:
+   - Use recurrence relation: f(n) = f(n-1) + (n-1) * f(n-2)
+   - f(n-1): nth friend remains single, ways to arrange first n-1 friends
+   - (n-1) * f(n-2): nth friend pairs with one of (n-1) others, ways for remaining n-2 friends
+   - Base cases: f(1) = 1, f(2) = 2
+   - This follows Fibonacci-like pattern with multiplication factor
+   
+   Simple: Each friend either stays single (recurse for n-1) or pairs with one of n-1 friends (multiply by n-1 and recurse for n-2).
+
+
+4. TILING PROBLEM
+   Link: https://leetcode.com/problems/minimum-cost-for-tickets/
+   
+   Problem Explanation:
+   - A 2xn board needs to be tiled with 1x2 tiles (dominoes)
+   - Tiles can be placed horizontally or vertically
+   - Find total number of ways to tile the 2xn board completely
+   
+   Key Idea:
+   - Use recurrence: f(n) = f(n-1) + f(n-2)
+   - f(n-1): place one vertical tile (covers 2 cells), recurse for remaining n-1
+   - f(n-2): place two horizontal tiles stacked (covers 2x2), recurse for remaining n-2
+   - Base cases: f(0) = 1, f(1) = 1
+   - This follows Fibonacci sequence
+   
+   Simple: At each step, either place 1 vertical tile (continue with n-1) or 2 horizontal tiles (continue with n-2), producing Fibonacci pattern.

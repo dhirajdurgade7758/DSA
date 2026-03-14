@@ -1,0 +1,23 @@
+HARD PROBLEMS SUMMARY
+=====================
+
+1. TOWER OF HANOI
+   Link: https://leetcode.com/problems/hanoi-tower/
+   
+   Problem Explanation:
+   - Move n disks from source peg (from) to destination peg (to) using auxiliary peg (aux)
+   - Only one disk can be moved at a time
+   - Larger disk can never be placed on smaller disk
+   - Find the sequence of moves and count total moves required to complete the puzzle
+   
+   Key Idea:
+   - Use helper recursion: towerOfHanoiHelper(n, from, to, aux)
+   - Base case: if n == 1, move single disk from source to destination (1 move)
+   - Recursive strategy:
+     1. Move n-1 disks from source to auxiliary (using destination as temporary)
+     2. Move largest disk from source to destination (1 move)
+     3. Move n-1 disks from auxiliary to destination (using source as temporary)
+   - Total moves = 2^n - 1
+   - Use reference parameter to count total moves across recursive calls
+   
+   Simple: To move n disks: first move n-1 to auxiliary, then move largest to destination, finally move n-1 from auxiliary to destination. This creates an exponential O(2^n) solution with 2^n - 1 total moves.

@@ -1,0 +1,55 @@
+EASY PROBLEMS SUMMARY
+=====================
+
+1. BINARY SEARCH
+   Link: https://leetcode.com/problems/binary-search/
+   
+   Problem Explanation:
+   - Given a sorted array and a target key, find the index of the key
+   - If key not found, return -1
+   - Array should be searched efficiently
+   
+   Key Idea:
+   - Use divide and conquer approach with recursion
+   - Calculate mid = (start + end) / 2
+   - If arr[mid] == key: return mid (base case: found)
+   - If start > end: return -1 (base case: not found)
+   - If arr[mid] < key: search right half recursively
+   - If arr[mid] > key: search left half recursively
+   
+   Simple: Recursively divide the sorted array in half until target is found or search space is exhausted.
+
+
+2. FIND ALL OCCURRENCES
+   Link: https://leetcode.com/problems/find-all-occurrences-of-a-target-in-an-array/
+   
+   Problem Explanation:
+   - Given an array and a key, find and print all indices where key occurs
+   - Print all matching indices in order
+   
+   Key Idea:
+   - Use linear recursion with index tracking
+   - Base case: if i == arr.size(), recursion ends
+   - For each element: if arr[i] == key, print the index i
+   - Move to next index i+1 recursively
+   - Process continues until array is fully traversed
+   
+   Simple: Recursively traverse array from left to right, printing index whenever key is found.
+
+
+3. STRING REMOVE DUPLICATES
+   Link: https://leetcode.com/problems/remove-all-adjacent-duplicates-in-string/
+   
+   Problem Explanation:
+   - Given a string, remove all duplicate characters (keep only first occurrence)
+   - Return the resulting string with unique characters only
+   
+   Key Idea:
+   - Use boolean array (map) to track visited characters
+   - Base case: if i == str.length(), return (all characters processed)
+   - For each character: check if already in map
+   - If character exists (map[str[i] - 'a'] is true): skip it
+   - If character is new: mark in map, add to answer, and recurse
+   - Process left to right to preserve order of first occurrence
+   
+   Simple: Recursively traverse string, tracking seen characters with a boolean array and building result with only first occurrences.
