@@ -1,0 +1,32 @@
+1. BINARY TO DECIMAL CONVERSION
+   
+   Problem Explanation:
+   - Convert a binary number to its decimal equivalent
+   - Each position in binary represents a power of 2
+   - Rightmost digit is 2^0, next is 2^1, then 2^2, etc.
+   
+   Key Idea:
+   - Extract each binary digit using modulo 10
+   - Multiply each digit by its corresponding power of 2 (1, 2, 4, 8, 16...)
+   - Keep dividing the binary number by 10 to move to next digit
+   - Sum all the products to get the decimal result
+   
+   Simple: Extract digits right to left, multiply by increasing powers of 2, and add them up.
+   Example: 1101 (binary) = 1×8 + 1×4 + 0×2 + 1×1 = 13 (decimal)
+
+
+2. DECIMAL TO BINARY CONVERSION
+   
+   Problem Explanation:
+   - Convert a decimal number to its binary representation
+   - Binary uses only digits 0 and 1, where each position is a power of 2
+   - Find which powers of 2 sum up to make the decimal number
+   
+   Key Idea:
+   - Repeatedly divide the decimal number by 2
+   - The remainder (0 or 1) at each step is the binary digit
+   - Use powers of 10 to construct the binary result as an integer
+   - Continue until the decimal number becomes 0
+   
+   Simple: Keep dividing by 2 and collect remainders in reverse order to get binary digits.
+   Example: 50 (decimal) = 110010 (binary) [using divisions: 50→25→12→6→3→1→0]
