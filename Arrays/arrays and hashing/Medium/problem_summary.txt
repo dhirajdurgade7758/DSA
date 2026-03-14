@@ -83,19 +83,21 @@ MEDIUM LEVEL PROBLEMS - SUMMARY
     - Example: [2,3,-2,4] -> 6 (subarray [2,3])
     - Tricky: negative numbers can flip signs, so can't just track max
     
-    Key Idea:
-    - Similar to Kadane's algorithm but for products
-    - Track both maximum and minimum product ending at current position
-    - Minimum is important because negative * negative = positive
-    - At each index: update currMax = max of (currMax*nums[i], currMin*nums[i], nums[i])
-    - Also update currMin = min of (currMax*nums[i], currMin*nums[i], nums[i])
-    - Reset to 0 if product becomes negative (can start fresh)
-    - Update global maximum as we go
+    Key Idea - LEFT & RIGHT PRODUCT APPROACH:
+    - Use two pointers: leftProduct (left to right) and rightProduct (right to left)
+    - In single pass: multiply leftProduct by nums[i] and rightProduct by nums[n-1-i]
+    - When product becomes 0, reset it to 1 (handle zero elements seamlessly)
+    - Track the maximum product encountered
+    - Why this works: 
+      * If there's no zero: both leftProduct and rightProduct will contain full info
+      * If there's zero: resetting to 1 allows us to skip zeros and compute other subarrays
+      * The maximum will be found either from left products or right products
+    - Handles all edge cases including zeros elegantly
     
     Time Complexity: O(n)
     Space Complexity: O(1)
     
-    Simple: Track maximum and minimum products ending at each position, because negatives can flip signs from min to max
+    Simple: Maintain left product (left to right) and right product (right to left), reset to 1 when hitting zero, return maximum product encountered
 
 ================================================================================
 5. SUBARRAY SUM EQUALS K - LeetCode 560

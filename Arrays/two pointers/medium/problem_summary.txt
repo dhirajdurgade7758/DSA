@@ -57,7 +57,29 @@ MEDIUM LEVEL - PROBLEM SUMMARIES
 
 ---
 
-4. REARRANGE ARRAY ELEMENTS BY SIGN VARIATION - LeetCode 2149 Variation
+
+4. NEXT PERMUTATION - LeetCode 31
+    File: nextPermutation.cpp
+    Link: https://leetcode.com/problems/next-permutation/
+    Algorithm Type: Sequence Manipulation
+    Time Complexity: O(n)
+    Space Complexity: O(1)
+    
+    Problem Explanation:
+    - Given an array of integers, modify it to the next lexicographically greater permutation
+    - If array is the last permutation (descending order), arrange it to the first permutation (ascending order)
+    - Do this in-place with O(1) extra space
+    
+    Key Idea:
+    - Step 1: Find pivot - rightmost element that is smaller than its next element (arr[i] < arr[i+1])
+    - Step 2: If no pivot exists, entire array is in descending order, reverse it to get first permutation
+    - Step 3: Find rightmost element greater than pivot (from right side)
+    - Step 4: Swap pivot with that element
+    - Step 5: Reverse the suffix after pivot position to get the next lexicographically smallest arrangement
+    
+    Simple: Find rightmost position where arr[i] < arr[i+1], swap arr[i] with rightmost element > arr[i], reverse suffix.
+
+5. REARRANGE ARRAY ELEMENTS BY SIGN VARIATION - LeetCode 2149 Variation
     Link: https://leetcode.com/problems/rearrange-array-elements-by-sign/
     Problem Explanation:
     - Variation where positive and negative counts may NOT be equal
