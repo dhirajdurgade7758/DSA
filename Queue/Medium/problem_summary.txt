@@ -1,0 +1,200 @@
+====================================================================
+                   MEDIUM LEVEL PROBLEMS & CONCEPTS
+====================================================================
+
+1. CIRCULAR QUEUE IMPLEMENTATION
+   Link: https://leetcode.com/problems/design-circular-queue/
+   
+   Problem Explanation:
+   - Queue with fixed capacity that wraps around (circular)
+   - Uses modular arithmetic to reuse array space
+   - Efficient space utilization with fixed capacity
+   
+   Key Idea:
+   - Use front and rear pointers with modulo arithmetic
+   - rear = (rear + 1) % capacity for circular insertion
+   - front = (front + 1) % capacity for circular deletion
+   - Track currSize to detect full/empty conditions
+   
+   Implementation Details:
+   - Fixed size array with front and rear pointers
+   - currSize tracks number of elements
+   - After deletion, space can be reused for new insertions
+   - Prevents shifting of elements unlike regular queue
+   
+   Time Complexity: O(1) for all operations
+   Space Complexity: O(capacity)
+   
+   Advantages:
+   - No shifting of elements
+   - Reuses space efficiently
+   - Constant time operations
+
+====================================================================
+
+2. FIRST NON-REPEATING CHARACTER
+   Link: https://leetcode.com/problems/first-unique-character-in-a-string/
+   
+   Problem Explanation:
+   - Find first character that appears only once in string
+   - Process string left to right
+   - For each position, report first non-repeating char seen so far
+   
+   Key Idea:
+   - Use frequency array to track character counts
+   - Use queue to maintain characters in order of appearance
+   - Remove from queue if character frequency > 1
+   
+   Implementation:
+   - frequency[26] array for 26 lowercase letters
+   - Queue stores characters in appearance order
+   - For each character:
+     * Push to queue
+     * Increment frequency
+     * Remove queue front while freq > 1
+     * Front of queue is first non-repeating char (or -1 if none)
+   
+   Time Complexity: O(n) where n is string length
+   Space Complexity: O(1) since max 26 characters
+   
+   Example: "aabccxb"
+   - Position 0: 'a' → 'a' (first non-repeating)
+   - Position 1: 'a' repeated → 'b' (new first non-repeating)
+   - Position 4: 'x' appears → 'x' (first non-repeating)
+   - Position 6: 'b' repeated → 'x' still first non-repeating
+
+====================================================================
+
+3. INTERLEAVE QUEUE HALVES
+   Link: https://practice.geeksforgeeks.org/problems/queue-using-two-stacks/1
+   
+   Problem Explanation:
+   - Given queue with even elements, interleave two halves
+   - First element becomes 1st, alternate with second half
+   - Pattern: [1,2,3,4,5,6] → [1,4,2,5,3,6]
+   
+   Key Idea:
+   - Use auxiliary queue to separate first half
+   - Pop half elements into separate queue
+   - Interleave by pushing from first half, then second half
+   
+   Implementation:
+   - Create first queue and copy n/2 elements from original
+   - Pop original queue's first n/2 elements
+   - Interleave: alternate between first and original queue
+   - Original queue ends up with interleaved result
+   
+   Time Complexity: O(n) where n is queue size
+   Space Complexity: O(n) for auxiliary queue
+   
+   Algorithm Steps:
+   1. Calculate n = queue.size() / 2
+   2. Move first n elements to auxiliary queue
+   3. Push from first queue, then from original queue alternately
+   4. Result: queue contains interleaved elements
+
+====================================================================
+
+4. QUEUE REVERSAL
+   Link: https://practice.geeksforgeeks.org/problems/reverse-a-queue/1
+   
+   Problem Explanation:
+   - Reverse the order of elements in a queue
+   - FIFO becomes LIFO order
+   - Input: [1,2,3,4,5] → Output: [5,4,3,2,1]
+   
+   Key Idea:
+   - Use stack to reverse queue order
+   - Stack's LIFO reverses queue's FIFO naturally
+   
+   Implementation:
+   - Push all queue elements into stack
+   - Pop all stack elements back to queue
+   - Queue now has reversed order
+   
+   Simple Algorithm:
+   1. Transfer all queue elements to stack (front → top)
+   2. Transfer all stack elements back to queue (top → rear)
+   3. Queue is now reversed
+   
+   Time Complexity: O(n) where n is queue size
+   Space Complexity: O(n) for stack
+   
+   Why It Works:
+   - Queue FIFO: 1,2,3,4,5 (1 at front)
+   - Push to stack: stack is 5,4,3,2,1 (5 at top)
+   - Pop from stack: queue is 5,4,3,2,1 (5 at front)
+
+====================================================================
+
+5. QUEUE USING TWO STACKS
+   Link: https://leetcode.com/problems/implement-queue-using-stacks/
+   
+   Problem Explanation:
+   - Implement Queue using only stack operations
+   - Need to achieve FIFO behavior using LIFO stacks
+   - Operations: push(), pop(), front(), empty()
+   
+   Key Idea (Approach 2 - Optimal):
+   - s1: stores elements (push here directly)
+   - s2: auxiliary stack for reversal (used in pop/front)
+   - pop: Transfer all from s1 to s2, pop from s2, transfer back
+   - front: Transfer all from s1 to s2, get top, transfer back
+   
+   Implementation Details:
+   - push(): O(1) - directly push to s1
+   - pop(): O(n) - transfer s1→s2→pop→transfer s2→s1
+   - front(): O(n) - transfer s1→s2→getTop→transfer s2→s1
+   
+   Time Complexity:
+   - push: O(1)
+   - pop: O(n)
+   - front: O(n)
+   Space Complexity: O(n)
+   
+   Why Two Stacks?
+   - Single stack cannot achieve O(1) push
+   - Two stacks needed for reversal operations
+   - Auxiliary stack (s2) acts as temporary storage
+
+====================================================================
+
+6. STACK USING TWO QUEUES
+   Link: https://leetcode.com/problems/implement-stack-using-queues/
+   
+   Problem Explanation:
+   - Implement Stack using only queue operations
+   - Need to achieve LIFO behavior using FIFO queues
+   - Operations: push(), pop(), top(), empty()
+   
+   Key Idea:
+   - q1: main queue for elements
+   - q2: auxiliary queue for reordering
+   - push(): Transfer q1 to q2, push new element, transfer q2 back
+   - This ensures new element is always at front (LIFO)
+   
+   Implementation Details:
+   - push(data): O(n)
+     * Transfer all from q1 to q2
+     * Push new data to q1
+     * Transfer all from q2 back to q1
+   - pop(): O(1) - just q1.pop()
+   - top(): O(1) - just q1.front()
+   
+   Time Complexity:
+   - push: O(n) - transfer operations
+   - pop: O(1)
+   - top: O(1)
+   Space Complexity: O(n)
+   
+   Why Two Queues?
+   - Single queue cannot maintain new element at front
+   - q2 serves as temporary reversal/reordering queue
+   - Always O(n) push ensures LIFO order maintenance
+
+====================================================================
+SUMMARY: Medium level covers queue/stack variations, circular queues,
+practical applications (string processing), and implementing queues
+and stacks using other data structures. Requires understanding of
+trade-offs between space and time complexity.
+====================================================================
