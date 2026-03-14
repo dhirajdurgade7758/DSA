@@ -1,0 +1,137 @@
+========================================================================================
+                         EASY LEVEL - BST PROBLEMS SUMMARY
+========================================================================================
+
+1. SEARCH IN BINARY SEARCH TREE
+   Link: https://leetcode.com/problems/search-in-a-binary-search-tree/
+   
+   Problem Explanation:
+   - Search for a target value in a Binary Search Tree
+   - Return true if found, false otherwise
+   - Must utilize the BST property for efficient search
+   
+   Key Idea:
+   - Use BST property: if target < root->data, search left subtree; otherwise search right
+   - Eliminates half of the tree at each step
+   - Early termination when target matches node value
+   
+   Implementation:
+   - Recursive approach: compare target with current node
+   - If equal: return true
+   - If less: recurse on left subtree
+   - If greater: recurse on right subtree
+   - If node is null: return false
+   
+   Time Complexity: O(log n) average, O(n) worst case (skewed tree)
+   Space Complexity: O(log n) recursion stack
+   
+   Simple: Compare target with current node, go left if smaller, right if larger.
+
+
+2. VALIDATE BINARY SEARCH TREE
+   Link: https://leetcode.com/problems/validate-binary-search-tree/
+   
+   Problem Explanation:
+   - Check if a given binary tree is a valid BST
+   - Every node in left subtree must be smaller than parent
+   - Every node in right subtree must be larger than parent
+   - This must hold recursively for all subtrees
+   
+   Key Idea:
+   - Use min/max constraints at each node
+   - For left subtree: max value should be parent's value
+   - For right subtree: min value should be parent's value
+   - Track these bounds through recursion
+   
+   Implementation:
+   - Helper function takes (root, min_node, max_node) as parameters
+   - Check if current node value is within [min, max] range
+   - Recurse left with updated max (current node)
+   - Recurse right with updated min (current node)
+   - Base case: null node is valid BST
+   
+   Critical Check: 
+   - if (min != nullptr && root->data < min->data) return false;
+   - if (max != nullptr && root->data > max->data) return false;
+   
+   Time Complexity: O(n) - visit each node once
+   Space Complexity: O(log n) recursion stack
+   
+   Simple: Track min/max bounds. At each node, verify it's within bounds [min, max].
+
+
+3. RANGE SUM OF BINARY SEARCH TREE
+   Link: https://leetcode.com/problems/range-sum-of-bst/
+   
+   Problem Explanation:
+   - Find sum of all node values within a given range [low, high]
+   - Include only nodes with values >= low AND <= high
+   - Must sum the values, not count them
+   
+   Key Idea:
+   - Use BST property to prune branches
+   - If node value < low: no need to search left subtree (skip it)
+   - If node value > high: no need to search right subtree (skip it)
+   - If node is in range, include it and sum both subtrees
+   
+   Implementation:
+   - Recursively traverse left and right subtrees
+   - Get leftSum and rightSum
+   - If current node is in range [low, high]: return leftSum + rightSum + node->val
+   - Otherwise: return leftSum + rightSum (skip current node)
+   
+   Optimization:
+   - Can prune branches: if (val > high) search only left; if (val < low) search only right
+   
+   Time Complexity: O(n) worst case, O(log n) average (with pruning)
+   Space Complexity: O(log n) recursion stack
+   
+   Simple: Recursively sum nodes in range [low, high]. Prune branches outside range.
+
+
+4. ROOT TO LEAF PATHS
+   Link: LeetCode 257 - Binary Tree Paths
+   
+   Problem Explanation:
+   - Find all root-to-leaf paths where a leaf is a node with no children
+   - Print or return all paths from root to every leaf
+   - Each path should contain values in order from root to leaf
+   
+   Key Idea:
+   - Use DFS (depth-first search) with path tracking
+   - Maintain a vector/list of current path
+   - When reaching leaf node, print or store the path
+   - Backtrack (remove current node) after processing
+   
+   Implementation:
+   - Helper function takes (root, current_path_vector)
+   - Add current node to path
+   - If leaf node (both children null): print path and backtrack
+   - Otherwise: recurse on left child, then right child
+   - Backtrack: remove current node from path after processing
+   
+   Path Backtracking:
+   - path.push_back(root->data);  // add current
+   - if (leaf) print...
+   - ... recurse left/right ...
+   - path.pop_back();  // remove current (backtrack)
+   
+   Time Complexity: O(n) traverse all nodes
+   Space Complexity: O(h) recursion stack, where h is height
+   
+   Simple: Maintain current path. When reaching leaf, print path. Backtrack after exploring.
+
+========================================================================================
+                              SUMMARY & KEY PATTERNS
+========================================================================================
+
+PATTERNS USED:
+✓ BST Property: Use value comparisons to eliminate branches
+✓ Min/Max Tracking: Validate BST by maintaining bounds
+✓ DFS with Path Tracking: Maintain current path during recursion
+✓ Backtracking: Remove elements after exploring (for path problems)
+
+DIFFICULTY BUILD-UP:
+Search (simplest) → Validate (add constraints) → RangeSum (add filtering) → Paths (add tracking)
+
+========================================================================================

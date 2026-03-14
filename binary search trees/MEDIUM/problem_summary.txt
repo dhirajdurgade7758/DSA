@@ -1,0 +1,299 @@
+========================================================================================
+                        MEDIUM LEVEL - BST PROBLEMS SUMMARY
+========================================================================================
+
+1. BUILD BINARY SEARCH TREE
+   Link: https://leetcode.com/problems/search-in-a-binary-search-tree/
+   
+   Problem Explanation:
+   - Insert elements one by one to construct a BST from an unsorted array
+   - Each insertion must maintain the BST property
+   - Elements smaller than parent go left, larger go right
+   
+   Key Idea:
+   - Iteratively call insert() for each element
+   - Insert() recursively finds the correct position
+   - Creates new node if position is empty
+   
+   Implementation:
+   - For each element in array, call insert(root, element)
+   - Insert function: if val < current->data go left, else go right
+   - Create new node when nullptr is reached
+   - Return the modified root at each step
+   
+   Time Complexity: O(n*h) where h = height (O(n log n) average, O(n²) worst)
+   Space Complexity: O(h) recursion stack
+   
+   Simple: For each element, compare with nodes and place in correct position (left/right).
+
+
+2. CONVERT SORTED ARRAY TO BALANCED BINARY SEARCH TREE
+   Link: https://leetcode.com/problems/convert-sorted-array-to-binary-search-tree/
+   
+   Problem Explanation:
+   - Build a BALANCED BST from a sorted array
+   - Balanced means height difference between subtrees is at most 1
+   - Use divide-and-conquer approach with middle element
+   
+   Key Idea:
+   - Pick middle element as root to keep tree balanced
+   - Recursively build left subtree from left half
+   - Recursively build right subtree from right half
+   - This ensures O(log n) height
+   
+   Implementation:
+   - Function: buildBSTFromSortedArray(arr, start, end)
+   - Base case: if start > end, return nullptr
+   - Find mid = start + (end - start) / 2
+   - Create node with arr[mid]
+   - Recursively build left = buildBSTFromSortedArray(arr, start, mid-1)
+   - Recursively build right = buildBSTFromSortedArray(arr, mid+1, end)
+   
+   Time Complexity: O(n) - create each node once
+   Space Complexity: O(log n) recursion stack (balanced tree height)
+   
+   Simple: Pick middle element as root, recursively build balanced left/right subtrees.
+
+
+3. KTH SMALLEST ELEMENT IN BINARY SEARCH TREE
+   Link: https://leetcode.com/problems/kth-smallest-element-in-a-bst/
+   
+   Problem Explanation:
+   - Find the kth smallest element in a BST
+   - k ranges from 1 to number of nodes
+   - Return the actual node value (not index)
+   
+   Key Idea:
+   - Inorder traversal of BST gives sorted values in ascending order
+   - Do inorder traversal and count visited nodes
+   - When count reaches k, found the answer
+   
+   Implementation:
+   - Use a class variable 'count' to track visited nodes
+   - Recursive inorder: traverse left, process node, traverse right
+   - Process node: increment count, if count==k, save in 'ans'
+   - Return the 'ans' after traversal completes
+   
+   Inorder Sequence:
+   - Process left subtree first (smaller values)
+   - Process current node (middle)
+   - Process right subtree (larger values)
+   
+   Time Complexity: O(k) to O(n) depending on k position
+   Space Complexity: O(h) recursion stack
+   
+   Simple: Inorder traversal gives sorted order. Count nodes until reaching kth.
+
+
+4. MINIMUM ABSOLUTE DIFFERENCE IN BST
+   Link: https://leetcode.com/problems/minimum-absolute-difference-in-bst/
+   
+   Problem Explanation:
+   - Find minimum absolute difference between any two node values in BST
+   - Return the minimum difference value (not the pair)
+   - Works because in sorted order, minimum diff is between adjacent elements
+   
+   Key Idea:
+   - Inorder traversal gives sorted sequence
+   - Adjacent values in sorted sequence have minimum difference
+   - Track previous element and calculate difference at each step
+   
+   Implementation:
+   - Do inorder traversal while tracking previous node
+   - At each node, calculate diff = current->data - previous->data
+   - Update minimum difference
+   - 'previous' always points to last visited node in inorder
+   
+   Why It Works:
+   - In sorted array [1,3,6,8], diffs are [2,3,2]
+   - Minimum is between adjacent elements only
+   - Other pairs will have larger differences
+   
+   Time Complexity: O(n) - visit all nodes
+   Space Complexity: O(h) recursion stack
+   
+   Simple: Inorder traversal gives sorted values. Min diff is between consecutive values.
+
+
+5. CLOSEST VALUE IN BINARY SEARCH TREE
+   Link: https://leetcode.com/problems/closest-binary-search-tree-value/
+   
+   Problem Explanation:
+   - Find the node value closest to a target K
+   - Return the actual node value (not distance)
+   - Tie-breaking: not specified, return either
+   
+   Key Idea:
+   - Use BST property to navigate efficiently
+   - Track closest value seen so far
+   - Go left if K < current, right if K > current
+   - Early termination when K is found
+   
+   Implementation:
+   - Start with closest = root->val
+   - While root != nullptr:
+       - Update closest if |current - K| is smaller
+       - If K == current: return immediately (exact match)
+       - If K < current: go left (search in left subtree)
+       - If K > current: go right (search in right subtree)
+   - Return closest after traversal
+   
+   Time Complexity: O(log n) average, O(n) worst (skewed tree)
+   Space Complexity: O(1) iterative approach
+   
+   Simple: Navigate using BST property. Track closest value met so far.
+
+
+6. PRINT NODES IN RANGE
+   Link: LeetCode variant - Range filtering
+   
+   Problem Explanation:
+   - Print all node values within a given range [start, end]
+   - Print in sorted order (inorder gives this naturally)
+   - Use range to prune unnecessary branches
+   
+   Key Idea:
+   - Use BST property to skip entire subtrees
+   - If node < start: search only right subtree
+   - If node > end: search only left subtree
+   - If node in range: traverse left, print current, traverse right
+   
+   Implementation:
+   - Base case: if root == nullptr, return
+   - If root->data < start: printInRange(root->right, start, end) only
+   - If root->data > end: printInRange(root->left, start, end) only
+   - If in range [start, end]: 
+       printInRange(root->left, start, end);
+       cout << root->data;
+       printInRange(root->right, start, end);
+   
+   Time Complexity: O(k + log n) where k is nodes in range
+   Space Complexity: O(log n) recursion stack
+   
+   Simple: Prune branches outside range. Print inorder traversal for nodes in range.
+
+
+7. DELETE NODE IN BINARY SEARCH TREE
+   Link: https://leetcode.com/problems/delete-node-in-a-bst/
+   
+   Problem Explanation:
+   - Delete a node with value 'val' from BST
+   - Maintain BST property after deletion
+   - Return the root of modified tree
+   
+   Key Idea:
+   - 3 cases: leaf node, 1 child, 2 children
+   - Leaf: simply remove
+   - 1 child: connect parent to child
+   - 2 children: replace with inorder successor
+   
+   Implementation:
+   Case 1: Leaf Node (0 children)
+   - Delete node and return nullptr
+   
+   Case 2: One Child
+   - If only right child exists: connect parent to right child
+   - If only left child exists: connect parent to left child
+   
+   Case 3: Two Children
+   - Find inorder successor (leftmost node in right subtree)
+   - Replace current node's value with successor's value
+   - Delete successor node from right subtree (now has 0-1 children)
+   
+   Time Complexity: O(log n) average, O(n) worst
+   Space Complexity: O(h) recursion stack
+   
+   Simple: 0 children=delete, 1 child=promote child, 2 children=replace with successor.
+
+
+8. LOWEST COMMON ANCESTOR OF BST (Path Approach)
+   Link: https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-search-tree/
+   
+   Problem Explanation:
+   - Find the lowest common ancestor (LCA) of two nodes p and q
+   - LCA is the deepest node that is ancestor of both p and q
+   
+   Key Idea (Path Approach):
+   - Store path from root to p
+   - Store path from root to q
+   - Find last common node in both paths
+   
+   Implementation:
+   - Helper: getPath(root, val, path) - builds path from root to target
+   - For p: getPath(root, p->val, path1)
+   - For q: getPath(root, q->val, path2)
+   - Compare paths: find last node where both paths agree
+   - Return that common node
+   
+   Path Building:
+   - Add current node to path
+   - If target found: return
+   - If target < current: go left
+   - If target > current: go right
+   
+   Time Complexity: O(h) to find paths, O(h) to compare = O(h)
+   Space Complexity: O(h) for storing two paths
+   
+   Simple: Find path to both nodes. Return last common node in both paths.
+
+
+9. LOWEST COMMON ANCESTOR OF BST (Iterative Approach)
+   Link: https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-search-tree/
+   
+   Problem Explanation:
+   - Same as Approach 1 but using BST property more efficiently
+   - Find LCA using iterative traversal
+   
+   Key Idea (Iterative - BEST):
+   - Use BST property: LCA is where paths split
+   - If both p and q < current: go left (both in left subtree)
+   - If both p and q > current: go right (both in right subtree)
+   - Otherwise: current is LCA (split point where one goes left, other goes right)
+   
+   Implementation:
+   - While root != nullptr:
+       - If p->val < root->val && q->val < root->val: root = root->left
+       - Else if p->val > root->val && q->val > root->val: root = root->right
+       - Else: return root (split point, this is LCA)
+   
+   Why It Works (Split Point):
+   - LCA is the point where the two node values straddle (one on each side)
+   - If both smaller: LCA is further left
+   - If both larger: LCA is further right
+   - Otherwise: LCA found!
+   
+   Time Complexity: O(log n) average, O(n) worst
+   Space Complexity: O(1) - no extra space
+   
+   Advantages:
+   ✓ No path storage needed
+   ✓ Cleaner code
+   ✓ Better space complexity
+   ✓ More interview-friendly
+   
+   Simple: If both nodes < current go left. If both > current go right. Else current is LCA.
+
+========================================================================================
+                              SUMMARY & KEY PATTERNS
+========================================================================================
+
+TECHNIQUES USED:
+✓ BST Property for Pruning: Skip entire branches based on value comparison
+✓ Inorder Traversal: Gives sorted sequence, useful for finding kth, min diff
+✓ State Tracking: Counter variable for finding kth element
+✓ Path Collection: Store paths for LCA comparison
+✓ Iterative Navigation: Use BST property to traverse smartly
+✓ Recursive Modification: Handle different node deletion cases
+
+ALGORITHMIC PATTERNS:
+1. Divide & Conquer: Build balanced BST from sorted array
+2. State Tracking: Count nodes in inorder traversal
+3. Efficient Search: Use BST property to prune branches
+4. Case Analysis: Deletion has 3 distinct cases
+5. Path-based Algorithms: LCA via path comparison
+6. Value-based Navigation: LCA via split point detection
+
+DIFFICULTY BUILD-UP:
+Build simple → Build balanced → Traversal patterns → Queries → Modifications → Advanced traversal
+
+========================================================================================

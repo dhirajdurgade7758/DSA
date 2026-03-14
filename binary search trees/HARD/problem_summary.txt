@@ -1,0 +1,310 @@
+========================================================================================
+                         HARD LEVEL - BST PROBLEMS SUMMARY
+========================================================================================
+
+1. BALANCE A BINARY SEARCH TREE
+   Link: https://leetcode.com/problems/balance-a-binary-search-tree/
+   
+   Problem Explanation:
+   - Convert an unbalanced BST (possibly skewed) into a balanced BST
+   - Balanced = height difference between any subtree's left and right is at most 1
+   - All node values remain same, structure changes
+   
+   Key Idea (3-Step Approach):
+   Step 1: Convert to sorted array using inorder traversal
+   Step 2: Build balanced BST from sorted array using divide-and-conquer
+   Step 3: Return new balanced root
+   
+   Implementation:
+   
+   Step 1 - getSortedArray():
+   - Inorder traversal: go left, process node, go right
+   - Collect all values in sorted order in a vector
+   - Result: vector of values in ascending order
+   
+   Step 2 - buildBSTFromSortedArray():
+   - Divide array into halves using middle element
+   - Make middle element as root (guarantees balanced)
+   - Recursively build left subtree from left half
+   - Recursively build right subtree from right half
+   - Base case: if start > end, return nullptr
+   
+   Why Middle is Key:
+   - Middle element ensures both subtrees have roughly equal size
+   - This guarantees O(log n) height
+   - Balancing automatic by construction
+   
+   Time Complexity: O(n) for inorder + O(n) for building = O(n)
+   Space Complexity: O(n) for storing array + O(log n) recursion = O(n)
+   
+   Simple: 1) Inorder traverse to get sorted array  2) Build balanced tree from sorted array.
+
+
+2. MERGE TWO BINARY SEARCH TREES
+   Link: Similar to LeetCode variants
+   
+   Problem Explanation:
+   - Combine two separate BSTs into one balanced BST
+   - All nodes from both trees must be in result
+   - Return a new balanced BST containing all values
+   
+   Key Idea (4-Step Approach):
+   Step 1: Extract sorted array from first BST (inorder)
+   Step 2: Extract sorted array from second BST (inorder)
+   Step 3: Merge two sorted arrays
+   Step 4: Build balanced BST from merged sorted array
+   
+   Implementation:
+   
+   Step 1-2 - getInorder():
+   - Inorder traversal of each tree separately
+   - Get vector1 from BST1, vector2 from BST2
+   - Both vectors are sorted (BST property)
+   
+   Step 3 - Merge Two Sorted Arrays:
+   - Two-pointer technique: i for array1, j for array2
+   - While both pointers valid: add smaller element, increment pointer
+   - After loop: add remaining elements from non-empty array
+   - Result: merged vector with all elements in sorted order
+   
+   Step 4 - buildBSTFromSortedArray():
+   - Same as previous problem (convert sorted array to balanced BST)
+   - Use middle element as root
+   - Recursively build balanced left and right subtrees
+   
+   Time Complexity: O(m) inorder1 + O(n) inorder2 + O(m+n) merge + O(m+n) build = O(m+n)
+   Space Complexity: O(m+n) for storing arrays
+   
+   Simple: 1) Get sorted array from both BSTs  2) Merge arrays  3) Build balanced tree.
+
+
+3. COUNT PAIRS FROM TWO BINARY SEARCH TREES WITH GIVEN SUM
+   Link: Similar to Two Sum but with BSTs
+   
+   Problem Explanation:
+   - Count number of pairs (a, b) where a from BST1, b from BST2, and a + b = X
+   - Each element used at most once
+   - Order matters in pairing (1,2) and (2,1) are different if from same BST
+   
+   Key Idea (Two Approaches):
+   
+   Approach 1 - Brute Force (Time: O(n log m)):
+   - Inorder traverse BST1
+   - For each value 'val' in BST1:
+       - Calculate complement = X - val
+       - Search for complement in BST2 using BST search
+       - If found, increment pair count
+   
+   Approach 2 - Optimal with HashMap (Time: O(n + m)):
+   - Store all values of BST2 in unordered_set
+   - Inorder traverse BST1
+   - For each value 'val' in BST1:
+       - Calculate complement = X - val
+       - Check if complement exists in set (O(1) lookup)
+       - If found, increment pair count
+   
+   Implementation (Approach 1):
+   
+   Function: countPairsBruteForce():
+   - inorderAndSearch(root1, root2, X, count)
+   - For each node in root1 (inorder):
+       - complement = X - node->val
+       - if searchBST(root2, complement) == true:
+           count++
+   
+   searchBST() uses BST property for efficient O(log n) search
+   
+   Implementation (Approach 2):
+   
+   Function: countPairsOptimal():
+   - storeInSet(root2, set) - add all values from BST2 to set
+   - countUsingSet(root1, set, X, count)
+   - For each node in root1 (inorder):
+       - complement = X - node->val
+       - if set.find(complement) != set.end():
+           count++
+   
+   Time Complexity (Approach 1): O(n log m) where n=nodes in BST1, m=nodes in BST2
+   Time Complexity (Approach 2): O(n + m)
+   Space Complexity: O(1) for approach 1, O(m) for approach 2
+   
+   Trade-off Approach 1 vs 2:
+   - Use Approach 1 if space is critical (O(1))
+   - Use Approach 2 if time is critical (O(n+m) vs O(n log m))
+   
+   Simple: Approach1) For each node in BST1, search complement in BST2.
+           Approach2) Store BST2 in set, check complements in O(1).
+
+
+4. MAXIMUM SUM BINARY SEARCH TREE IN BINARY TREE
+   Link: https://leetcode.com/problems/maximum-sum-bst-in-binary-tree/
+   
+   Problem Explanation:
+   - Find the maximum sum of any BST subtree within a binary tree
+   - Binary tree may contain non-BST subtrees
+   - Return sum of largest BST subtree (must be valid BST)
+   
+   Key Idea:
+   - Post-order DFS traversal (process children before parent)
+   - At each node, check if current subtree is a valid BST
+   - Use Info class to track (isBST, min, max, sum) for each subtree
+   - Update maximum sum when finding a valid BST
+   
+   Info Class (stores for each subtree):
+   - bool isBST: Is this subtree a valid BST?
+   - int min: Minimum value in subtree
+   - int max: Maximum value in subtree
+   - int sum: Sum of all node values in subtree
+   
+   Implementation:
+   
+   Function: largestBST(root) returns Info* for that subtree
+   
+   Base Case:
+   - If root == nullptr: return Info(true, INT_MAX, INT_MIN, 0)
+   - Empty tree is valid BST with sum 0
+   
+   Recursive Case:
+   1. Get info about left subtree: leftInfo
+   2. Get info about right subtree: rightInfo
+   3. Calculate current subtree statistics:
+      - currMin = min(root->val, min(leftInfo->min, rightInfo->min))
+      - currMax = max(root->val, max(leftInfo->max, rightInfo->max))
+      - currSize = leftInfo->sum + rightInfo->sum + root->val
+   
+   4. Check if current subtree is a valid BST:
+      - Both children must be valid BSTs
+      - AND root->val must be > all values in left subtree (> leftInfo->max)
+      - AND root->val must be < all values in right subtree (< rightInfo->min)
+   
+   5. If valid BST:
+      - Update global maxsum
+      - Return Info(true, currMin, currMax, currSize)
+   
+   6. If not valid BST:
+      - Cannot include root, but might have valid BST in children
+      - Return Info(false, currMin, currMax, larger of child sums)
+   
+   Critical Comparisons:
+   - left->max < root->val < right->min (ensures BST property)
+   
+   Time Complexity: O(n) - visit each node once
+   Space Complexity: O(h) recursion stack + O(n) for Info objects
+   
+   Simple: Post-order DFS. Check if each subtree is BST. Track max sum of valid BSTs.
+
+
+5. LARGEST BINARY SEARCH TREE SUBTREE
+   Link: LeetCode similar variants
+   
+   Problem Explanation:
+   - Find the largest (by node count) BST subtree in a binary tree
+   - Given binary tree may contain non-BST subtrees
+   - Return the size (number of nodes) of largest valid BST subtree
+   
+   Key Idea:
+   - Similar to Maximum Sum BST but track size instead of sum
+   - Post-order DFS traversal
+   - Use Info class to track (isBST, min, max, size) for each subtree
+   - Return maximum size among all valid BST subtrees
+   
+   Info Class (stores for each subtree):
+   - bool isBST: Is this subtree a valid BST?
+   - int min: Minimum value in subtree
+   - int max: Maximum value in subtree
+   - int sz: Size of subtree (number of nodes)
+   
+   Implementation:
+   
+   Function: largestBST(root) returns Info* for that subtree
+   
+   Base Case:
+   - If root == nullptr: return Info(true, INT_MAX, INT_MIN, 0)
+   - Empty tree is valid BST with size 0
+   - INT_MAX/INT_MIN used as sentinels for min/max
+   
+   Recursive Case:
+   1. Get info about left subtree: leftInfo
+   2. Get info about right subtree: rightInfo
+   3. Calculate current node statistics:
+      - currMin = min(root->data, min(leftInfo->min, rightInfo->min))
+      - currMax = max(root->data, max(leftInfo->max, rightInfo->max))
+      - currSize = leftInfo->sz + rightInfo->sz + 1
+   
+   4. Check if current subtree is a valid BST:
+      - Both children must be valid BSTs
+      - AND root->data > leftInfo->max (greater than all left children)
+      - AND root->data < rightInfo->min (less than all right children)
+   
+   5. If valid BST:
+      - Update global maxsize
+      - Return Info(true, currMin, currMax, currSize)
+      - This subtree itself is a valid BST with calculated size
+   
+   6. If not valid BST:
+      - Current subtree is NOT a valid BST
+      - But largest BST might be in one of the children
+      - Return Info(false, currMin, currMax, currSize)
+      - We still return currSize but mark as non-BST
+   
+   Valid BST Check:
+   if (left->isBST && right->isBST && 
+       left->max < root->data && root->data < right->min) {
+       // Current subtree is a valid BST
+   }
+   
+   Time Complexity: O(n) - visit each node once
+   Space Complexity: O(h) recursion stack + O(n) for Info objects
+   
+   Differences from Maximum Sum:
+   ✓ Size tracking instead of sum tracking
+   ✓ Logic similar, just different metric
+   
+   Simple: Post-order DFS. Check if each subtree is BST. Track max size of valid BSTs.
+
+========================================================================================
+                              SUMMARY & KEY PATTERNS
+========================================================================================
+
+KEY TECHNIQUES IN HARD PROBLEMS:
+
+1. POST-ORDER DFS:
+   - Process children before parent
+   - Required for bottom-up problem solving
+   - Allows computing properties of parent based on children
+
+2. INFO CLASS / HELPER STRUCTURE:
+   - Track multiple properties: isBST, min, max, sum/size
+   - More complex than tracking single values
+   - Enables validation while computing auxiliary information
+
+3. DIVIDE & CONQUER:
+   - Sorted array → balanced BST construction
+   - Used in balancing and merging problems
+
+4. TWO-POINTER MERGE:
+   - Merge two sorted arrays efficiently
+   - Foundation for merging multiple BSTs
+
+5. COMPLEMENTARY VALUE SEARCH:
+   - Given target sum, find complement in another set
+   - HashMap/HashSet for O(1) lookups
+   - Optimization from O(n log m) to O(n+m)
+
+6. VALIDATION WHILE COMPUTING:
+   - Check BST validity at each step
+   - Use min/max bounds for validation
+   - Track multiple metrics (size, sum, validity)
+
+ALGORITHMIC PATTERNS:
+1. Reconstruct & Balance: Extract sorted → rebuild balanced
+2. Multi-Tree Operations: Merge, pair-count across trees
+3. Problem Composition: Validate + compute (max sum/size)
+4. State Accumulation: Info class carries all needed data
+5. Conditional Computation: Different logic for valid vs invalid subtrees
+
+DIFFICULTY PROGRESSION:
+Balance simple tree → Merge two trees → Count pairs → Max sum BST → Largest BST subtree
+  (structure)         (multiple inputs)  (search)      (validate+sum)  (validate+size)
+
+========================================================================================
