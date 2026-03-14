@@ -3,8 +3,7 @@
 #include<vector>
 using namespace std;
 
-void maxAreaHistogram(vector<int> heights){
-
+void largestRectangleArea(vector<int>& heights) {
     int n = heights.size();
     //next smaller left
     stack<int> s;
@@ -67,15 +66,14 @@ void maxAreaHistogram(vector<int> heights){
 
         maxArea = max(maxArea, area);
     }
-
     cout<<"the maximum are of histogram is: "<<maxArea<<endl;
-    
-}
+
+    }
 
 int main()
 {
     vector<int> heights = {2,1,5,6,2,3};
-    maxAreaHistogram(heights);
+    largestRectangleArea(heights);
 
 
 return 0;
