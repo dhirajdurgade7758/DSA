@@ -1,0 +1,147 @@
+================================================================================
+                          EASY LEVEL PROBLEMS
+================================================================================
+
+1. GRAPH REPRESENTATION - ADJACENCY LIST
+   Link: https://www.geeksforgeeks.org/graph-and-its-representations/
+   
+   Problem Explanation:
+   - Represent a graph using adjacency list data structure
+   - Each vertex maintains a list of its neighbors
+   - Efficient for sparse graphs
+   
+   Key Idea:
+   - Use array of linked lists (or lists in C++)
+   - Time: O(1) to add edge, O(degree) to check neighbor
+   - Space: O(V + E) - optimal for sparse graphs
+   
+   Simple: Array of lists where each index i stores neighbors of vertex i.
+
+================================================================================
+
+2. DEPTH-FIRST SEARCH (DFS)
+   Link: https://www.geeksforgeeks.org/depth-first-search-or-dfs-for-a-graph/
+   
+   Problem Explanation:
+   - Traverse graph starting from a node going as deep as possible
+   - Use recursive or stack-based approach
+   - Mark visited nodes to avoid revisiting
+   
+   Key Idea:
+   - Recursive helper function marks node visited, prints it, then explores unvisited neighbors
+   - Works for both connected and disconnected graphs
+   - Time: O(V + E), Space: O(V) visited array + O(height) recursion stack
+   
+   Simple: Start at node, recursively visit unvisited neighbors until all reachable nodes explored.
+
+================================================================================
+
+3. BREADTH-FIRST SEARCH (BFS)
+   Link: https://www.geeksforgeeks.org/breadth-first-search-or-bfs-for-a-graph/
+   
+   Problem Explanation:
+   - Traverse graph level by level from source node
+   - Visit all neighbors before moving to next level
+   - Use queue data structure
+   
+   Key Idea:
+   - Add source to queue, mark visited
+   - Dequeue front, print it, enqueue all unvisited neighbors
+   - Continue until queue empty
+   - Time: O(V + E), Space: O(V) for queue and visited array
+   
+   Simple: Use queue to process nodes in FIFO order, visiting all neighbors before moving deeper.
+
+================================================================================
+
+4. NUMBER OF ISLANDS
+   Link: https://leetcode.com/problems/number-of-islands/
+   
+   Problem Explanation:
+   - Count connected regions of '1's in a grid
+   - '0' represents water, '1' represents land
+   - Connected means adjacent horizontally or vertically (4-directional)
+   
+   Key Idea:
+   - DFS/BFS from each unvisited '1'
+   - Mark all connected '1's as visited (change to '0')
+   - Each DFS call = one island, increment counter
+   - Time: O(m × n), Space: O(1) if we modify grid
+   
+   Simple: For each '1', do DFS to mark entire island, count number of DFS calls.
+
+================================================================================
+
+5. FLOOD FILL
+   Link: https://leetcode.com/problems/flood-fill/
+   
+   Problem Explanation:
+   - Change color of starting pixel and all connected pixels of same color
+   - Connected means 4-directional (up, down, left, right)
+   - Common in image editing tools (paint bucket)
+   
+   Key Idea:
+   - Get original color at starting position
+   - DFS from source, changing all connected pixels with original color to new color
+   - Maintain visited array to avoid revisiting
+   - Check bounds and original color before recursive calls
+   - Time: O(m × n), Space: O(m × n) visited array + recursion stack
+   
+   Simple: DFS from source position, filling all connected same-colored pixels with new color.
+
+================================================================================
+
+6. CLONE A GRAPH
+   Link: https://leetcode.com/problems/clone-graph/
+   
+   Problem Explanation:
+   - Create a deep copy of an undirected graph
+   - Given a node of undirected graph, return a copy of entire connected component
+   - Each node has value and list of neighbors
+   
+   Key Idea:
+   - Use HashMap to store mapping from original nodes to cloned nodes
+   - DFS from source node
+   - For each unvisited node, create new clone and store in map
+   - Recursively clone all neighbors
+   - Time: O(V + E), Space: O(V) for map + recursion stack
+   
+   Simple: DFS with hash map tracking cloned nodes. For each unvisited node, create clone then clone its neighbors.
+
+================================================================================
+
+7. DISCONNECTED COMPONENTS
+   Link: https://www.geeksforgeeks.org/connected-components-in-an-undirected-graph/
+   
+   Problem Explanation:
+   - Count number of isolated/disconnected components in a graph
+   - A component is a set of vertices reachable from each other
+   - Graph may have multiple disconnected components
+   
+   Key Idea:
+   - Iterate through all vertices
+   - For each unvisited vertex, run DFS and increment component counter
+   - All vertices reached in one DFS = one component
+   - Time: O(V + E), Space: O(V) visited array + recursion stack
+   
+   Simple: Count number of disconnected regions by running DFS from each unvisited node.
+
+================================================================================
+
+8. WEIGHTED GRAPH REPRESENTATION
+   Link: https://www.geeksforgeeks.org/graph-and-its-representations/
+   
+   Problem Explanation:
+   - Represent a weighted undirected graph using adjacency list
+   - Each edge has an associated weight/cost
+   - Need to store both neighbor and weight information
+   
+   Key Idea:
+   - Use array of lists where each element is pair<neighbor, weight>
+   - When adding edge: add (v, weight) to u's list and (u, weight) to v's list
+   - Time: O(1) to add edge, O(degree) to traverse neighbors
+   - Space: O(V + E)
+   
+   Simple: Array of lists storing pairs (neighbor, weight) instead of just neighbors.
+
+================================================================================

@@ -1,0 +1,132 @@
+================================================================================
+                        EASY PROBLEMS - SUMMARY
+================================================================================
+
+1. FIBONACCI SEQUENCE (Memoization)
+   File: fibonachi.cpp
+   Link: https://leetcode.com/problems/fibonacci-number/
+   
+   Problem Explanation:
+   - Calculate the nth Fibonacci number where F(n) = F(n-1) + F(n-2)
+   - Base cases: F(0) = 0, F(1) = 1
+   - Returns the nth Fibonacci number
+   
+   Key Idea:
+   - Use memoization (top-down DP) with a vector to store computed results
+   - Check if result already exists before computing recursively
+   - Avoids redundant calculations by storing intermediate results
+   - State: dp[n] = nth Fibonacci number
+   
+   Simple: Store computed Fibonacci values to avoid recalculation.
+
+================================================================================
+
+2. FIBONACCI SEQUENCE (Tabulation)
+   File: fibonachiWithTabulation.cpp
+   Link: https://leetcode.com/problems/fibonacci-number/
+   
+   Problem Explanation:
+   - Calculate the nth Fibonacci number using iterative approach
+   - F(n) = F(n-1) + F(n-2), F(0) = 0, F(1) = 1
+   - Build solution from bottom-up starting with base cases
+   
+   Key Idea:
+   - Use tabulation (bottom-up DP) approach
+   - Create array and fill iteratively from index 2 to n
+   - Each cell stores F(i) = F(i-1) + F(i-2)
+   - Time: O(n), Space: O(n)
+   
+   Simple: Build Fibonacci values iteratively from base cases upward.
+
+================================================================================
+
+3. TRIBONACCI SEQUENCE
+   File: tribonachi.cpp
+   Link: https://leetcode.com/problems/n-th-tribonacci-number/
+   
+   Problem Explanation:
+   - Calculate nth Tribonacci number: T(n) = T(n-1) + T(n-2) + T(n-3)
+   - Base cases: T(0) = 0, T(1) = 1, T(2) = 1
+   - Generalization of Fibonacci with 3 terms instead of 2
+   
+   Key Idea:
+   - Use tabulation with DP array initialized with base cases
+   - Fill DP table iteratively: dp[i] = dp[i-1] + dp[i-2] + dp[i-3]
+   - Each position depends on previous 3 values
+   - Time: O(n), Space: O(n)
+   
+   Simple: Sum of previous three values instead of two.
+
+================================================================================
+
+4. HOUSE ROBBER
+   File: houseRobber.cpp
+   Link: https://leetcode.com/problems/house-robber/
+   
+   Problem Explanation:
+   - Rob houses on a street to maximize money collected
+   - Cannot rob two adjacent houses (triggers alarm)
+   - Decision: rob current house or skip it
+   
+   Key Idea:
+   - DP state: dp[i] = maximum money that can be robbed up to house i
+   - For each house: either skip (dp[i-1]) OR rob it + dp[i-2]
+   - Take maximum of both choices: dp[i] = max(dp[i-1], nums[i] + dp[i-2])
+   - Base: dp[0] = nums[0], dp[1] = max(nums[0], nums[1])
+   
+   Simple: For each house, choose max between robbing it or skipping it.
+
+================================================================================
+
+5. BEST TIME TO BUY AND SELL STOCK WITH TRANSACTION FEE
+   File: 747_memo.cpp
+   Link: https://leetcode.com/problems/best-time-to-buy-and-sell-stock-with-transaction-fee/
+   
+   Problem Explanation:
+   - Buy and sell stocks multiple times to maximize profit
+   - Each transaction incurs a fee (buy + sell costs fee)
+   - Can hold at most one stock at a time
+   - States: holding stock or not holding stock
+   
+   Key Idea:
+   - Use 2D memoization: dp[i][buy] where buy = 0 or 1
+   - buy=1: can buy next stock, buy=0: currently holding stock
+   - If holding: either sell (get price - fee) or skip
+   - If not holding: either buy (pay price) or skip
+   - Recursive transitions with memoization to avoid recomputation
+   
+   Simple: Track holding/not-holding state and choose optimal buy/sell action.
+
+================================================================================
+                        COMPLEXITY ANALYSIS
+================================================================================
+
+Problem              | Time Complexity | Space Complexity | Approach
+-----------          | --------------- | --------------- | -----------
+Fibonacci (Memo)     | O(n)            | O(n)            | Top-down DP
+Fibonacci (Tabulation)| O(n)           | O(n)            | Bottom-up DP
+Tribonacci          | O(n)            | O(n)            | Bottom-up DP
+House Robber        | O(n)            | O(n)            | Bottom-up DP
+Stock with Fee      | O(n)            | O(n)            | Top-down DP
+
+================================================================================
+                        KEY LEARNING POINTS
+================================================================================
+
+1. **Memoization vs Tabulation**
+   - Memoization: Top-down, recursive with caching
+   - Tabulation: Bottom-up, iterative with table building
+
+2. **State Definition**
+   - Clear definition of what each dp[i] or dp[i][j] represents
+   - Base cases are critical for correct recursion/iteration
+
+3. **Decision Making**
+   - At each step, explore all valid choices and pick the best
+   - Compare "include current" vs "exclude current"
+
+4. **Recurrence Relation**
+   - Express current problem in terms of previously solved subproblems
+   - Easy problems typically have simple 1D recurrence
+
+================================================================================

@@ -1,0 +1,276 @@
+================================================================================
+                       HARD PROBLEMS - SUMMARY
+================================================================================
+
+1. EDIT DISTANCE (Levenshtein Distance)
+   File: editDistance.cpp
+   Link: https://leetcode.com/problems/edit-distance/
+   
+   Problem Explanation:
+   - Find minimum operations to convert word1 to word2
+   - Allowed operations: insert, delete, or replace a character
+   - Each operation costs 1 unit
+   - Example: "horse" → "ros" requires 3 operations
+   
+   Key Idea:
+   - 2D DP: dp[i][j] = min operations to convert word1[0..i-1] to word2[0..j-1]
+   - Base cases:
+     - dp[i][0] = i (delete all i characters)
+     - dp[0][j] = j (insert all j characters)
+   - Transitions:
+     - If chars match: dp[i][j] = dp[i-1][j-1] (no operation needed)
+     - Else: dp[i][j] = 1 + min(dp[i-1][j], dp[i][j-1], dp[i-1][j-1])
+               (delete, insert, or replace)
+   - Time: O(m*n), Space: O(m*n) where m, n are string lengths
+   
+   Simple: Match characters exactly, or choose cheapest operation to align strings.
+
+================================================================================
+
+2. WILDCARD PATTERN MATCHING
+   File: wildcardMatching.cpp
+   Link: https://leetcode.com/problems/wildcard-matching/
+   
+   Problem Explanation:
+   - Match text against pattern with wildcards
+   - Pattern contains normal characters, '?' (matches any single char), 
+     and '*' (matches any sequence of characters)
+   - Example: "aa" matches "a", "*a", and "a*"
+   
+   Key Idea:
+   - 2D DP: dp[i][j] = true if text[0..i-1] matches pattern[0..j-1]
+   - Base cases:
+     - dp[0][0] = true (empty text matches empty pattern)
+     - dp[0][j] = dp[0][j-1] if pattern[j-1]=='*' (star matches empty)
+   - Transitions:
+     - If pattern[j-1] matches text[i-1] (== or '?'): dp[i][j] = dp[i-1][j-1]
+     - If pattern[j-1] == '*': dp[i][j] = dp[i-1][j] || dp[i][j-1]
+       (either '*' consumes char or matches empty string)
+     - Else: dp[i][j] = false
+   - Time: O(m*n), Space: O(m*n)
+   
+   Simple: Star matches zero or more chars, '?' matches exactly one char.
+
+================================================================================
+
+3. MATRIX CHAIN MULTIPLICATION (Recursive)
+   File: mcm.cpp
+   Link: https://leetcode.com/problems/matrix-chain-multiplication/
+   
+   Problem Explanation:
+   - Given array of matrix dimensions, find minimum multiplications
+   - Matrices: A1(p[0]×p[1]), A2(p[1]×p[2]), ..., An(p[n-1]×p[n])
+   - Order of multiplication affects total scalar multiplications
+   - Example: (A1·A2)·A3 vs A1·(A2·A3) have different costs
+   
+   Key Idea:
+   - Recursive approach: mcm(arr, i, j) = min cost to multiply matrices i to j
+   - Base: mcm(i, i) = 0 (single matrix, no multiplication)
+   - Try all partition points k: cost = mcm(i,k) + mcm(k+1,j) + (p[i-1]*p[k]*p[j])
+   - Recurrence: f(i,j) = min over all k of (f(i,k) + f(k+1,j) + matrix multiply cost)
+   - Time: O(3^n) exponential without memoization
+   
+   Simple: Try splitting at all positions, pick partition with min total cost.
+
+================================================================================
+
+4. MATRIX CHAIN MULTIPLICATION (Memoization)
+   File: mcmMemo.cpp
+   Link: https://leetcode.com/problems/matrix-chain-multiplication/
+   
+   Problem Explanation:
+   - Same as recursive version but with memoization optimization
+   - Avoids recalculating overlapping subproblems
+   
+   Key Idea:
+   - Use 2D memoization table: dp[i][j] = min cost for matrices i to j
+   - Check dp[i][j] != -1 before computing recursively
+   - Same recurrence as recursive mcm:
+     f(i,j) = min(f(i,k) + f(k+1,j) + arr[i-1]*arr[k]*arr[j]) for all k
+   - Memoize result: dp[i][j] = answer
+   - Time: O(n³), Space: O(n²)
+   
+   Simple: Recursive MCM with memoization table for DP storage.
+
+================================================================================
+
+5. MATRIX CHAIN MULTIPLICATION (Tabulation)
+   File: mcmTab.cpp
+   Link: https://leetcode.com/problems/matrix-chain-multiplication/
+   
+   Problem Explanation:
+   - Bottom-up iterative approach to matrix chain multiplication
+   - Avoids recursion by building solution from smaller to larger chains
+   
+   Key Idea:
+   - 2D DP table: dp[i][j] = min cost to multiply matrices from i to j
+   - Iterate by chain length (len):
+     - len=2: multiply adjacent matrices (cost = p[i-1]*p[i]*p[i+1])
+     - len=3: multiply 3 matrices, try 2 split points
+     - Continue increasing chain length
+   - For each (i,j) pair: try all k from i to j-1
+     dp[i][j] = min(dp[i][k] + dp[k+1][j] + cost of merging)
+   - Time: O(n³), Space: O(n²)
+   
+   Simple: Build solution iteratively by increasing subsequence length.
+
+================================================================================
+
+6. MINIMUM COST TO CUT A STICK (Recursive)
+   File: minCostToCutStickRec.cpp
+   Link: https://leetcode.com/problems/minimum-cost-to-cut-a-stick/
+   
+   Problem Explanation:
+   - Given stick length and cut positions, minimize cutting cost
+   - Each cut costs the current length of the piece being cut
+   - After cutting, pieces become separate sticks
+   - Order of cuts affects total cost
+   - Example: stick length 7, cuts at [1,3,4,5] - find optimal cut order
+   
+   Key Idea:
+   - Recursive function: f(i, j) = min cost to make cuts between i and j
+   - Base: f(i, i+1) = 0 (no cuts needed between adjacent positions)
+   - For each cut position k between i and j:
+     cost = length of current piece + f(i,k) + f(k,j)
+     where length = cuts[j+1] - cuts[i-1]
+   - Try all k, return minimum
+   - Time: O(n³) exponential without memoization
+   
+   Simple: Try cutting at each position, choose partition with min total cost.
+
+================================================================================
+
+7. MINIMUM COST TO CUT A STICK (Tabulation)
+   File: minCostToCutStickTab.cpp
+   Link: https://leetcode.com/problems/minimum-cost-to-cut-a-stick/
+   
+   Problem Explanation:
+   - Same as recursive version using bottom-up dynamic programming
+   - Processes all possible ranges systematically
+   
+   Key Idea:
+   - Preprocess: add 0 at start and n at end to cuts array
+   - Sort cuts array
+   - 2D DP: dp[i][j] = min cost to cut segment from cuts[i] to cuts[j]
+   - Base: dp[i][i+1] = 0 (adjacent cuts, no further cuts needed)
+   - Iterate by range: for i from large to small, for j from i+2 upward
+   - dp[i][j] = min(dp[i][k] + dp[k][j] + (cuts[j+1] - cuts[i-1])) for all k
+   - Time: O(n³), Space: O(n²)
+   
+   Simple: Bottom-up interval DP processing ranges from bottom to top.
+
+================================================================================
+
+8. UNIQUE BINARY SEARCH TREES (Catalan Numbers)
+   File: uniqueBinarySearchTrees.cpp
+   Link: https://leetcode.com/problems/unique-binary-search-trees/
+   
+   Problem Explanation:
+   - Count structurally unique BSTs with n nodes labeled 1 to n
+   - Each node can be chosen as root, creating left and right subtrees
+   - BST property: left subtree < root < right subtree
+   - Example: n=3 gives 5 unique BSTs
+   
+   Key Idea:
+   - DP state: dp[i] = number of unique BSTs possible with i nodes
+   - For each i, try each j (0 to i-1) as root:
+     - j nodes go to left subtree: dp[j] possibilities
+     - i-j-1 nodes go to right subtree: dp[i-j-1] possibilities
+     - Together: dp[j] * dp[i-j-1] structures
+   - dp[i] = sum of (dp[j] * dp[i-j-1]) for all j = 0 to i-1
+   - This is exactly the Catalan number formula!
+   - Base: dp[0]=1, dp[1]=1
+   - Time: O(n²), Space: O(n)
+   
+   Simple: Each node choice as root partitions problem into left/right BSTs.
+
+================================================================================
+                        INTERVAL DP PATTERN
+================================================================================
+
+Problems 1, 3, 4, 5, 6, 7 all use "Interval DP" pattern:
+
+1. **Define State**: dp[i][j] = optimal solution for range/interval [i, j]
+
+2. **Base Case**: Smallest ranges (length 1 or 2)
+
+3. **Build Up**: Iterate by increasing range length
+
+4. **Transition**: For range [i, j], try all split points k:
+   dp[i][j] = optimal(dp[i][k], dp[k+1][j], cost to merge)
+
+5. **Answer**: dp[1][n] or dp[0][n-1] depending on indexing
+
+================================================================================
+                        COMPLEXITY ANALYSIS
+================================================================================
+
+Problem              | Time    | Space   | Type          | Key Challenge
+-----------          | ------- | ------- | -----------   | -----------
+Edit Distance        | O(m*n)  | O(m*n)  | String DP     | Insert/delete/replace
+Wildcard Matching    | O(m*n)  | O(m*n)  | String DP     | Star handling
+MCM Recursive        | O(3^n)  | O(n)    | Interval DP   | Try all partitions
+MCM Memoization      | O(n³)   | O(n²)   | Interval DP   | Memoize subproblems
+MCM Tabulation       | O(n³)   | O(n²)   | Interval DP   | Bottom-up iteration
+Min Cut Stick Rec    | O(3^n)  | O(n)    | Interval DP   | Cut order optimization
+Min Cut Stick Tab    | O(n³)   | O(n²)   | Interval DP   | Range processing
+Unique BSTs          | O(n²)   | O(n)    | Catalan DP    | Partition counting
+
+================================================================================
+                        KEY LEARNING POINTS
+================================================================================
+
+1. **String DP (Edit Distance, Wildcard)**
+   - Base cases handle empty prefixes
+   - Character matching vs operation choices
+   - Edit operations: insert, delete, replace
+   - Wildcards require special state handling
+
+2. **Interval DP Pattern (MCM, Min Cut)**
+   - Problems defined on ranges or intervals
+   - Built bottom-up from smaller to larger intervals
+   - Try all split points within interval
+   - Combine left and right subproblem solutions
+
+3. **Interview Tips**
+   - Master the recurrence relation first
+   - Start with recursive approach, then add memoization
+   - Finally optimize with bottom-up tabulation
+   - Understand space optimization (rolling arrays for some)
+
+4. **Common Optimizations**
+   - Memoization: O(2^n) → O(n²) or O(n³)
+   - Tabulation: Avoid function call overhead
+   - Space optimization: Use rolling arrays for some problems
+
+5. **Problem Recognition**
+   - **Edit Distance**: String transformation with operations
+   - **Wildcard**: Pattern matching with special characters
+   - **MCM**: Optimal matrix multiplication order
+   - **Min Cut**: Optimal partitioning/cutting strategy
+   - **Unique BSTs**: Catalan number application
+
+================================================================================
+                        PRACTICE STRATEGY
+================================================================================
+
+**Recommended Order to Master:**
+
+1. Start with Edit Distance (clearer string DP patterns)
+   → Understand base cases and 3 operations
+
+2. Move to Wildcard Matching (star handling complication)
+   → Recognize and handle special characters
+
+3. Learn Matrix Chain Multiplication (classic interval DP)
+   → Try recursive → memoization → tabulation
+
+4. Apply to Min Cost to Cut Stick (similar pattern, different context)
+   → Reinforces interval DP understanding
+
+5. Understand Unique BSTs as Catalan application
+   → Recognize partition-based counting problems
+
+6. Practice similar problems from LeetCode
+
+================================================================================

@@ -1,0 +1,356 @@
+================================================================================
+                       MEDIUM PROBLEMS - SUMMARY
+================================================================================
+
+1. KNAPSACK PROBLEM (0/1 Knapsack - Tabulation)
+   File: knapsackTabulation.cpp
+   Link: https://leetcode.com/problems/0-1-knapsack-problem/
+   
+   Problem Explanation:
+   - Given items with value and weight, maximize value within capacity W
+   - Each item can be taken at most once (0/1)
+   - Decision: include item or exclude item
+   
+   Key Idea:
+   - 2D DP table: dp[i][j] = max value using first i items with capacity j
+   - For each item: dp[i][j] = max(dp[i-1][j], value[i] + dp[i-1][j-weight[i]])
+   - Either skip item (dp[i-1][j]) or take it if it fits
+   - Time: O(n*W), Space: O(n*W)
+   
+   Simple: For each item-capacity pair, choose max between taking or skipping.
+
+================================================================================
+
+2. UNBOUNDED KNAPSACK
+   File: unboundedKnapsack.cpp
+   Link: https://leetcode.com/problems/unbounded-knapsack/
+   
+   Problem Explanation:
+   - Similar to 0/1 knapsack but each item can be used unlimited times
+   - Maximize value within given weight capacity
+   - Items are distinguishable (each position has its own count)
+   
+   Key Idea:
+   - 2D DP: dp[i][j] = max value using items 0..i-1 with capacity j
+   - For each item: dp[i][j] = max(dp[i-1][j], value[i] + dp[i][j-weight[i]])
+   - Key difference: transition uses dp[i][j-w] instead of dp[i-1][j-w]
+   - Allows reusing the same item multiple times
+   - Time: O(n*W), Space: O(n*W)
+   
+   Simple: Allow reusing same item by accessing same row (i) instead of previous row.
+
+================================================================================
+
+3. LONGEST COMMON SUBSEQUENCE (Tabulation)
+   File: lcsTabulation.cpp
+   Link: https://leetcode.com/problems/longest-common-subsequence/
+   
+   Problem Explanation:
+   - Find longest subsequence present in both strings
+   - Characters don't need to be consecutive (subsequence not substring)
+   - Example: LCS("abcdge", "abedg") = "abdg" (length 4)
+   
+   Key Idea:
+   - 2D DP: dp[i][j] = length of LCS of str1[0..i-1] and str2[0..j-1]
+   - If str1[i-1] == str2[j-1]: dp[i][j] = 1 + dp[i-1][j-1] (extend)
+   - Else: dp[i][j] = max(dp[i-1][j], dp[i][j-1]) (skip one character)
+   - Time: O(m*n), Space: O(m*n)
+   
+   Simple: Match characters diagonally; skip mismatches horizontally or vertically.
+
+================================================================================
+
+4. LONGEST INCREASING SUBSEQUENCE
+   File: longestIncreasingSubsequence.cpp
+   Link: https://leetcode.com/problems/longest-increasing-subsequence/
+   
+   Problem Explanation:
+   - Find length of longest subsequence where elements are in increasing order
+   - Subsequence doesn't need to be consecutive
+   - Example: [50,3,10,7,40,80] → LIS = "3,10,40,80" (length 4)
+   
+   Key Idea:
+   - Use LCS algorithm: compare original array with sorted array
+   - LCS(original, sorted) gives LIS since common part is increasing
+   - 2D DP: dp[i][j] = LCS of original[0..i-1] and sorted[0..j-1]
+   - Match when elements equal, skip mismatches
+   - Time: O(n²), Space: O(n²)
+   
+   Simple: LIS = LCS of original array with its sorted version.
+
+================================================================================
+
+5. COUNT WAYS TO REACH NTH STAIR (Memoization)
+   File: countWaysRecMem.cpp
+   Link: https://leetcode.com/problems/climbing-stairs/
+   
+   Problem Explanation:
+   - Count ways to climb n steps if can take 1 or 2 steps at a time
+   - At each step: take 1 step OR take 2 steps
+   - Base: 1 way to reach step 0, 1 way to reach step 1
+   
+   Key Idea:
+   - Recurrence: f(n) = f(n-1) + f(n-2) (take 1 step + take 2 steps)
+   - Use memoization to store already computed values
+   - Check if f[n] != -1 before recursing
+   - Top-down approach: solve from n to base cases
+   - Time: O(n), Space: O(n)
+   
+   Simple: Ways to reach step n = ways from n-1 + ways from n-2.
+
+================================================================================
+
+6. COUNT WAYS WITH 3 DIFFERENT STEPS (Tabulation Variation)
+   File: countWaysTabVariabtion.cpp
+   Link: https://leetcode.com/problems/climbing-stairs-ii/ (variant)
+   
+   Problem Explanation:
+   - Count ways to climb n steps with 3 step options: 1, 2, or 3 steps
+   - Generalization of the stairs problem with additional choices
+   
+   Key Idea:
+   - Recurrence: f(n) = f(n-1) + f(n-2) + f(n-3)
+   - Bottom-up tabulation with 3 terms summation
+   - Base cases: f(0)=1, f(1)=1, f(2)=2
+   - Fill table iteratively: dp[i] = dp[i-1] + dp[i-2] + dp[i-3]
+   - Time: O(n), Space: O(n)
+   
+   Simple: Sum of previous 3 steps for more climbing options.
+
+================================================================================
+
+7. CATALAN NUMBERS (Tabulation)
+   File: catlanTabulation.cpp
+   Link: https://leetcode.com/problems/unique-binary-search-trees/
+   
+   Problem Explanation:
+   - Calculate nth Catalan number: Cn = Σ(Ci * Cn-i-1) for i=0 to n-1
+   - Applications: balanced parentheses, BSTs, mountain ranges, etc.
+   - C(0)=1, C(1)=1, C(2)=2, C(3)=5, C(4)=14...
+   
+   Key Idea:
+   - Catalan recurrence: dp[n] = sum of (dp[i] * dp[n-i-1]) for all i
+   - Represents: choose i elements for left, n-i-1 for right
+   - Build DP table bottom-up using nested loops
+   - Time: O(n²), Space: O(n)
+   
+   Simple: Nth Catalan = sum of products of all (i, n-i-1) partitions.
+
+================================================================================
+
+8. MOUNTAIN RANGES (Catalan Application)
+   File: mountainRanges.cpp
+   Link: https://leetcode.com/problems/mountain-ranges/ (variant)
+   
+   Problem Explanation:
+   - Count ways to draw non-crossing mountain ranges with n pairs
+   - Each pair opens and closes at same altitude, non-crossing constraint
+   - Answer follows Catalan number sequence
+   
+   Key Idea:
+   - Uses same Catalan recurrence: dp[n] = Σ(dp[i] * dp[n-i-1])
+   - Represents: left subtree pairs + right subtree pairs
+   - dp[0]=1, dp[1]=1, then fill using Catalan formula
+   - Time: O(n²), Space: O(n)
+   
+   Simple: Mountain ranges with n pairs = nth Catalan number.
+
+================================================================================
+
+9. FRACTIONAL KNAPSACK (0/1 Knapsack Recursive)
+   File: FractionalKnapsak.cpp
+   Link: https://leetcode.com/problems/0-1-knapsack-problem/
+   
+   Problem Explanation:
+   - Maximize value of items that fit in knapsack of capacity W
+   - Each item taken completely (0/1, not fractional)
+   - Recursive backtracking approach
+   
+   Key Idea:
+   - Recursive function: knapSackRec(items, weights, n, w)
+   - Base: if n==0 or w==0, return 0
+   - For item n: if weight fits, try both include and exclude, return max
+   - If weight doesn't fit, can only exclude
+   - Time: O(2^n) exponential without memoization
+   
+   Simple: For each item, try include (if fits) and exclude, take maximum.
+
+================================================================================
+
+10. LONGEST COMMON SUBSEQUENCE (Memoization)
+    File: LCSMemo.cpp
+    Link: https://leetcode.com/problems/longest-common-subsequence/
+    
+    Problem Explanation:
+    - Find longest subsequence present in both strings using recursion
+    - Strings don't need matching consecutive characters
+    
+    Key Idea:
+    - Recursive approach with memoization
+    - Base: if either string empty, return 0
+    - If last chars match: return 1 + lcs(remaining1, remaining2)
+    - Else: return max(lcs(str1 without last, str2), lcs(str1, str2 without last))
+    - Store results to avoid recalculation
+    - Time: O(m*n), Space: O(m*n)
+    
+    Simple: Recursively match strings, use memoization to cache results.
+
+================================================================================
+
+11. LONGEST COMMON SUBSEQUENCE (Another Implementation)
+    File: longestCommonSubsequence.cpp
+    Link: https://leetcode.com/problems/longest-common-subsequence/
+    
+    Problem Explanation:
+    - Find LCS length using similar approach to LIS
+    - Treats LCS as matching subsequence between two strings
+    
+    Key Idea:
+    - Uses LCS/LIS DP approach with 2D table
+    - dp[i][j] = LCS length for arr[0..i-1] and sorted arr[0..j-1]
+    - Match when characters equal, take diagonal value + 1
+    - Mismatch: take max from left or top
+    - Time: O(m*n), Space: O(m*n)
+    
+    Simple: 2D DP matching two strings/arrays.
+
+================================================================================
+
+12. TARGET SUM (Subset Sum Problem)
+    File: targetSum.cpp
+    Link: https://leetcode.com/problems/target-sum/
+    
+    Problem Explanation:
+    - Find if subset of array can sum to target value
+    - Check if any combination of elements equals target
+    
+    Key Idea:
+    - 2D DP: dp[i][j] = max sum achievable using first i elements with sum j
+    - For each element: either include (nums[i] + dp[i-1][j-nums[i]]) or skip
+    - Check if dp[n][target] == target at the end
+    - Time: O(n*target), Space: O(n*target)
+    
+    Simple: For each element, choose include or exclude to reach target.
+
+================================================================================
+
+13. ROAD CUTTING (Unbounded Knapsack Variant)
+    File: roadCutting.cpp
+    Link: https://leetcode.com/problems/house-robber-ii/ (similar)
+    
+    Problem Explanation:
+    - Given road length and pieces with prices, maximize profit by cutting
+    - Similar to unbounded knapsack: can use same piece multiple times
+    - Maximize total price of pieces that sum to road length
+    
+    Key Idea:
+    - 2D DP: dp[i][j] = max price using first i piece types for length j
+    - For piece i: dp[i][j] = max(dp[i-1][j], price[i] + dp[i][j-length[i]])
+    - Can reuse same piece type (unbounded)
+    - Time: O(n*length), Space: O(n*length)
+    
+    Simple: Maximize price by choosing piece types to fill exact length.
+
+================================================================================
+
+14. CATALAN NUMBERS (Recursive)
+    File: catlanRec.cpp
+    Link: https://leetcode.com/problems/unique-binary-search-trees/
+    
+    Problem Explanation:
+    - Calculate nth Catalan number using pure recursion
+    - Cn = Σ(Ci * Cn-i-1) for all partitions
+    
+    Key Idea:
+    - Direct recursive implementation without memoization
+    - Base: C(0)=1, C(1)=1
+    - Recursive: for each partition point, multiply left and right counts
+    - Potentially exponential time due to repeated calculations
+    - Time: O(exponential), Space: O(n) recursion stack
+    
+    Simple: Each Catalan number is sum of products of smaller Catalan numbers.
+
+================================================================================
+
+15. CATALAN NUMBERS (Memoization)
+    File: catlanMemo.cpp
+    Link: https://leetcode.com/problems/unique-binary-search-trees/
+    
+    Problem Explanation:
+    - Calculate nth Catalan number with memoization optimization
+    - Same recurrence as recursive version but with caching
+    
+    Key Idea:
+    - dp[n] = already computed Catalan number n
+    - Check dp[n] != -1 before computing recursively
+    - Base: dp[0]=1, dp[1]=1
+    - Recursively compute with memoization
+    - Time: O(n²), Space: O(n)
+    
+    Simple: Catalan recurrence with memoization to avoid recomputation.
+
+================================================================================
+
+16. COIN CHANGE - COUNT COMBINATIONS
+    File: coinChange2.cpp
+    Link: https://leetcode.com/problems/coin-change-2/
+    
+    Problem Explanation:
+    - Count number of ways to make amount using given coin denominations
+    - Each coin can be used unlimited times
+    - Consider different permutations as same combination
+    
+    Key Idea:
+    - 2D or 1D DP: dp[i][j] = ways to make amount j using coins 0..i-1
+    - For each coin: dp[i][j] = dp[i-1][j] + dp[i][j-coin[i]]
+    - Skip coin: dp[i-1][j], Use coin: dp[i][j-coin]
+    - Time: O(n*amount), Space: O(amount) or O(n*amount)
+    
+    Simple: Count ways to combine coins to reach target amount.
+
+================================================================================
+                        COMPLEXITY ANALYSIS
+================================================================================
+
+Problem              | Time      | Space   | Approach    | Difficulties
+-----------          | ------    | ------- | ---------   | -----------
+0/1 Knapsack         | O(n*W)    | O(n*W)  | Tabulation  | Weight-value tradeoff
+Unbounded Knapsack   | O(n*W)    | O(n*W)  | Tabulation  | Unlimited items
+LCS                  | O(m*n)    | O(m*n)  | Both        | String matching
+LIS                  | O(n²)     | O(n²)   | Tabulation  | Subsequence ordering
+Climb Stairs         | O(n)      | O(n)    | Both        | Simple recurrence
+Catalan Numbers      | O(n²)     | O(n)    | Both        | Partition counting
+Mountain Ranges      | O(n²)     | O(n)    | Tabulation  | Catalan application
+Target Sum           | O(n*sum)  | O(n*sum)| Tabulation  | Subset matching
+Road Cutting         | O(n*len)  | O(n*len)| Tabulation  | Unbounded variant
+Coin Change 2        | O(n*amt)  | O(amt)  | Tabulation  | Combination counting
+
+================================================================================
+                        KEY LEARNING POINTS
+================================================================================
+
+1. **1D vs 2D DP**
+   - 1D DP: Linear recurrence (stairs, Fibonacci)
+   - 2D DP: Two dimensions (knapsack capacity, string lengths)
+
+2. **String/Array Problems**
+   - LCS: Compare characters, match or skip
+   - LIS: Use LCS with sorted array trick
+   - Edit Distance: Match, insert, delete, replace
+
+3. **Counting Problems**
+   - Coin combinations, ways to climb stairs
+   - Use addition to combine independent choices
+   - Unbounded: reuse items by revisiting same row/state
+
+4. **Catalan Numbers Pattern**
+   - Partition into left and right subproblems
+   - Multiply counts (independent choices)
+   - Applications: BSTs, brackets, mountain ranges, paths
+
+5. **Knapsack Variants**
+   - 0/1: Each item once (use dp[i-1][j-w])
+   - Unbounded: Items unlimited (use dp[i][j-w])
+   - Fractional: Can split items (greedy algorithm)
+
+================================================================================

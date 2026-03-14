@@ -1,0 +1,398 @@
+================================================================================
+                         MEDIUM LEVEL PROBLEMS
+================================================================================
+
+1. DFS ON WEIGHTED GRAPHS
+   Link: https://www.geeksforgeeks.org/graph-and-its-representations/
+   
+   Problem Explanation:
+   - Apply DFS on graphs where edges have weights
+   - Weights are ignored for traversal order (DFS doesn't consider weights)
+   - Both recursive and iterative implementations provided
+   
+   Key Idea:
+   - Use adjacency list of pairs (neighbor, weight)
+   - Recursive DFS: traverse unvisited neighbors recursively
+   - Iterative DFS: use explicit stack (or reverse iteration)
+   - Time: O(V + E), Space: O(V)
+   
+   Simple: DFS traversal ignoring weights. Weights matter for shortest path (Dijkstra) but not traversal order.
+
+================================================================================
+
+2. BFS ON WEIGHTED GRAPHS
+   Link: https://www.geeksforgeeks.org/graph-and-its-representations/
+   
+   Problem Explanation:
+   - Apply BFS on graphs where edges have weights
+   - Like weighted DFS, weights don't affect BFS order (unless you want shortest path)
+   - Useful for level-order traversal of weighted graphs
+   
+   Key Idea:
+   - Use adjacency list of pairs (neighbor, weight)
+   - Queue stores neighbors; process in FIFO order
+   - Weight information available if needed for special processing
+   - Time: O(V + E), Space: O(V) for queue
+   
+   Simple: Standard BFS with pair representation. Weights available if needed but don't affect order.
+
+================================================================================
+
+3. CHECK IF GRAPH IS BIPARTITE
+   Link: https://leetcode.com/problems/is-graph-bipartite/
+   
+   Problem Explanation:
+   - Determine if graph can be colored with 2 colors
+   - No adjacent vertices should have same color
+   - True if graph is bipartite, false otherwise
+   
+   Key Idea:
+   - Use BFS with 2-coloring (color array: -1=unvisited, 0=color1, 1=color2)
+   - Start from any unvisited node, color it 0
+   - Color all neighbors with opposite color
+   - If neighbor already has same color, not bipartite
+   - Time: O(V + E), Space: O(V)
+   
+   Simple: BFS with 2-coloring. Adjacent vertices must have different colors.
+
+================================================================================
+
+4. BIPARTITE GRAPH - ODD/EVEN CYCLE DETECTION
+   Link: https://www.geeksforgeeks.org/bipartite-graph/
+   
+   Problem Explanation:
+   - Detect if a cycle exists and classify as odd-length or even-length
+   - Odd cycle = not bipartite, Even cycle = bipartite (still cyclic)
+   - Return cycle type or -1 if no cycle
+   
+   Key Idea:
+   - DFS with depth tracking
+   - When revisiting a node that's not parent: cycle detected
+   - Cycle length = current_depth + visited_node_depth
+   - If cycle_length % 2 == 1: odd cycle (return 0), else even cycle (return 1)
+   - Time: O(V + E), Space: O(V)
+   
+   Simple: DFS with depth. Revisiting non-parent node indicates cycle. Check parity of cycle length.
+
+================================================================================
+
+5. COURSE SCHEDULE (CYCLE DETECTION IN DAG)
+   Link: https://leetcode.com/problems/course-schedule/
+   
+   Problem Explanation:
+   - Check if all courses can be completed given prerequisites
+   - Represent as directed graph: edge u→v means u must complete before v
+   - If cycle exists, impossible to complete all courses
+   
+   Key Idea:
+   - DFS-based cycle detection in directed graph
+   - Use color array: 0=white(unvisited), 1=gray(in current path), 2=black(finished)
+   - If encounter gray node = back edge = cycle
+   - Time: O(V + E), Space: O(V)
+   
+   Simple: DFS with recursion stack tracking. Back edge (to gray node) indicates cycle.
+
+================================================================================
+
+6. COURSE SCHEDULE II (TOPOLOGICAL ORDER WITH CYCLE CHECK)
+   Link: https://leetcode.com/problems/course-schedule-ii/
+   
+   Problem Explanation:
+   - Return valid course order if all courses can be completed
+   - Return empty list if cycle exists (impossible to complete)
+   - Combine cycle detection with topological sorting
+   
+   Key Idea:
+   - DFS with color tracking (0=white, 1=gray, 2=black)
+   - If cycle detected, return empty result
+   - If no cycle, use DFS post-order: add nodes to result as they finish
+   - Reverse result for topological order
+   - Time: O(V + E), Space: O(V)
+   
+   Simple: DFS that checks for cycles and builds topological order via post-order finishing times.
+
+================================================================================
+
+7. CYCLE DETECTION IN DIRECTED GRAPH
+   Link: https://www.geeksforgeeks.org/detect-cycle-in-a-directed-graph/
+   
+   Problem Explanation:
+   - Detect if cycle exists in a directed graph
+   - Directed edge means one-way relationship
+   - Common in dependency problems
+   
+   Key Idea:
+   - DFS with recursion stack (gray nodes = in current path)
+   - Back edge = directed edge to ancestor = cycle
+   - Color array: 0=unvisited, 1=in current path, 2=completed
+   - If encounter color 1: cycle found
+   - Time: O(V + E), Space: O(V)
+   
+   Simple: DFS tracking recursion stack. Edge to node in current path confirms cycle.
+
+================================================================================
+
+8. CYCLE DETECTION IN UNDIRECTED GRAPH
+   Link: https://www.geeksforgeeks.org/detect-cycle-in-an-undirected-graph/
+   
+   Problem Explanation:
+   - Detect if cycle exists in an undirected graph
+   - In undirected graphs: edge goes both ways
+   - Can't just return to parent node (that's not a cycle)
+   
+   Key Idea:
+   - DFS with parent tracking
+   - If neighbor is visited AND not parent: cycle found
+   - Use parent parameter to distinguish back edge from forward edge
+   - Time: O(V + E), Space: O(V)
+   
+   Simple: DFS with parent tracking. Visiting a non-parent visited node indicates cycle.
+
+================================================================================
+
+9. ALL PATHS FROM SOURCE TO TARGET
+   Link: https://leetcode.com/problems/all-paths-from-source-to-target/
+   
+   Problem Explanation:
+   - Find all possible paths from node 0 to destination node
+   - Path must follow directed edges
+   - Return all valid paths as list of lists
+   
+   Key Idea:
+   - DFS with backtracking
+   - Maintain path as we explore (add node, recurse, remove node)
+   - When reaching destination, add copy of path to result
+   - Backtracking allows exploring multiple paths from same node
+   - Time: O(2^V × V) worst case, Space: O(V) recursion depth
+   
+   Simple: DFS with backtracking. Build paths incrementally, backtrack to explore alternatives.
+
+================================================================================
+
+10. CHECK IF PATH EXISTS BETWEEN TWO NODES
+    Link: https://www.geeksforgeeks.org/find-if-there-is-a-path-between-two-vertices/
+    
+    Problem Explanation:
+    - Simple reachability check: can we reach target from source?
+    - Return true if path exists, false otherwise
+    - Simpler than finding actual path
+    
+    Key Idea:
+    - DFS/BFS from source node
+    - If we visit target node, return true
+    - If traversal completes without visiting target, return false
+    - Time: O(V + E), Space: O(V)
+    
+    Simple: DFS or BFS from source. Return true if target is visited during traversal.
+
+================================================================================
+
+11. ROTTING ORANGES
+    Link: https://leetcode.com/problems/rotting-oranges/
+    
+    Problem Explanation:
+    - Find minimum time for rot to spread from rotten oranges to adjacent fresh oranges
+    - Rotten orange spreads to 4-adjacent fresh oranges each minute
+    - Return -1 if not all oranges can rot, or minutes if all become rotten
+    
+    Key Idea:
+    - Multi-source BFS: start from all rotten oranges simultaneously
+    - Queue stores (row, col, time)
+    - For each rotten orange, spread to 4-adjacent cells with time+1
+    - Track max time when last orange rots
+    - Time: O(m × n), Space: O(m × n)
+    
+    Simple: Multi-source BFS from all rotten cells. Track time for each cell. Return max time.
+
+================================================================================
+
+12. PACIFIC ATLANTIC WATER FLOW
+    Link: https://leetcode.com/problems/pacific-atlantic-water-flow/
+    
+    Problem Explanation:
+    - Find cells where water can flow to both Pacific (top/left border) and Atlantic (bottom/right border)
+    - Water flows from higher to lower elevation (adjacent cells)
+    - Return list of cells satisfying both conditions
+    
+    Key Idea:
+    - Reverse thinking: DFS from ocean borders backwards (higher elevation)
+    - Two separate DFS: one from Pacific border, one from Atlantic border
+    - Mark cells reachable from each ocean
+    - Cells reachable from both = answer cells
+    - Time: O(m × n), Space: O(m × n)
+    
+    Simple: Reverse DFS from each ocean border. Cells marked by both borders flow to both oceans.
+
+================================================================================
+
+13. MAXIMUM AREA OF ISLAND
+    Link: https://leetcode.com/problems/max-area-of-island/
+    
+    Problem Explanation:
+    - Find size of largest connected region of 1's in grid
+    - 1 = land, 0 = water, 4-directional connectivity
+    - Return area (count of 1's) in largest island
+    
+    Key Idea:
+    - DFS from each unvisited 1
+    - Count cells in current island during DFS
+    - Mark visited by changing to 0 (no separate visited array needed)
+    - Track maximum count across all islands
+    - Time: O(m × n), Space: O(m × n) recursion
+    
+    Simple: DFS from each unvisited 1, counting connected cells. Return max count.
+
+================================================================================
+
+14. SURROUNDED REGIONS
+    Link: https://leetcode.com/problems/surrounded-regions/
+    
+    Problem Explanation:
+    - Flip all 'O' regions completely surrounded by 'X' to 'X'
+    - 'O' on border can't be surrounded (can escape to outside)
+    - Only interior 'O's surrounded by 'X' should flip
+    
+    Key Idea:
+    - Mark all 'O's connected to borders as safe with temporary marker 'T'
+    - Remaining 'O's are surrounded, flip them to 'X'
+    - Change 'T' back to 'O'
+    - DFS from all border 'O's to mark connected regions unsafe
+    - Time: O(m × n), Space: O(m × n)
+    
+    Simple: DFS from border 'O's marking safe cells. Flip unsafemarked 'O's to 'X'.
+
+================================================================================
+
+15. WORD LADDER
+    Link: https://leetcode.com/problems/word-ladder/
+    
+    Problem Explanation:
+    - Find shortest transformation path from beginWord to endWord
+    - Each step changes exactly one letter
+    - Each intermediate word must be in given wordList
+    - Return length of shortest path (or 0 if impossible)
+    
+    Key Idea:
+    - BFS for shortest path in implicit graph
+    - Efficiently find neighbors using pattern: "*oa*", "*da*" etc (wildcard approach)
+    - Map each pattern to list of words matching it
+    - For each word, check all 26 letter patterns to find neighbors
+    - Time: O(N × L × 26) where N=words, L=length, Space: O(N × L)
+    
+    Simple: BFS with pattern-based neighbor finding. "*o*" patterns connect words differing by 1 char.
+
+================================================================================
+
+16. TOPOLOGICAL SORT (DFS-BASED)
+    Link: https://www.geeksforgeeks.org/topological-sorting/
+    
+    Problem Explanation:
+    - Linear ordering of vertices in DAG such that for edge u→v, u comes before v
+    - Valid only for directed acyclic graphs
+    - Used in task scheduling, course prerequisites, build systems
+    
+    Key Idea:
+    - DFS-based: use post-order traversal (finish time)
+    - Push node to stack after processing all descendants
+    - Pop stack to get reverse topological order
+    - Time: O(V + E), Space: O(V)
+    
+    Simple: DFS with stack. Add nodes to stack after finishing DFS. Pop stack for topo order.
+
+================================================================================
+
+17. TOPOLOGICAL SORT (KAHN'S ALGORITHM - INDEGREE)
+    Link: https://www.geeksforgeeks.org/topological-sorting-indegree-based-solution/
+    
+    Problem Explanation:
+    - Same as topological sort but using BFS with indegree approach
+    - Process vertices with indegree 0 (no predecessors)
+    - More intuitive than DFS-based approach
+    
+    Key Idea:
+    - Calculate indegree for each vertex
+    - Add all 0-indegree vertices to queue
+    - Process queue: for each vertex, decrease indegree of neighbors
+    - When neighbor's indegree becomes 0, add to queue
+    - Result list is topological order
+    - Time: O(V + E), Space: O(V)
+    
+    Simple: Queue-based. Process 0-indegree nodes first. Decrease neighbor indegrees.
+
+================================================================================
+
+18. REDUNDANT CONNECTIONS (UNION-FIND)
+    Link: https://leetcode.com/problems/redundant-connection/
+    
+    Problem Explanation:
+    - Find edge creating a cycle in an undirected graph
+    - Graph is tree + 1 edge (creates exactly one cycle)
+    - Return the redundant edge (prefer later edge if multiple options)
+    
+    Key Idea:
+    - Use union-find (disjoint set) to detect first cycle-creating edge
+    - Process edges in order
+    - If both endpoints already in same set: this edge is redundant
+    - Union them otherwise
+    - Time: O(E × α(V)), Space: O(V)
+    
+    Simple: Union-find to track connected components. First edge connecting same set is redundant.
+
+================================================================================
+
+19. DISJOINT SET (UNION-FIND DATA STRUCTURE)
+    Link: https://www.geeksforgeeks.org/union-find/
+    
+    Problem Explanation:
+    - Data structure for managing disjoint sets
+    - Supports two operations: union (merge sets) and find (check if in same set)
+    - Fundamental for cycle detection, LCA, Kruskal's algorithm
+    
+    Key Idea:
+    - Parent array tracks set membership via parent pointers
+    - Path compression in find(): make nodes point directly to root
+    - Union by rank: attach smaller tree to larger to balance
+    - Path compression + union by rank = nearly O(1) amortized
+    - Time: O(α(N)) amortized per operation (α = inverse Ackermann)
+    
+    Simple: Parent array with path compression and union by rank. Nearly constant time operations.
+
+================================================================================
+
+20. DIJKSTRA'S SHORTEST PATH ALGORITHM
+    Link: https://www.geeksforgeeks.org/dijkstras-shortest-path-algorithm-greedy-algo-7/
+    
+    Problem Explanation:
+    - Find shortest path from source to all vertices
+    - Works with non-negative edge weights
+    - Greedy approach: always process closest unvisited vertex
+    
+    Key Idea:
+    - Priority queue stores (distance, vertex)
+    - Initialize source distance 0, others ∞
+    - Extract min distance vertex, relax its edges
+    - Relaxation: if distance[u] + weight(u,v) < distance[v], update distance[v]
+    - Time: O((V + E) log V), Space: O(V)
+    
+   Simple: Priority queue for min distance. Always process closest vertex next. Relax edges.
+
+================================================================================
+
+21. MINIMUM COST TO CONNECT ALL POINTS
+    Link: https://leetcode.com/problems/minimum-cost-to-connect-all-points/
+    
+    Problem Explanation:
+    - Find MST where edge weight = Manhattan distance between points
+    - Connect all points with minimum total distance
+    - Uses Prim's algorithm variant
+    
+    Key Idea:
+    - Prim's algorithm with priority queue
+    - Don't store all edges upfront (complete graph → too many edges)
+    - Generate edges on-the-fly: for current MST node, consider edges to all unvisited points
+    - Manhattan distance = |x1-x2| + |y1-y2|
+    - Time: O(V² log V), Space: O(V)
+    
+    Simple: Prim's MST with on-the-fly edge generation. Manhattan distance as weight.
+
+================================================================================

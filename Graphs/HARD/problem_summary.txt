@@ -1,0 +1,151 @@
+================================================================================
+                          HARD LEVEL PROBLEMS
+================================================================================
+
+1. BELLMAN-FORD ALGORITHM
+   Link: https://www.geeksforgeeks.org/bellman-ford-algorithm-dp-9/
+   
+   Problem Explanation:
+   - Find shortest paths from source to all vertices
+   - Works with negative edge weights (Dijkstra can't handle these)
+   - Can detect negative cycles if one exists
+   - Slower than Dijkstra but more general
+   
+   Key Idea:
+   - Relax all edges V-1 times
+   - Each iteration improves shortest paths for vertices further away
+   - On iteration V, if any edge still relaxes, negative cycle exists
+   - Relaxation same as Dijkstra: if dist[u] + weight < dist[v], update dist[v]
+   - Time: O(V × E), Space: O(V + E)
+   
+   Simple: Relax all edges V-1 times to find shortest paths. 
+          Works even with negative weights. Detect negative cycles on iteration V.
+
+================================================================================
+
+2. CHEAPEST FLIGHTS WITHIN K STOPS
+   Link: https://leetcode.com/problems/cheapest-flights-within-k-stops/
+   
+   Problem Explanation:
+   - Find minimum cost flight from src to destination with at most K stops
+   - K stops = K intermediate cities, so K+1 flight segments
+   - Return minimum cost, or -1 if no valid path
+   
+   Key Idea:
+   - Modified BFS/Dijkstra tracking stops explicitly
+   - Queue stores (node, cost, stops_used)
+   - For each city, try all outgoing flights if stops_used < K
+   - Track minimum cost to reach each city with specific stop count
+   - Can revisit same city with different stop counts if cost is better
+   - Time: O(min(V × K, E × K)), Space: O(V × K)
+   
+   Simple: BFS with stops constraint. Track cost and stops separately.
+          Explore all neighbors if stops remaining. Return minimum cost to destination.
+
+================================================================================
+
+3. CYCLE DETECTION USING KAHN'S ALGORITHM
+   Link: https://www.geeksforgeeks.org/topological-sorting-indegree-based-solution/
+   
+   Problem Explanation:
+   - Detect cycles in directed graphs using topological sort approach
+   - Alternative to DFS-based cycle detection
+   - More intuitive: if can't produce complete topological order, cycle exists
+   
+   Key Idea:
+   - Calculate indegree for each vertex
+   - Add vertices with indegree 0 to queue
+   - Process: for each vertex, decrease neighbor indegrees
+   - When neighbor indegree → 0, add to queue
+   - After processing: if count_processed < V, cycle exists (unprocessed vertices have cycle)
+   - Time: O(V + E), Space: O(V)
+   
+   Simple: Topological sort with indegree. If processed vertices < V, cycle exists.
+
+================================================================================
+
+4. KRUSKAL'S MINIMUM SPANNING TREE
+   Link: https://www.geeksforgeeks.org/kruskals-minimum-spanning-algorithm/
+   
+   Problem Explanation:
+   - Find MST (minimum spanning tree) of weighted graph
+   - MST connects all V vertices with V-1 edges, minimizing total weight
+   - Greedy approach: select minimum weight edges without creating cycles
+   
+   Key Idea:
+   - Sort all edges by weight
+   - Use union-find to track connected components
+   - For each edge in sorted order:
+     - If endpoints in different components: add to MST, union components
+     - If endpoints in same component: skip (would create cycle)
+   - Stop when MST has V-1 edges
+   - Time: O(E log E) sorting, O(E × α(V)) union-find, Total: O(E log E)
+   - Space: O(V + E)
+   
+   Simple: Sort edges by weight. Use union-find to add non-cycle-creating edges. 
+           Stop at V-1 edges.
+
+================================================================================
+
+5. NETWORK DELAY TIME
+   Link: https://leetcode.com/problems/network-delay-time/
+   
+   Problem Explanation:
+   - Find time for signal from node K to reach all nodes
+   - Signal travels along edges with given travel times
+   - Return time for signal to reach all nodes, or -1 if unreachable
+   
+   Key Idea:
+   - Dijkstra's algorithm from source node K
+   - Find shortest path distance to all vertices
+   - The maximum distance is the answer (time until all get signal)
+   - If any vertex unreachable: distance = ∞, return -1
+   - Time: O((V + E) log V), Space: O(V + E)
+   
+   Simple: Dijkstra from node K. Return maximum distance to any node.
+           If any unreachable (distance = ∞), return -1.
+
+================================================================================
+
+6. PRIM'S MINIMUM SPANNING TREE
+   Link: https://www.geeksforgeeks.org/prims-minimum-spanning-tree-mst-greedy-algo-5/
+   
+   Problem Explanation:
+   - Find MST using incremental approach (different from Kruskal's)
+   - Start with one vertex, grow MST by adding minimum weight edge to new vertex
+   - All intermediate states form valid spanning trees of visited vertices
+   
+   Key Idea:
+   - Priority queue stores (weight, vertex)
+   - Start from any vertex (usually 0), mark visited, add all edges to PQ
+   - Extract min weight edge to unvisited vertex, add to MST
+   - Mark new vertex visited, add its edges to PQ
+   - Ignore edges to already visited vertices
+   - Continue until all vertices visited
+   - Time: O((V + E) log V) with priority queue, Space: O(V + E)
+   
+   Simple: Priority queue of edges. Start from one vertex, greedily add min edge to new vertex.
+
+================================================================================
+
+7. SWIM IN RISING WATER (MINIMAX PATH)
+   Link: https://leetcode.com/problems/swim-in-rising-water/
+   
+   Problem Explanation:
+   - Find path from top-left to bottom-right minimizing maximum elevation
+   - At time T, can move to cells with elevation ≤ T
+   - Need to find minimum T to reach bottom-right from top-left
+   
+   Key Idea:
+   - Modified Dijkstra using max() instead of sum()
+   - Instead of distance = sum of weights, track max elevation seen
+   - Priority queue by maximum elevation (not sum)
+   - For each cell: max_elevation_on_path = max(current_max, cell_elevation)
+   - Always explore path with minimum maximum elevation first
+   - First path to reach destination has answer (minimum max elevation needed)
+   - Time: O(n² log n) for n×n grid, Space: O(n²)
+   
+   Simple: Modified Dijkstra. Track max elevation on path instead of sum.
+          Use priority queue with max elevation. Return max elevation when reaching destination.
+
+================================================================================
