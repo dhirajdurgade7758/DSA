@@ -1,0 +1,50 @@
+═══════════════════════════════════════════════════════════════════════════════
+                     EASY - BACKTRACKING PROBLEMS
+═══════════════════════════════════════════════════════════════════════════════
+
+1. PERMUTATIONS
+   Link: https://leetcode.com/problems/permutations/
+   
+   Problem Explanation:
+   - Given a string or array, generate ALL permutations (all possible arrangements)
+   - For "abc": Output is "abc", "acb", "bac", "bca", "cab", "cba"
+   - Each element appears exactly once in each permutation
+   
+   Key Idea:
+   - Use choice-explore-unchoose pattern (backtracking)
+   - For each position, try each unused element
+   - Remove element after recursion, add it back (backtrack)
+   - Base case: when all elements are used, print result
+   
+   Simple: Pick an element → Recurse with remaining → Remove element → Backtrack
+   
+   Time Complexity: O(n! * n) - n! permutations, each takes O(n) time
+   Space Complexity: O(n!) for storing all permutations
+
+
+2. PERMUTATIONS (VECTOR IMPLEMENTATION)
+   Link: https://leetcode.com/problems/permutations/
+   File: findPermutationsVector.cpp
+   
+   Problem Explanation:
+   - Same as Permutations but handles numeric arrays with vectors
+   - Returns vector<vector<int>> of all permutations
+   
+   Key Idea:
+   - Same choice-explore-unchoose backtracking pattern
+   - Use vector.erase() to remove picked element
+   - Use vector.insert() to restore during backtracking
+   - Collect results in 2D vector
+   
+   Simple: Generate all orderings of distinct numbers using backtracking
+   
+   Time Complexity: O(n! * n)
+   Space Complexity: O(n! * n)
+
+═══════════════════════════════════════════════════════════════════════════════
+LEARNING TIPS FOR EASY PROBLEMS:
+- These are entry points to backtracking
+- Focus on understanding the choice-explore-unchoose pattern
+- Try tracing through small examples (2-3 elements) by hand
+- The pattern here is the foundation for all harder problems
+═══════════════════════════════════════════════════════════════════════════════

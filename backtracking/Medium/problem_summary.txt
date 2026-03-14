@@ -1,0 +1,381 @@
+═══════════════════════════════════════════════════════════════════════════════
+                     MEDIUM - BACKTRACKING PROBLEMS
+═══════════════════════════════════════════════════════════════════════════════
+
+📋 SECTION 1: COMBINATION PROBLEMS (Find groups summing to target)
+
+1. COMBINATION SUM
+   Link: https://leetcode.com/problems/combination-sum/
+   
+   Problem Explanation:
+   - Find all unique COMBINATIONS of candidates that sum to target
+   - Each element in candidates can be reused unlimited times
+   - No duplicates in result, candidates may have duplicates
+   - Example: candidates=[2,3,6,7], target=7 → [[2,2,3], [7]]
+   
+   Key Idea:
+   - Use backtracking with index-based recursion
+   - Keep index same when recursing (allows reuse of current element)
+   - Pass sum forward, check if sum == target for base case
+   - Prune when sum > target (early termination)
+   
+   Simple: Try each candidate, reuse it until sum is reached or exceeded
+   
+   Time Complexity: O(N^(T/M)) where N = candidate count, T = target, M = min value
+   Space Complexity: O(T/M) for recursion depth
+
+
+2. COMBINATION SUM II
+   Link: https://leetcode.com/problems/combination-sum-ii/
+   
+   Problem Explanation:
+   - Find all unique combinations that sum to target
+   - EACH element can be used AT MOST ONCE
+   - Candidates array may contain DUPLICATES
+   - Must avoid duplicate combinations
+   
+   Key Idea:
+   - Sort array first to group duplicates together
+   - Use index+1 in recursion (each element used once)
+   - Skip duplicate elements at same recursion level using: 
+     if(i > indx && candidates[i] == candidates[i-1]) continue;
+   
+   Simple: Similar to Combination Sum but move to next index, skip duplicates
+   
+   Time Complexity: O(2^N) for exploring all subsets
+   Space Complexity: O(N) for recursion depth
+
+
+═══════════════════════════════════════════════════════════════════════════════
+
+📋 SECTION 2: SUBSET GENERATION (Power Set)
+
+3. SUBSETS (String)
+   File: findSubset.cpp
+   
+   Problem Explanation:
+   - Generate ALL possible subsets of a given string
+   - Include empty subset and full set
+   - Example: "abc" → "", "a", "b", "c", "ab", "ac", "bc", "abc"
+   
+   Key Idea:
+   - For each character: you have 2 choices (include or exclude)
+   - At each position, try: YES choice (add char) and NO choice (skip char)
+   - Base case: when string is empty, print the current subset
+   
+   Simple: For each character, make 2 recursive calls - with and without it
+   
+   Time Complexity: O(2^n) - 2^n subsets, each taking O(n) to print
+   Space Complexity: O(n) for recursion depth
+
+
+4. SUBSETS (Array without Duplicates) - Vector Version
+   Link: https://leetcode.com/problems/subsets/
+   File: findSubsetVector.cpp
+   
+   Problem Explanation:
+   - Generate all subsets of an array with distinct elements
+   - Return vector<vector<int>> of all subsets
+   
+   Key Idea:
+   - At each index i: make 2 recursive calls
+   - First: include nums[i], then recurse on i+1
+   - Second: exclude nums[i], then recurse on i+1
+   - Base case: i == nums.size(), add current subset to result
+   
+   Simple: Binary tree of choices - include/exclude each element
+   
+   Time Complexity: O(n * 2^n) - 2^n subsets, each taking O(n) time
+   Space Complexity: O(n * 2^n) for output
+
+
+5. SUBSETS II (with Duplicates)
+   Link: https://leetcode.com/problems/subsets-ii/
+   
+   Problem Explanation:
+   - Generate all subsets of array that may contain DUPLICATES
+   - Still want unique subsets in result
+   - Example: [1,2,2] → [[], [1], [2], [1,2], [2,2], [1,2,2]]
+   
+   Key Idea:
+   - Sort array first to group duplicates
+   - At each recursion level, skip subsequent duplicate elements
+   - Use while loop to skip: while(i+1 < n && nums[i] == nums[i+1]) i++;
+   - Then for exclude choice, we've already skipped all duplicates
+   
+   Simple: Same as Subsets, but skip duplicate choices at same level
+   
+   Time Complexity: O(n * 2^n)
+   Space Complexity: O(n * 2^n)
+
+
+═══════════════════════════════════════════════════════════════════════════════
+
+📋 SECTION 3: GENERATION WITH CONSTRAINTS
+
+6. GENERATE PARENTHESES
+   Link: https://leetcode.com/problems/generate-parentheses/
+   
+   Problem Explanation:
+   - Generate all VALID combinations of n pairs of parentheses
+   - Valid = every ( has matching ), no more ) than (
+   - n=3 → ["((()))","(()())","(())()","()(())","()()()"]
+   
+   Key Idea:
+   - Track lcount (open parens) and rcount (close parens)
+   - Can add ( only if lcount < n
+   - Can add ) only if rcount < lcount (prevents unmatched )
+   - Base case: when lcount == n AND rcount == n
+   
+   Simple: Build string character by character, respecting parenthesis rules
+   
+   Time Complexity: O(4^n / sqrt(n)) - Catalan number
+   Space Complexity: O(n) for string length
+
+
+7. LETTER COMBINATIONS OF A PHONE NUMBER
+   Link: https://leetcode.com/problems/letter-combinations-of-a-phone-number/
+   File: keypad_combinations.cpp
+   
+   Problem Explanation:
+   - Given digits like "23", map to phone keypad letters
+   - Digit 2→"abc", 3→"def", etc.
+   - Find ALL combinations: "23" → ["ad","ae","af","bd","be","bf","cd","ce","cf"]
+   
+   Key Idea:
+   - Create mapping array: map[2]="abc", map[3]="def", etc.
+   - For each digit, try each letter it maps to
+   - Recursively build combinations with remaining digits
+   - Base case: when all digits processed, add to result
+   
+   Simple: For each digit's letters, recursively build combinations with next digit's letters
+   
+   Time Complexity: O(4^n) where n = digits length (max 4 letters per digit)
+   Space Complexity: O(4^n) for output
+
+
+═══════════════════════════════════════════════════════════════════════════════
+
+📋 SECTION 4: GRID/BOARD PATHFINDING
+
+8. GRID UNIQUE PATHS (Count)
+   Link: https://leetcode.com/problems/unique-paths/
+   File: grid_ways.cpp
+   
+   Problem Explanation:
+   - Count unique paths from top-left to bottom-right in m×n grid
+   - Can only move RIGHT or DOWN
+   - Example: 3×7 grid → many possible paths
+   
+   Key Idea:
+   - Recursive approach: from (r,c), go right or go down
+   - Base case: reached bottom-right corner (r==n-1, c==m-1) return 1
+   - Boundary: if out of bounds, return 0
+   - Result: sum of right paths + down paths
+   
+   Simple: From each cell, try moving right OR down, count all paths
+   
+   Time Complexity: O(2^(m+n)) - exponential (can be optimized with DP)
+   Space Complexity: O(m+n) for recursion depth
+
+
+9. GRID UNIQUE PATHS (Print All Paths)
+   Link: https://leetcode.com/problems/unique-paths/
+   File: grid_ways_print.cpp
+   
+   Problem Explanation:
+   - Print each unique path from top-left to bottom-right
+   - Path represented as string of moves: "RRR...DDDD"
+   
+   Key Idea:
+   - Same recursive structure as counting
+   - Pass path string that accumulates moves
+   - Append 'R' for right move, 'D' for down move
+   - When destination reached, print the path
+   
+   Simple: Build path string while exploring all routes to destination
+   
+   Time Complexity: O(C(m+n, m) * (m+n)) - for each path, takes m+n to build
+   Space Complexity: O(m+n) for recursion depth and path string
+
+
+10. RAT IN MAZE
+    Link: https://www.geeksforgeeks.org/rat-in-a-maze/
+    File: ratInMaz.cpp
+    
+    Problem Explanation:
+    - Find all paths for rat to move from start to end in a maze
+    - Grid: 1 = open path, 0 = wall
+    - Rat can move in 4 directions: Up, Down, Left, Right
+    - Cannot visit same cell twice
+    
+    Key Idea:
+    - Use visited[][] array to track visited cells
+    - Try all 4 directions: Down, Up, Right, Left (in order for sorted output)
+    - Before recursing, mark cell as visited
+    - After recursion, unmark (backtrack) to allow other paths
+    - Base case: reached destination (r==n-1, c==n-1)
+    
+    Simple: For each cell, try all 4 moves, mark visited, backtrack, sort results
+    
+    Time Complexity: O(4^(n^2)) - worst case all cells can be visited
+    Space Complexity: O(n^2) for visited array and recursion depth
+
+
+═══════════════════════════════════════════════════════════════════════════════
+
+📋 SECTION 5: STRING PARTITIONING WITH CONSTRAINTS
+
+11. PALINDROME PARTITIONING
+    Link: https://leetcode.com/problems/palindrome-partitioning/
+    
+    Problem Explanation:
+    - Partition string into substrings where EACH substring is a palindrome
+    - Find ALL valid palindrome partitions
+    - Example: "nitin" → one partition is ["nit","in"] (both palindromes)
+    
+    Key Idea:
+    - At each position i, try making cuts at every position j >= i
+    - Check if s[i...j] is palindrome before including it
+    - Include palindrome in partition, recurse from j+1
+    - Base case: i == s.size() (entire string used)
+    
+    Simple: Try cutting at each position if resulting substring is palindrome
+    
+    Time Complexity: O(N * 2^N) - exponential subsets, palindrome check O(N)
+    Space Complexity: O(N) for recursion depth
+
+
+═══════════════════════════════════════════════════════════════════════════════
+
+📋 SECTION 6: BOARD CONSTRAINT SATISFACTION (N-QUEENS)
+
+12. N-QUEENS (Print All Solutions)
+    Link: https://leetcode.com/problems/n-queens/
+    File: nQueens.cpp
+    
+    Problem Explanation:
+    - Place N queens on N×N chessboard
+    - No two queens can attack each other (same row, col, or diagonal)
+    - Find ALL valid placements and print each board
+    
+    Key Idea:
+    - Place one queen per row (automatically satisfies row constraint)
+    - For each row, try placing queen in each column
+    - isSafe() checks: vertical, diagonal-left, diagonal-right
+    - If safe, place queen ('Q') and recurse to next row
+    - After recurs, remove queen (backtrack) to try next column
+    
+    Simple: Greedy row-by-row placement with conflict checking & backtracking
+    
+    Constraints checked:
+    - Vertical: scan upward in column
+    - Diagonal-left: scan from current position toward top-left
+    - Diagonal-right: scan from current position toward top-right
+    
+    Time Complexity: O(N!) - N queens in N positions
+    Space Complexity: O(N) for recursion depth
+
+
+13. N-QUEENS COUNT
+    Link: https://leetcode.com/problems/n-queens-ii/
+    File: nQueens_possible_count.cpp
+    
+    Problem Explanation:
+    - Count total number of valid N-Queens solutions (don't print them)
+    - Same constraints as N-Queens
+    
+    Key Idea:
+    - Same backtracking as N-Queens
+    - Instead of printing, just count solutions
+    - Increment counter when complete board is filled
+    
+    Simple: Same algorithm as N-Queens, just track count instead of printing
+    
+    Time Complexity: O(N!) - must explore all placements
+    Space Complexity: O(N)
+
+
+14. N-QUEENS PRINT ANY ONE SOLUTION
+    File: nQueenPrintAnyOneSolution.cpp
+    
+    Problem Explanation:
+    - Find and print just ONE valid N-Queens solution
+    - Don't need all solutions
+    
+    Key Idea:
+    - Same backtracking as N-Queens
+    - Return true immediately when board is completely filled
+    - No need to explore other solutions
+    
+    Simple: Same as N-Queens, but stop after finding first solution
+    
+    Time Complexity: O(N!) worst case, but often much faster
+    Space Complexity: O(N)
+
+
+═══════════════════════════════════════════════════════════════════════════════
+
+📋 SECTION 7: 2D WORD SEARCH
+
+15. WORD SEARCH
+    Link: https://leetcode.com/problems/word-search/
+    
+    Problem Explanation:
+    - Given 2D board of characters, find if a word exists in the board
+    - Word must be formed by adjacent cells (up, down, left, right)
+    - Each cell used at most once per word
+    
+    Key Idea:
+    - Try starting from each cell in the board
+    - From a cell, match character and recursively search adjacent cells
+    - Mark current cell (set to different char) to avoid revisiting
+    - Unmark after recursion (backtrack) for other starting positions
+    - Base case: matched entire word length
+    
+    Simple: DFS from each cell, mark visited, explore adjacent, backtrack
+    
+    Time Complexity: O(N * M * 4^L) where N,M = board size, L = word length
+    Space Complexity: O(L) for recursion depth
+
+
+═══════════════════════════════════════════════════════════════════════════════
+
+📋 SECTION 8: GRID OPTIMIZATION
+
+16. GRID WAYS OPTIMIZATION
+    File: grid_ways_optimization.cpp
+    
+    Problem Explanation:
+    - Same as unique paths but with optimizations
+    - May include dynamic programming or memoization
+    
+    Key Idea:
+    - Store previously computed results to avoid recomputation
+    - In recursive backtracking, same state computed multiple times
+    - Memoization reduces time complexity significantly
+    
+    Simple: Dynamic programming optimization of recursive pathfinding
+    
+    Time Complexity: O(m * n) with memoization
+    Space Complexity: O(m * n) for memo table
+
+
+═══════════════════════════════════════════════════════════════════════════════
+LEARNING PATH FOR MEDIUM PROBLEMS:
+
+Week 1: Combinations (Sum, Sum II)
+Week 2: Subsets (all variants)
+Week 3: Parentheses + Keypad
+Week 4: Grid pathfinding (all variants)
+Week 5: Palindrome partitioning
+Week 6-7: N-Queens (understanding + counting)
+Week 8: Word search + integration
+
+PATTERN SUMMARY:
+- Combinations: Control element reuse via index management
+- Subsets: Binary choices (include/exclude) at each position
+- Constraints: Check validity before recursing, prune early
+- Grid: Track visited cells, try all directions, backtrack
+- String: Check substring properties, partition smartly
+═══════════════════════════════════════════════════════════════════════════════
