@@ -1,0 +1,17 @@
+========== STACK PROBLEMS - HARD ==========
+
+1. LARGEST RECTANGLE IN HISTOGRAM
+   Link: https://leetcode.com/problems/largest-rectangle-in-histogram/
+   
+   Problem Explanation:
+   - Given array of histogram bar heights
+   - Find largest rectangular area that can be formed in the histogram
+   
+   Key Idea:
+   - For each bar, find how far left and right it extends as minimum height
+   - Find Next Smaller Left (NSL) and Next Smaller Right (NSR) using stacks
+   - Area = height[i] * (NSR[i] - NSL[i] - 1)
+   - Return maximum area
+   
+   Simple: For each bar, find min-height boundaries and calculate max area.
+

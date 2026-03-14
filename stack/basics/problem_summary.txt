@@ -1,0 +1,104 @@
+========== STACK BASICS - LEARNING CODE ==========
+
+1. USING ARRAY
+   Problem Explanation:
+   - Static-size stack implementation using C++ arrays
+   - Maintains top pointer to track current position
+   
+   Key Idea:
+   - Fixed capacity defined as constant
+   - Operations: push (top++), pop (top--), peek (arr[top])
+   - isFull and isEmpty checks
+   
+   Simple: Array-based stack with fixed size and top pointer.
+
+
+2. USING VECTORS
+   Problem Explanation:
+   - Dynamic stack using C++ vectors
+   - Vector automatically resizes when needed
+   
+   Key Idea:
+   - More flexible than array implementation
+   - push_back() for push, pop_back() for pop, back() for peek
+   - Space grows dynamically as needed
+   
+   Simple: Vector-based stack with dynamic resizing.
+
+
+3. USING LINKED LIST
+   Problem Explanation:
+   - Stack implemented using singly linked list
+   - Each push creates new node and adds to front
+   
+   Key Idea:
+   - Each pop removes front node
+   - No size limit (depends on memory)
+   - Good for understanding pointer-based data structures
+   
+   Simple: Linked list stack - push/pop at front of list.
+
+
+4. USING TEMPLATE
+   Problem Explanation:
+   - Generic stack implementation using C++ templates
+   - Works with any data type
+   
+   Key Idea:
+   - Demonstrates template programming
+   - Same operations work for int, char, string, etc.
+   - Reusable for different data types
+   
+   Simple: Generic stack using C++ templates.
+
+
+5. STL STACK
+   Problem Explanation:
+   - Using C++ Standard Template Library stack
+   - Built-in, optimized implementation
+   
+   Key Idea:
+   - Methods: push(), pop(), top(), empty(), size()
+   - Easier and recommended for competitive programming
+   - Reliable and well-tested
+   
+   Simple: Use built-in STL stack for production code.
+
+
+6. PUSH AT BOTTOM (Helper Function)
+   Problem Explanation:
+   - Insert element at bottom of stack recursively
+   - Without reversing the entire stack
+   
+   Key Idea:
+   - Recursive approach: pop all, push new element, push back all
+   - Base case: if stack empty, push and return
+   - Time O(n), Space O(n) for recursion
+   
+   Simple: Recursively pop all, insert bottom, push all back.
+
+
+7. REVERSE STACK (Helper Function)
+   Problem Explanation:
+   - Reverse order of elements in a stack
+   - Uses recursion and pushAtBottom helper
+   
+   Key Idea:
+   - Pop top element, recursively reverse remaining, push top at bottom
+   - Time O(n²), Space O(n) for recursion
+   
+   Simple: Pop top, reverse rest, insert popped at bottom.
+
+
+8. REVERSE STRING (Helper Function)
+   Problem Explanation:
+   - Use stack to reverse a string
+   
+   Key Idea:
+   - Push all characters to stack
+   - Pop all characters back to get reversed string
+   - Time O(n), Space O(n) for stack
+   
+   Simple: Push all chars, pop in reverse order.
+
+

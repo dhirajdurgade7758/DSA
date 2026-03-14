@@ -1,0 +1,16 @@
+========== STACK PROBLEMS - EASY ==========
+
+1. VALID PARENTHESIS
+   Link: https://leetcode.com/problems/valid-parentheses/
+   
+   Problem Explanation:
+   - Given a string with brackets: '(', ')', '{', '}', '[', ']'
+   - Check if all brackets are properly matched and closed in correct order
+   
+   Key Idea:
+   - Use stack to track opening brackets
+   - For closing brackets, check if it matches top of stack
+   - String is valid if stack is empty at end
+   
+   Simple: Use stack to match bracket pairs.
+

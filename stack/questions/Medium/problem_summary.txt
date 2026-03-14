@@ -1,0 +1,140 @@
+========== STACK PROBLEMS - MEDIUM ==========
+
+1. MIN STACK
+   Link: https://leetcode.com/problems/min-stack/
+   
+   Problem Explanation:
+   - Stack with standard push, pop, top operations
+   - Additional getMin() that returns minimum element in O(1) time
+   
+   Key Idea:
+   - Maintain two stacks: one for all values, one for minimum values
+   - Min stack stores minimum value at each level
+   - Push both stacks simultaneously
+   - getMin() returns top of min stack
+   
+   Simple: Two stacks - one for values, one for tracking minimum.
+
+
+2. CAR FLEET
+   Link: https://leetcode.com/problems/car-fleet/
+   
+   Problem Explanation:
+   - n cars at different positions with speeds trying to reach target
+   - When car catches slower car, they form a fleet and move together
+   - Count how many fleets reach the target
+   
+   Key Idea:
+   - Sort cars by position ascending
+   - Calculate reach_time = (target - position) / speed for each car
+   - Use monotonic stack: new fleet only if reach_time > front car's reach_time
+   
+   Simple: Sort by position, compare reach times. New fleet if reaches after car ahead.
+
+
+3. DAILY TEMPERATURES
+   Link: https://leetcode.com/problems/daily-temperatures/
+   
+   Problem Explanation:
+   - Given daily temperatures array
+   - For each day, find how many days until a warmer temperature
+   - Return 0 if no warmer day exists
+   
+   Key Idea:
+   - Use monotonic decreasing stack of indices
+   - When current temp > stack top, record difference and pop
+   - Stack top always points to next greater element
+   
+   Simple: Use stack to track next warmer day for each temperature.
+
+
+4. EVALUATE REVERSE POLISH NOTATION
+   Link: https://leetcode.com/problems/evaluate-reverse-polish-notation/
+   
+   Problem Explanation:
+   - Given expression in Reverse Polish Notation (postfix notation)
+   - Operators come after operands: "2 1 +" = (2+1)
+   - Evaluate and return result
+   
+   Key Idea:
+   - Use stack to naturally process postfix notation
+   - Push numbers to stack
+   - When operator found: pop two operands, apply operation, push result
+   
+   Simple: Push numbers, pop operands for operators, push results back.
+
+
+5. STOCK SPAN PROBLEM
+   Link: https://leetcode.com/problems/online-stock-span/
+   
+   Problem Explanation:
+   - For each day i, find span = consecutive days with price <= current price
+   - Span includes the current day itself
+   
+   Key Idea:
+   - Use monotonic decreasing stack of indices
+   - When current price > stack top: pop elements with <= price
+   - Span = current index - previous unpopped index (or current index + 1 if empty)
+   
+   Simple: Find previous higher price using stack. Span = index difference.
+
+
+6. DECODE STRING
+   Link: https://leetcode.com/problems/decode-string/
+   
+   Problem Explanation:
+   - Given encoded string with "number[string]" pattern
+   - Nested patterns allowed: "3[a2[c]]" = "accaccacc"
+   - Decode the string
+   
+   Key Idea:
+   - Use two stacks: one for numbers, one for strings
+   - '[' signals encoding start, ']' signals repeat
+   - Pop strings, repeat them, push back to stack
+   
+   Simple: Two stacks - one for numbers, one for strings. Repeat at each ']'.
+
+
+7. DUPLICATE PARENTHESIS
+   Problem Explanation:
+   - Check if string contains "()" without characters between them
+   - "(())" has duplicate (inner pair is empty)
+   
+   Key Idea:
+   - Push all characters except ')'
+   - When ')' found: if top is '(', duplicate exists
+   - Otherwise pop until '(' (no duplicate for this pair)
+   
+   Simple: If ')' immediately follows '(' on stack, duplicates exist.
+
+
+8. NEXT GREATER ELEMENT
+   Link: https://leetcode.com/problems/next-greater-element-i/
+   
+   Problem Explanation:
+   - For each element, find the next greater element in the array
+   - Return -1 if no greater element exists
+   
+   Key Idea:
+   - Iterate from right to left using monotonic decreasing stack
+   - Stack top is the next greater element (if exists)
+   - Pop elements <= current (they're not greater than current)
+   
+   Simple: Iterate right to left, use stack to track next greater element.
+
+
+9. SIMPLIFY PATH
+   Link: https://leetcode.com/problems/simplify-path/
+   
+   Problem Explanation:
+   - Given absolute file path with ".", "..", and directory names
+   - "." means current directory, ".." means parent directory
+   - Simplify to canonical path
+   
+   Key Idea:
+   - Use stack for directory names
+   - ".." pops from stack (go to parent directory)
+   - "." does nothing (stay in current directory)
+   - Build final path by joining stack contents with "/"
+   
+   Simple: Stack for dirs, ".." pops, "." ignored. Join with "/".
