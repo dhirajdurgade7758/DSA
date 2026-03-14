@@ -15,7 +15,7 @@ struct Node{
 
 int main()
 {
-    Node root = new Node(5);
+    Node* root = new Node(5);
     root->left = new Node(6);
     root->right = new Node(7);
     

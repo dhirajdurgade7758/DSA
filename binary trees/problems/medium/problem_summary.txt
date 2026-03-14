@@ -1,0 +1,285 @@
+================================================================================
+MEDIUM LEVEL PROBLEMS - BINARY TREES
+================================================================================
+
+1. BINARY TREE FROM PREORDER AND INORDER
+   Link: https://leetcode.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/
+   
+   Problem Explanation:
+   - Reconstruct binary tree from two traversals (preorder and inorder)
+   - Preorder: root comes first, then left subtree, then right subtree
+   - Inorder: left subtree, then root, then right subtree
+   
+   Key Idea:
+   - Use HashMap to store inorder indices for O(1) lookup
+   - Preorder tells us which element is root
+   - Inorder tells us left/right boundary for root
+   - Recursively build left (indices left to root-1) and right (root+1 to right)
+   - Time: O(n), Space: O(n) for HashMap
+   
+   Simple: Preorder gives root, Inorder gives left/right split. Recurse on boundaries.
+
+================================================================================
+
+2. CONSTRUCT BINARY TREE FROM PREORDER AND INORDER TRAVERSAL
+   Link: https://leetcode.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/
+   
+   Problem Explanation:
+   - Same as above with different implementation
+   - Build tree using preorder and inorder sequences
+   
+   Key Idea:
+   - Store inorder indices in HashMap for O(1) lookup
+   - Use recursive helper with preorder index reference
+   - Pass left and right boundaries from inorder
+   - Pre-increment preorder index during traversal (crucial for correct order)
+   
+   Simple: Map inorder values to indices, build tree by recursing on left/right ranges.
+
+================================================================================
+
+3. COUNT GOOD NODES
+   Link: https://leetcode.com/problems/number-of-good-leaf-nodes-pairs/
+   
+   Problem Explanation:
+   - Count nodes where value >= max value seen on path from root to node
+   - A "good" node has its value >= all values from root to it
+   - Root is always good (no predecessors)
+   
+   Key Idea:
+   - DFS traversal tracking maxSoFar value from root
+   - At each node: if current >= maxSoFar, increment count
+   - Update maxSoFar = max(maxSoFar, current.val)
+   - Continue DFS on left and right with updated maxSoFar
+   - Time: O(n), Space: O(h) for recursion stack
+   
+   Simple: Track max value from root to node, count nodes >= this max.
+
+================================================================================
+
+4. KTH SMALLEST ELEMENT IN BST
+   Link: https://leetcode.com/problems/kth-smallest-element-in-a-bst/
+   
+   Problem Explanation:
+   - Find kth smallest value in a Binary Search Tree
+   - k=1 means smallest, k=n means largest
+   - Inorder traversal of BST gives sorted sequence
+   
+   Key Idea:
+   - Inorder traversal (Left → Root → Right) visits nodes in ascending order
+   - Use counter to track which node we're at
+   - When counter == k, store and return that node's value
+   - Time: O(k) on average, O(n) worst case
+   - Space: O(h) for recursion stack
+   
+   Simple: Inorder traversal of BST gives sorted order; return kth element.
+
+================================================================================
+
+5. LOWEST COMMON ANCESTOR (Approach 1)
+   Link: https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-tree/
+   
+   Problem Explanation:
+   - Find LCA of two nodes in a binary tree
+   - LCA = deepest node that has both nodes in its subtrees
+   - For BST, follow binary search property
+   
+   Key Idea:
+   - Utility function: find path from root to given node
+   - Get path for both target nodes
+   - Find last common node in both paths
+   - Uses vector to store paths from root to target nodes
+   - Time: O(n), Space: O(h) for path vectors
+   
+   Simple: Find paths to both nodes, return last common ancestor.
+
+================================================================================
+
+6. LOWEST COMMON ANCESTOR (Approach 2)
+   Link: https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-tree/
+   
+   Problem Explanation:
+   - Find LCA of two nodes in a binary tree
+   - Alternative to path-based approach
+   
+   Key Idea:
+   - If current node is one of targets, return it
+   - Search left and right subtrees
+   - If both found in different subtrees, current node is LCA
+   - If only one subtree has results, that's the LCA
+   - Recursive approach without building paths
+   - Time: O(n), Space: O(h)
+   
+   Simple: Recursively find which subtree contains target; intersection is LCA.
+
+================================================================================
+
+7. RIGHT SIDE VIEW OF TREE
+   Link: https://leetcode.com/problems/binary-tree-right-side-view/
+   
+   Problem Explanation:
+   - Output values of rightmost node at each level
+   - When viewing tree from right side, see only rightmost node per level
+   
+   Key Idea:
+   - Use DFS with depth/vertical distance tracking
+   - Visit right child before left (important for rightmost first)
+   - Store first node seen at each depth in HashMap
+   - Depth ordering in HashMap gives right side view
+   - Can also use level-order BFS and take last element of each level
+   
+   Simple: DFS visiting right before left; record first node at each depth.
+
+================================================================================
+
+8. DUPLICATE SUBTREES
+   Link: https://leetcode.com/problems/find-duplicate-subtrees/
+   
+   Problem Explanation:
+   - Find all duplicate subtrees in a binary tree
+   - Two subtrees are duplicates if they have identical structure and values
+   - Return root nodes of all duplicate subtrees
+   
+   Key Idea:
+   - Serialize each subtree as string: "val,left,right"
+   - Use postorder traversal to serialize bottom-up
+   - Store serialized string in HashMap with count
+   - When count reaches 2, add root to result (store only first duplicate)
+   - Time: O(n), Space: O(n) for HashMap and serialization
+   
+   Simple: Serialize subtrees, use HashMap to track duplicates.
+
+================================================================================
+
+9. TOP VIEW OF TREE
+   Link: https://leetcode.com/problems/top-view-of-binary-tree/
+   
+   Problem Explanation:
+   - Output nodes visible from top when looking down at tree
+   - For each horizontal distance, only topmost node is visible
+   
+   Key Idea:
+   - BFS with horizontal distance tracking (0 for root)
+   - Left child: hd-1, Right child: hd+1
+   - Use TreeMap/HashMap to store first occurrence of each hd
+   - Iterate through map (sorted by hd) to get top view
+   - Time: O(n log n), Space: O(n)
+   
+   Simple: BFS with horizontal distance; record first node per distance level.
+
+================================================================================
+
+10. DELETE LEAVES WITH GIVEN VALUE
+    Link: https://leetcode.com/problems/delete-leaves-with-a-given-value/
+    
+    Problem Explanation:
+    - Remove all leaf nodes with given target value
+    - After deletion, new leaves may have the same value, so repeat
+    - Continue until no more matching leaves exist
+    
+    Key Idea:
+    - Postorder traversal: process children before parent
+    - First remove matching leaves from subtrees
+    - After removing children, check if current becomes leaf with target value
+    - If so, return nullptr to remove it
+    - May need multiple passes or recursive calls to handle cascading deletions
+    - Time: O(n²) worst case (multiple passes), Space: O(h)
+    
+    Simple: Postorder traversal; remove matching leaf nodes; repeat if needed.
+
+================================================================================
+
+11. TRANSFORM TO SUM TREE
+    Link: https://leetcode.com/problems/convert-binary-search-tree-to-greater-sum-tree/
+    
+    Problem Explanation:
+    - Transform tree so each node contains sum of itself + all nodes with larger values
+    - In-order traversal in reverse visits nodes in descending order
+    
+    Key Idea:
+    - Reverse inorder traversal (Right → Root → Left)
+    - Maintain running sum as we traverse
+    - Update each node: node->val = sum (sum includes current node)
+    - Update running sum after processing current node
+    - Time: O(n), Space: O(h) for recursion
+    
+    Simple: Reverse inorder traversal; update each node with running sum.
+
+================================================================================
+
+12. VALIDATE BINARY SEARCH TREE
+    Link: https://leetcode.com/problems/validate-binary-search-tree/
+    
+    Problem Explanation:
+    - Verify if tree is a valid binary search tree
+    - For each node: left < node < right (recursively)
+    - Left subtree must have all values < node
+    - Right subtree must have all values > node
+    
+    Key Idea:
+    - DFS with min and max bounds for each node
+    - Root has bounds (-∞, +∞)
+    - Left child gets bounds (min, node->val)
+    - Right child gets bounds (node->val, max)
+    - Verify node value is within bounds at each step
+    - Time: O(n), Space: O(h)
+    
+    Simple: DFS with upper and lower bounds; verify node falls within range.
+
+================================================================================
+
+13. KTH ANCESTOR OF NODE
+    Link: https://leetcode.com/problems/kth-ancestor-of-a-tree-node/
+    
+    Problem Explanation:
+    - Find kth ancestor of a given node in a tree
+    - Ancestor = node reached by moving up k parent pointers
+    - Return -1 if kth ancestor doesn't exist
+    
+    Key Idea:
+    - Binary lifting / Jump pointers technique
+    - Store 2^i-th ancestor for each node (preprocessing)
+    - To find kth ancestor: repeatedly jump by powers of 2
+    - Time: O(n log n) preprocessing, O(log k) per query
+    - Space: O(n log n) for ancestor storage
+    
+    Simple: Store ancestors at powers of 2 distances; jump to find kth ancestor.
+
+================================================================================
+
+14. KTH LEVEL OF TREE
+    Link: https://leetcode.com/problems/binary-tree-level-order-traversal/
+    
+    Problem Explanation:
+    - Return all nodes at kth level of the tree
+    - Level 0 = root, Level 1 = root's children, etc.
+    
+    Key Idea:
+    - Level-order (BFS) traversal using queue
+    - Process exactly kth level
+    - Can stop after reaching target level
+    - Return vector of all nodes in that level
+    - Time: O(n), Space: O(w) where w = max width
+    
+    Simple: BFS traversal; return nodes at kth level using queue.
+
+================================================================================
+
+15. MINIMUM DISTANCE BETWEEN NODES
+    Link: https://leetcode.com/problems/minimum-distance-between-bst-nodes/
+    
+    Problem Explanation:
+    - Find minimum absolute difference between any two node values
+    - Inorder traversal of BST gives sorted values
+    - Min difference occurs between consecutive elements in sorted order
+    
+    Key Idea:
+    - Inorder traversal of BST gives ascending sorted sequence
+    - Track previous node's value
+    - Update min difference: current - previous
+    - Minimum difference must be between adjacent nodes in sorted order
+    - Time: O(n), Space: O(h)
+    
+    Simple: Inorder traversal gives sorted values; min diff between consecutive.
+
+================================================================================

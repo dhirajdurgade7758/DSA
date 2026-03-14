@@ -1,0 +1,137 @@
+================================================================================
+EASY LEVEL PROBLEMS - BINARY TREES
+================================================================================
+
+1. BALANCED BINARY TREE
+   Link: https://leetcode.com/problems/balanced-binary-tree/
+   
+   Problem Explanation:
+   - Check if a binary tree is height-balanced
+   - Balanced = for every node, heights of left & right subtrees differ by ≤ 1
+   
+   Key Idea:
+   - Recursive DFS: calculate height while checking balance
+   - Return -1 if unbalanced, else return node height
+   - Check |height(left) - height(right)| <= 1 at each node
+   
+   Simple: Use DFS to check height difference at every node during traversal.
+
+================================================================================
+
+2. DIAMETER OF TREE (Approach 2)
+   Link: https://leetcode.com/problems/diameter-of-binary-tree/
+   
+   Problem Explanation:
+   - Find the longest path between any two nodes in the tree
+   - Path doesn't need to pass through root
+   - Diameter = maximum number of edges in this path
+   
+   Key Idea:
+   - At each node, diameter can be: left_height + right_height
+   - Track maximum diameter during DFS traversal
+   - Use postorder: process children before parent
+   
+   Simple: At each node, max path through it = height(left) + height(right).
+
+================================================================================
+
+3. DIAMETER OF TREE (Approach 1)
+   Link: https://leetcode.com/problems/diameter-of-binary-tree/
+   
+   Problem Explanation:
+   - Find longest path between any two nodes (edges count)
+   - Similar to Approach 2 but with explicit diameter calculation
+   
+   Key Idea:
+   - At each node: diameter = max(left_diam, right_diam, left_h + right_h)
+   - Recursively calculate diameter for each subtree
+   - Time: O(n²) due to height calculation at each node
+   
+   Simple: Calculate height at each node to find diameter through that node.
+
+================================================================================
+
+4. INVERT BINARY TREE
+   Link: https://leetcode.com/problems/invert-binary-tree/
+   
+   Problem Explanation:
+   - Mirror/flip the binary tree
+   - Swap left and right children of every node (recursively)
+   
+   Key Idea:
+   - Base case: if node is null, return null
+   - Swap left and right children
+   - Recursively invert left and right subtrees
+   - Can be done preorder or postorder
+   
+   Simple: Swap left and right children at every node recursively.
+
+================================================================================
+
+5. SAME TREE
+   Link: https://leetcode.com/problems/same-tree/
+   
+   Problem Explanation:
+   - Check if two binary trees are identical
+   - Same values at every corresponding node position
+   - Same structure (left/right attachments)
+   
+   Key Idea:
+   - Recursive comparison of both trees simultaneously
+   - Base cases: both null (true), one null (false), values different (false)
+   - Recursively check: same(left, left) AND same(right, right)
+   
+   Simple: Compare structure and values at each position via DFS.
+
+================================================================================
+
+6. UNIVALUED BINARY TREE
+   Link: https://leetcode.com/problems/univalued-binary-tree/
+   
+   Problem Explanation:
+   - Check if all nodes in tree have the same value
+   - Tree is univalued if every node equals the root value
+   
+   Key Idea:
+   - Helper function compares every node against root value
+   - Base case: null node is valid (true)
+   - Return false if any node has different value
+   - Recursively check both left and right subtrees
+   
+   Simple: Verify all nodes have root's value using DFS.
+
+================================================================================
+
+7. MAXIMUM DEPTH OF TREE
+   Link: https://leetcode.com/problems/maximum-depth-of-binary-tree/
+   
+   Problem Explanation:
+   - Find the longest path from root to leaf (number of nodes)
+   - Leaf node has depth 1
+   
+   Key Idea:
+   - Base case: null node returns 0
+   - Recursively calculate depth of left and right subtrees
+   - Current depth = 1 + max(left_depth, right_depth)
+   - Simple postorder traversal
+   
+   Simple: Return 1 + max depth of left and right children.
+
+================================================================================
+
+8. SUBTREE OF ANOTHER TREE
+   Link: https://leetcode.com/problems/subtree-of-another-tree/
+   
+   Problem Explanation:
+   - Check if tree `subRoot` is a subtree of tree `root`
+   - Subtree = subtree structure must be identical AND aligned at some node
+   
+   Key Idea:
+   - Two step approach:
+     1. For each node in root, check if it matches subRoot structure
+     2. Use tree comparison function (isSameTree) for each node
+   - OR: Serialize both trees and check string matching
+   
+   Simple: Check if subRoot matches any subtree starting from root's nodes.
+
+================================================================================

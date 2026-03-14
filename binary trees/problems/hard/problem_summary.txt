@@ -1,0 +1,54 @@
+================================================================================
+HARD LEVEL PROBLEMS - BINARY TREES
+================================================================================
+
+1. MAXIMUM PATH SUM
+   Link: https://leetcode.com/problems/binary-tree-maximum-path-sum/
+   
+   Problem Explanation:
+   - Find maximum sum path in binary tree
+   - Path can start and end anywhere (not necessarily at root/leaf)
+   - Path does NOT need to pass through root
+   - Path can go through multiple nodes: child → parent → child
+   
+   Key Idea:
+   - For each node, calculate max path sum going down to children
+   - At each node: global_max = node + left_sum + right_sum
+   - For returning to parent: return node + max(left_sum, right_sum)
+   - Ignore negative sums (return max(0, sum)) to avoid decreasing path
+   - Use reference variable to track global maximum during traversal
+   - Time: O(n), Space: O(h) for recursion stack
+   
+   Simple: At each node, update max as node + left + right. Return best going down.
+
+================================================================================
+
+2. SERIALIZE AND DESERIALIZE BINARY TREE
+   Link: https://leetcode.com/problems/serialize-and-deserialize-binary-tree/
+   
+   Problem Explanation:
+   - Convert tree to string representation (serialize)
+   - Reconstruct tree from string (deserialize)
+   - Must handle all edge cases: null children, single nodes, skewed trees
+   
+   Key Idea:
+   
+   SERIALIZATION:
+   - Preorder traversal: root → left → right
+   - Use delimiter "," to separate values
+   - Use "N" to mark null/empty nodes
+   - Format: "1,2,3,N,N,4,5,N,N,N,N"
+   - Time: O(n), Space: O(n)
+   
+   DESERIALIZATION:
+   - Parse string by splitting on delimiter
+   - Use index pointer to traverse parsed array
+   - Recursive construction: create node, then left subtree, then right subtree
+   - When encountering "N", return nullptr
+   - Time: O(n), Space: O(n) + O(h) recursion
+   
+   Key Challenge: Handle null nodes correctly to preserve structure
+   
+   Simple: Serialize with preorder + "N" for nulls. Deserialize by parsing recursively.
+
+================================================================================
