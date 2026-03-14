@@ -1,0 +1,110 @@
+================================================================================
+LEARNING MATERIALS - HEAP AND PRIORITY QUEUE CONCEPTS
+================================================================================
+
+1. HEAP IMPLEMENTATION (heap.cpp)
+   Concept: Manual implementation of a max-heap data structure
+   
+   Key Points:
+   - Array-based representation: parent at index i, children at 2i+1 and 2i+2
+   - push(data): Add element at end, bubble up to maintain heap property
+   - pop(): Remove root, move last element to root, bubble down
+   - Heap Property: Parent >= Children (for max-heap)
+   - Heapify Up: Compare with parent, swap if larger, continue until valid
+   
+   Simple: Build heap manually, understand parent-child indexing and bubble up/down operations.
+
+================================================================================
+
+2. HEAP SORT (heap_sort.cpp)
+   Concept: Sorting using heap data structure
+   
+   Algorithm Steps:
+   1. Build max-heap from array (bottom-up heapify)
+   2. Extract max element (root) and place at end
+   3. Reduce heap size and heapify remaining elements
+   4. Repeat until one element left
+   
+   Key Function:
+   - heapify(index, arr, n): Bubble down operation
+     - Compare node with children
+     - Swap with larger child if needed
+     - Recursively heapify child
+   
+   Simple: Build max-heap, repeatedly extract max and place at end, heapify remaining elements.
+
+================================================================================
+
+3. BASIC PRIORITY QUEUE (priority_queue.cpp)
+   Concept: Introduction to priority_queue STL
+   
+   Usage:
+   - priority_queue<int> pq; // max-heap by default
+   - priority_queue<int, vector<int>, greater<int>> pq; // min-heap
+   
+   Operations:
+   - pq.push(x): Insert element
+   - pq.pop(): Remove top element
+   - pq.top(): Access top element
+   - pq.empty(): Check if empty
+   - pq.size(): Get number of elements
+   
+   Simple: Learn STL priority_queue API, understand default behavior (max-heap) vs custom comparators.
+
+================================================================================
+
+4. PRIORITY QUEUE WITH CUSTOM OBJECTS (PQForObj.cpp)
+   Concept: Using custom classes with priority_queue
+   
+   Key Concept:
+   - Define operator< in custom class
+   - This defines ordering: return true if this < other
+   - priority_queue orders by this comparison
+   
+   Example Structure:
+   struct Student {
+       int rank;
+       int age;
+       
+       bool operator<(const Student& s) const {
+           return this->rank > s.rank; // max-heap by rank
+       }
+   };
+   
+   Simple: Overload operator< in custom class to define heap ordering.
+
+================================================================================
+
+5. PRIORITY QUEUE WITH PAIRS (PQForPairs.cpp)
+   Concept: Using priority_queue with pair<T1, T2> and custom comparator
+   
+   Key Concept:
+   - Create custom comparator struct with operator()
+   - Use comparator in third template parameter
+   - Pairs compared by first element, then by second element
+   
+   Example:
+   struct compare {
+       bool operator()(pair<string, int> &p1, pair<string, int> &p2) {
+           return p1.second > p2.second; // min-heap by second element
+       }
+   };
+   
+   Usage:
+   priority_queue<pair<string,int>, vector<pair<string,int>>, compare> pq;
+   
+   Simple: Create comparator functor to customize pair ordering in priority_queue.
+
+================================================================================
+
+6. PRIORITY QUEUE WITH STUDENT OBJECTS (students_priority_queue.cpp)
+   Concept: Advanced custom comparator patterns
+   
+   Key Concept:
+   - Similar to PQForObj but may include tie-breaking
+   - Multiple criteria for ordering
+   - Practical application to student ranking system
+   
+   Simple: Extend custom object heap usage with multi-field comparisons and tie-breaking logic.
+
+================================================================================

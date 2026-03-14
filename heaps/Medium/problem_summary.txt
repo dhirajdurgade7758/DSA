@@ -1,0 +1,95 @@
+================================================================================
+MEDIUM LEVEL PROBLEMS - SUMMARY
+================================================================================
+
+1. KTH LARGEST ELEMENT IN AN ARRAY
+   Link: https://leetcode.com/problems/kth-largest-element-in-an-array/
+   
+   Problem Explanation:
+   - Find the kth largest element in an unsorted array
+   - k is always valid (1 ≤ k ≤ array length)
+   - Return single answer, not a stream
+   
+   Key Idea:
+   - Use max-heap to push all elements
+   - Pop (k-1) times to remove k-1 largest elements
+   - Top element is now the kth largest
+   - Alternative: could use min-heap of size k like stream version
+   
+   Simple: Push all to max-heap, pop k-1 times, return top.
+
+================================================================================
+
+2. K CLOSEST POINTS TO ORIGIN
+   Link: https://leetcode.com/problems/k-closest-points-to-origin/
+   
+   Problem Explanation:
+   - Given list of points and integer k
+   - Find k points closest to origin (0, 0)
+   - Distance = sqrt(x² + y²), but we use x² + y² for comparison
+   
+   Key Idea:
+   - Use min-heap with (distance, point_index) pairs
+   - Squared distance is sufficient for comparison (monotonic)
+   - Extract k smallest distances
+   
+   Simple: Calculate squared distances, use min-heap to extract k closest points.
+
+================================================================================
+
+3. MINIMUM COST TO CONNECT ROPES
+   Link: https://leetcode.com/problems/minimum-cost-to-connect-ropes/
+   
+   Problem Explanation:
+   - Given array of rope lengths, cost to connect is sum of their lengths
+   - Connect all ropes to one single rope
+   - Minimize total cost
+   
+   Key Idea:
+   - Always connect two smallest ropes first (greedy approach)
+   - Use min-heap to efficiently get two smallest ropes
+   - Combined rope becomes new element in heap
+   - Repeat until one rope remains
+   
+   Simple: Greedily connect two smallest ropes, put result back in min-heap.
+
+================================================================================
+
+4. TASK SCHEDULER
+   Link: https://leetcode.com/problems/task-scheduler/
+   
+   Problem Explanation:
+   - Given array of task characters and cooldown period n
+   - Execute tasks but same task cannot run within n units
+   - Find minimum time needed to execute all tasks
+   
+   Key Idea:
+   - Most frequent task determines timeline
+   - Use max-heap for task frequencies
+   - Use queue to track tasks in cooldown period
+   - Process one time unit at a time
+   - When cooldown expires, move task back to heap
+   
+   Simple: Track task frequencies in max-heap, queue cooling tasks, execute most frequent each time unit.
+
+================================================================================
+
+5. DESIGN TWITTER
+   Link: https://leetcode.com/problems/design-twitter/
+   
+   Problem Explanation:
+   - Design Twitter system with users, tweets, and follows
+   - postTweet(userId, tweetId): user posts a tweet
+   - getNewsFeed(userId): returns 10 most recent tweets from user and followees
+   - follow(followerId, followeeId): user follows another user
+   - unfollow(followerId, followeeId): user unfollows another user
+   
+   Key Idea:
+   - Use tweetMap: userId -> vector of (timestamp, tweetId)
+   - Use followMap: userId -> set of followeeIds
+   - Max-heap to merge multiple tweet streams efficiently
+   - Each entry in heap tracks: (timestamp, tweetId, userId, index)
+   
+   Simple: Maintain tweet/follow maps, merge recent tweets from followees using max-heap.
+
+================================================================================

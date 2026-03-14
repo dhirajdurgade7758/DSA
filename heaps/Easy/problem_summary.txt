@@ -1,0 +1,57 @@
+================================================================================
+EASY LEVEL PROBLEMS - SUMMARY
+================================================================================
+
+1. KTH LARGEST ELEMENT IN A STREAM
+   Link: https://leetcode.com/problems/kth-largest-element-in-a-stream/
+   
+   Problem Explanation:
+   - Design a class that finds the kth largest element in a stream
+   - Add new numbers one by one and return kth largest after each addition
+   - Efficiently handle multiple queries
+   
+   Key Idea:
+   - Use min-heap of size k
+   - Keep only k largest elements in heap
+   - When heap size > k, remove smallest (root)
+   - The minimum in heap is always the kth largest overall
+   
+   Simple: Maintain min-heap of k largest elements. New number: push and pop if size > k.
+
+================================================================================
+
+2. LAST STONE WEIGHT
+   Link: https://leetcode.com/problems/last-stone-weight/
+   
+   Problem Explanation:
+   - We have stones with different weights
+   - Each turn: pick two heaviest stones and smash them together
+   - If y > x: resulting stone has weight (y-x) and is put back
+   - If y == x: both stones are destroyed
+   - Find weight of last stone remaining, return 0 if all destroyed
+   
+   Key Idea:
+   - Use max-heap to always get the two heaviest stones
+   - Process stones by popping top two, computing difference
+   - If difference > 0, push back to heap
+   - Continue until one or zero stones left
+   
+   Simple: Repeatedly pop two heaviest stones, push their difference back until one remains.
+
+================================================================================
+
+3. THE K WEAKEST ROWS IN A MATRIX
+   Link: https://leetcode.com/problems/the-k-weakest-rows-in-a-matrix/
+   
+   Problem Explanation:
+   - Given m×n matrix where each row has 1s followed by 0s (soldiers then empty)
+   - Find k weakest rows (fewest soldiers)
+   - Tiebreaker: if same soldier count, prefer smaller index
+   
+   Key Idea:
+   - Convert each row to (soldier_count, row_index) pair
+   - Create custom comparator: compare by count first, then by index
+   - Use priority_queue with custom comparator to maintain ordering
+   - Extract k rows from top
+   
+   Simple: Count soldiers per row, use custom comparator min-heap to order by count then index.

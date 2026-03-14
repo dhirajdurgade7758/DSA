@@ -1,0 +1,41 @@
+================================================================================
+HARD LEVEL PROBLEMS - SUMMARY
+================================================================================
+
+1. FIND MEDIAN FROM DATA STREAM
+   Link: https://leetcode.com/problems/find-median-from-a-data-stream/
+   
+   Problem Explanation:
+   - Design a data structure that supports adding numbers and finding median
+   - Median of even-length array = average of two middle elements
+   - Median of odd-length array = middle element
+   - Integers can be negative
+   
+   Key Idea:
+   - Use TWO heaps instead of sorting:
+     - maxHeap: stores smaller half of numbers (max at top)
+     - minHeap: stores larger half of numbers (min at top)
+   - Maintain invariant: maxHeap.size() >= minHeap.size()
+   - All elements in maxHeap <= all elements in minHeap
+   
+   Simple: Split numbers into two heaps (smaller/larger halves), balance sizes, return top elements.
+
+================================================================================
+
+2. SLIDING WINDOW MAXIMUM
+   Link: https://leetcode.com/problems/sliding-window-maximum/
+   
+   Problem Explanation:
+   - Given array and window size k
+   - Return array of maximum values for each sliding window
+   - Window slides from left to right one position at a time
+   
+   Key Idea:
+   - Use max-heap with (value, index) pairs
+   - Include index to identify elements outside current window
+   - Remove elements whose index is outside window boundary
+   - Track maximum for each window position
+   
+   Simple: Use max-heap with indices, remove elements outside window, output heap top per window.
+
+================================================================================
