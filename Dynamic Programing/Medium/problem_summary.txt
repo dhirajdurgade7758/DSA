@@ -216,7 +216,27 @@
 
 ================================================================================
 
-12. TARGET SUM (Subset Sum Problem)
+12. LONGEST COMMON SUBSTRING (Tabulation)
+    File: longesCommonSubstring.cpp
+    Link: https://leetcode.com/problems/longest-common-substring/
+    
+    Problem Explanation:
+    - Find the longest substring (consecutive characters) that appears in both strings
+    - Different from subsequence: characters must be consecutive
+    - Example: LCS("abcde", "abfce") → "abc" (length 3)
+    
+    Key Idea:
+    - 2D DP: dp[i][j] = length of common substring ending at str1[i-1] and str2[j-1]
+    - If str1[i-1] == str2[j-1]: dp[i][j] = 1 + dp[i-1][j-1] (extend substring)
+    - Else: dp[i][j] = 0 (reset, substring is broken)
+    - Track maximum length found during iteration
+    - Time: O(m*n), Space: O(m*n)
+    
+    Simple: Match characters diagonally; reset to 0 on mismatch (unlike LCS).
+
+================================================================================
+
+13. TARGET SUM (Subset Sum Problem)
     File: targetSum.cpp
     Link: https://leetcode.com/problems/target-sum/
     
@@ -234,7 +254,7 @@
 
 ================================================================================
 
-13. ROAD CUTTING (Unbounded Knapsack Variant)
+14. ROAD CUTTING (Unbounded Knapsack Variant)
     File: roadCutting.cpp
     Link: https://leetcode.com/problems/house-robber-ii/ (similar)
     
@@ -253,7 +273,7 @@
 
 ================================================================================
 
-14. CATALAN NUMBERS (Recursive)
+15. CATALAN NUMBERS (Recursive)
     File: catlanRec.cpp
     Link: https://leetcode.com/problems/unique-binary-search-trees/
     
@@ -272,7 +292,7 @@
 
 ================================================================================
 
-15. CATALAN NUMBERS (Memoization)
+16. CATALAN NUMBERS (Memoization)
     File: catlanMemo.cpp
     Link: https://leetcode.com/problems/unique-binary-search-trees/
     
@@ -291,7 +311,7 @@
 
 ================================================================================
 
-16. COIN CHANGE - COUNT COMBINATIONS
+17. COIN CHANGE - COUNT COMBINATIONS
     File: coinChange2.cpp
     Link: https://leetcode.com/problems/coin-change-2/
     

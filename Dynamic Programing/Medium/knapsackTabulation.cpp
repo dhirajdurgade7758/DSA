@@ -7,6 +7,7 @@ int knapsackTab(vector<int> val, vector<int> wt, int n, int w){
 
     for(int i=1; i<n+1; i++){
         for(int j=1; j<w+1; j++){
+            //current item weight and value i will be n here and j will be w
             int itemwt = wt[i-1];
             int itemval = val[i-1];
 
@@ -14,7 +15,7 @@ int knapsackTab(vector<int> val, vector<int> wt, int n, int w){
                 dp[i][j] = max(itemval + dp[i-1][j-itemwt], dp[i-1][j]);
             }
             else{
-                dp[i][j] = dp[i-1][j];
+                dp[i][j] = dp[i-1][j]; // we are excluding current becuse of that knapsack we are taking value of the previus with the same knapsack value
             }
 
         }
