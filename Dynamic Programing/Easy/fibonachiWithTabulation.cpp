@@ -3,6 +3,9 @@
 using namespace std;
 
 int fib(int n){
+     if(n<=1){
+        return n;
+    }
     vector<int> fib(n+1, 0);
     fib[0] = 0;
     fib[1] = 1;
