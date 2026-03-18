@@ -159,30 +159,7 @@
    
    Simple: Bottom-up interval DP processing ranges from bottom to top.
 
-================================================================================
 
-8. UNIQUE BINARY SEARCH TREES (Catalan Numbers)
-   File: uniqueBinarySearchTrees.cpp
-   Link: https://leetcode.com/problems/unique-binary-search-trees/
-   
-   Problem Explanation:
-   - Count structurally unique BSTs with n nodes labeled 1 to n
-   - Each node can be chosen as root, creating left and right subtrees
-   - BST property: left subtree < root < right subtree
-   - Example: n=3 gives 5 unique BSTs
-   
-   Key Idea:
-   - DP state: dp[i] = number of unique BSTs possible with i nodes
-   - For each i, try each j (0 to i-1) as root:
-     - j nodes go to left subtree: dp[j] possibilities
-     - i-j-1 nodes go to right subtree: dp[i-j-1] possibilities
-     - Together: dp[j] * dp[i-j-1] structures
-   - dp[i] = sum of (dp[j] * dp[i-j-1]) for all j = 0 to i-1
-   - This is exactly the Catalan number formula!
-   - Base: dp[0]=1, dp[1]=1
-   - Time: O(n²), Space: O(n)
-   
-   Simple: Each node choice as root partitions problem into left/right BSTs.
 
 ================================================================================
                         INTERVAL DP PATTERN
