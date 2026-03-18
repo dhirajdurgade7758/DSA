@@ -328,6 +328,27 @@
     
     Simple: Count ways to combine coins to reach target amount.
 
+18. MINIMUM PARTITION SUM DIFFERENCE
+    File: minimumPartitioning.cpp
+    Link: https://leetcode.com/problems/partition-equal-subset-sum/
+    
+    Problem Explanation:
+    - Partition array into two subsets with minimum difference in their sums
+    - Goal: split elements such that |sum1 - sum2| is minimized
+    - Example: [1,5,11,5] → {11} and {1,5,5} → difference = |11-10| = 1
+    
+    Key Idea:
+    - Total sum = sum of all elements
+    - Maximize sum of first group using capacity = totalSum/2 (0/1 Knapsack)
+    - 2D DP: dp[i][j] = max sum achievable using first i items with capacity j
+    - If element fits: dp[i][j] = max(nums[i-1] + dp[i-1][j-nums[i-1]], dp[i-1][j])
+    - Else: dp[i][j] = dp[i-1][j]
+    - Group 1 sum = dp[n][W], Group 2 sum = totalSum - dp[n][W]
+    - Answer = |group1Sum - group2Sum|
+    - Time: O(n*totalSum), Space: O(n*totalSum)
+    
+    Simple: Maximize one group's sum using knapsack; minimize difference by getting sums closest.
+
 ================================================================================
                         COMPLEXITY ANALYSIS
 ================================================================================
@@ -344,6 +365,7 @@ Mountain Ranges      | O(n²)     | O(n)    | Tabulation  | Catalan application
 Target Sum           | O(n*sum)  | O(n*sum)| Tabulation  | Subset matching
 Road Cutting         | O(n*len)  | O(n*len)| Tabulation  | Unbounded variant
 Coin Change 2        | O(n*amt)  | O(amt)  | Tabulation  | Combination counting
+Min Partition        | O(n*sum)  | O(n*sum)| Tabulation  | Partition difference
 
 ================================================================================
                         KEY LEARNING POINTS
