@@ -410,6 +410,80 @@
 
 ================================================================================
 
+21. LONGEST PALINDROMIC SUBSTRING (Expand Around Center)
+    File: longestPalindromicSubstring.cpp
+    Link: https://leetcode.com/problems/longest-palindromic-substring/
+    
+    Problem Explanation:
+    - Find the longest palindromic substring in a given string
+    - Return the actual substring itself (not just its length)
+    - If multiple palindromes have same length, any one is valid
+    - Example: "babad" → "bab" or "aba" (both length 3)
+    - Example: "cbbd" → "bb" (length 2)
+    
+    Key Idea:
+    - Expand Around Center approach: treat each position as potential center
+    - Two types of centers (same as palindromic substrings counting):
+      1. Odd length: single character center at position i
+      2. Even length: center between positions i and i+1
+    - For each center, expand left and right while characters match
+    - Track the longest palindrome found (store start position and length)
+    - Compare length with current max and update if longer
+    - Return the substring using start position and max length
+    - Time: O(n²), Space: O(1) (only storing indices)
+    
+    Algorithm:
+    - Initialize maxLen=0, start=0
+    - for each position i in string:
+      - Odd: expand around i, update maxLen and start if longer
+      - Even: expand around i and i+1, update maxLen and start if longer
+    - return s.substr(start, maxLen)
+    
+    Difference from palindromic substrings:
+    - This finds LONGEST, not COUNT all
+    - Uses start position and maxLen to track best palindrome
+    - Returns the substring itself
+    
+    Simple: Expand around each position, remember longest palindrome found.
+
+================================================================================
+
+22. DECODE WAYS (String DP - Backwards)
+    File: decodeWays.cpp
+    Link: https://leetcode.com/problems/decode-ways/
+    
+    Problem Explanation:
+    - Count number of ways to decode a string of digits into letters
+    - Encoding: '1'->A, '2'->B, ..., '26'->Z
+    - Single digit: '1' to '9' (valid individual codes)
+    - Two digits: '10' to '26' (valid pair codes, no '00' or '27'+)
+    - Example: "12" → 2 ways ("1,2"=AB or "12"=L)
+    - Example: "226" → 3 ways ("2,2,6"=BBF or "22,6"=VF or "2,26"=BZ)
+    
+    Key Idea:
+    - Use 1D DP working backwards from end of string
+    - dp[i] = number of ways to decode substring from position i to end
+    - Base case: dp[n] = 1 (empty substring has 1 way)
+    - For each position i:
+      - If s[i] == '0': dp[i] = 0 (can't decode '0' alone)
+      - Else: dp[i] = dp[i+1] (decode s[i] as single digit)
+      - If s[i] and s[i+1] form valid 2-digit code (10-26):
+        - dp[i] += dp[i+2] (also decode as pair)
+    - Valid 2-digit pairs: s[i]=='1' (10-19) or s[i]=='2' && s[i+1]<='6' (20-26)
+    - Time: O(n), Space: O(n)
+    
+    Algorithm:
+    - Start from end of string, work backwards
+    - For each digit, decide: can decode alone? can decode with next digit?
+    - Add up all valid decoding count
+    
+    Edge Cases:
+    - String starts with '0': no valid decodings
+    - Contains '0': can only pair with '1' or '2' (forming 10 or 20)
+    - Invalid pairs like '27', '30', etc: can't decode as pair
+    
+    Simple: Backward DP: single digit + valid pair = total decodings.
+
 ================================================================================
                         COMPLEXITY ANALYSIS
 ================================================================================
@@ -429,6 +503,8 @@ Coin Change 2        | O(n*amt)  | O(amt)  | Tabulation  | Combination counting
 Min Partition        | O(n*sum)  | O(n*sum)| Tabulation  | Partition difference
 House Robber II      | O(n)      | O(n)    | Tabulation  | Circular constraint
 Palindromic Substr   | O(n²)     | O(1)    | Expansion   | Center expansion
+Longest Palindrome   | O(n²)     | O(1)    | Expansion   | Track longest found
+Decode Ways          | O(n)      | O(n)    | Tabulation  | Backward string DP
 
 ================================================================================
                         KEY LEARNING POINTS
