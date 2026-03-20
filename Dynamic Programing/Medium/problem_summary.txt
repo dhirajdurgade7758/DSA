@@ -239,25 +239,6 @@
 
 ================================================================================
 
-12. LONGEST COMMON SUBSTRING (Tabulation)
-    File: longesCommonSubstring.cpp
-    Link: https://leetcode.com/problems/longest-common-substring/
-    
-    Problem Explanation:
-    - Find the longest substring (consecutive characters) that appears in both strings
-    - Different from subsequence: characters must be consecutive
-    - Example: LCS("abcde", "abfce") → "abc" (length 3)
-    
-    Key Idea:
-    - 2D DP: dp[i][j] = length of common substring ending at str1[i-1] and str2[j-1]
-    - If str1[i-1] == str2[j-1]: dp[i][j] = 1 + dp[i-1][j-1] (extend substring)
-    - Else: dp[i][j] = 0 (reset, substring is broken)
-    - Track maximum length found during iteration
-    - Time: O(m*n), Space: O(m*n)
-    
-    Simple: Match characters diagonally; reset to 0 on mismatch (unlike LCS).
-
-================================================================================
 
 13. TARGET SUM (Subset Sum Problem)
     File: targetSum.cpp
@@ -372,6 +353,63 @@
     
     Simple: Maximize one group's sum using knapsack; minimize difference by getting sums closest.
 
+19. HOUSE ROBBER II (Circular Arrangement)
+    File: houseRobber2.cpp
+    Link: https://leetcode.com/problems/house-robber-ii/
+    
+    Problem Explanation:
+    - Rob houses arranged in a circle to maximize money
+    - Constraint: first and last houses are adjacent (circular)
+    - Cannot rob both first house and last house together
+    - Each house has money but robbing triggers alarm affecting neighbors
+    
+    Key Idea:
+    - Break circular constraint into two linear cases
+    - Case 1: Rob houses 0 to n-2 (exclude last house) using linear DP
+    - Case 2: Rob houses 1 to n-1 (exclude first house) using linear DP
+    - Return max profit from both cases
+    - Linear robber recurrence: dp[i] = max(dp[i-1], dp[i-2] + nums[i])
+    - dp[i]: max profit considering houses from start to current house
+    - Base: dp[0] = nums[start], dp[1] = max(nums[start], nums[start+1])
+    - Fill table using maximum of skip or rob current house
+    - Time: O(n), Space: O(n)
+    - Edge case: n=1 return single house value
+    
+    Simple: Handle circular constraint by solving two linear problems and returning max.
+
+================================================================================
+
+20. PALINDROMIC SUBSTRINGS (Expand Around Center)
+    File: palindromicSubstrings.cpp
+    Link: https://leetcode.com/problems/palindromic-substrings/
+    
+    Problem Explanation:
+    - Count total number of palindromic substrings in a given string
+    - Palindrome reads same forwards and backwards
+    - Must count all palindromic substrings, including single characters
+    - Example: \"abc\" → 3 palindromes (\"a\", \"b\", \"c\")
+    - Example: \"aab\" → 4 palindromes (\"a\", \"a\", \"b\", \"aa\")
+    
+    Key Idea:
+    - Expand Around Center approach: each position can be a palindrome center
+    - Two types of centers:
+      1. Odd length: single character center at position i
+      2. Even length: center between positions i and i+1
+    - For each center, expand left and right while characters match
+    - Count each valid palindrome found during expansion
+    - Stop expanding when characters don't match or reach boundary
+    - Time: O(n²), Space: O(1) (only storing count)
+    
+    Algorithm:
+    - for each position i in string:
+      - Odd: set l=i, r=i, expand while s[l]==s[r]
+      - Even: set l=i, r=i+1, expand while s[l]==s[r]
+      - Increment count for each valid palindrome
+    
+    Simple: Treat each position as center, expand outwards, count palindromes.
+
+================================================================================
+
 ================================================================================
                         COMPLEXITY ANALYSIS
 ================================================================================
@@ -389,6 +427,8 @@ Target Sum           | O(n*sum)  | O(n*sum)| Tabulation  | Subset matching
 Road Cutting         | O(n*len)  | O(n*len)| Tabulation  | Unbounded variant
 Coin Change 2        | O(n*amt)  | O(amt)  | Tabulation  | Combination counting
 Min Partition        | O(n*sum)  | O(n*sum)| Tabulation  | Partition difference
+House Robber II      | O(n)      | O(n)    | Tabulation  | Circular constraint
+Palindromic Substr   | O(n²)     | O(1)    | Expansion   | Center expansion
 
 ================================================================================
                         KEY LEARNING POINTS
