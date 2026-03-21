@@ -1,0 +1,18 @@
+1. MEETING ROOMS - LeetCode 252
+Link: https://leetcode.com/problems/meeting-rooms/
+Problem Explanation:
+
+Given an array of meeting intervals
+Check if a person can attend all meetings
+A person can attend all if no two meetings overlap
+Return true if all meetings can be attended, false if any overlap
+
+Key Idea:
+
+Sort meetings by start time
+Iterate through sorted meetings starting from index 1
+For each meeting, check if current start < previous end
+If intervals[i][0] < intervals[i-1][1] → overlap found, return false
+If no overlaps found after checking all → return true
+
+Simple: Sort by start time, then check if any current meeting starts before previous ends
