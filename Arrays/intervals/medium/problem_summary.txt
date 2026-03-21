@@ -60,3 +60,24 @@ Else → no overlap, update j to i (move to next interval)
 When overlap: keep interval with smaller end time to leave more room for future intervals
 
 Simple: Sort, then greedily keep intervals with smaller ends, count overlaps
+
+
+4. MEETING ROOMS II - LeetCode 253
+Link: https://leetcode.com/problems/meeting-rooms-ii/
+Problem Explanation:
+
+Given an array of meeting intervals
+Find minimum number of meeting rooms needed
+A room can be used for multiple meetings if they don't overlap
+When a meeting ends, room becomes free for another meeting starting at that time
+
+Key Idea:
+
+Sort meetings by start time
+Use min heap to track end times of current meetings
+For each meeting in sorted order:
+If earliest ending meeting ends before or at current start → room is free, pop from heap and reuse
+Push current meeting's end time into heap
+Size of heap at end = minimum rooms needed
+
+Simple: Sort by start, use min heap of end times, reuse rooms when earliest ends before next starts
