@@ -485,6 +485,40 @@
     Simple: Backward DP: single digit + valid pair = total decodings.
 
 ================================================================================
+
+23. INTERLEAVING STRINGS (String Combination)
+    File: interleavingStrings.cpp
+    Link: https://leetcode.com/problems/interleaving-string/
+    
+    Problem Explanation:
+    - Determine if string s3 is an interleaving of strings s1 and s2
+    - Interleaving: merge characters from s1 and s2 while preserving their order
+    - Example: s1="aab", s2="dbbca", s3="aadbbcbab" → True (valid interleaving)
+    - Requires: all characters from s1 and s2 used exactly once
+    - Basic check: len(s1) + len(s2) must equal len(s3)
+    
+    Key Idea:
+    - 2D DP: dp[i][j] = whether first i chars of s1 + first j chars of s2 form first i+j chars of s3
+    - Base case: dp[0][0] = true (empty strings form empty result)
+    - First column: dp[i][0] = true if s1[0..i-1] matches s3[0..i-1]
+    - First row: dp[0][j] = true if s2[0..j-1] matches s3[0..j-1]
+    - Recurrence: dp[i][j] = true if:
+      - (dp[i-1][j] && s1[i-1] == s3[i+j-1]) OR
+      - (dp[i][j-1] && s2[j-1] == s3[i+j-1])
+    - First condition: take character from s1 if it matches
+    - Second condition: take character from s2 if it matches
+    - Return dp[m][n] where m=len(s1), n=len(s2)
+    - Time: O(m*n), Space: O(m*n)
+    
+    Algorithm:
+    - Check if lengths are compatible (m + n == l)
+    - Initialize DP table and fill first row/column
+    - For each cell (i,j): check both possibilities (take from s1 or s2)
+    - Return bottom-right cell value
+    
+    Simple: Use 2D DP to track if characters from s1 and s2 can form s3 in order.
+
+================================================================================
                         COMPLEXITY ANALYSIS
 ================================================================================
 
@@ -505,6 +539,7 @@ House Robber II      | O(n)      | O(n)    | Tabulation  | Circular constraint
 Palindromic Substr   | O(n²)     | O(1)    | Expansion   | Center expansion
 Longest Palindrome   | O(n²)     | O(1)    | Expansion   | Track longest found
 Decode Ways          | O(n)      | O(n)    | Tabulation  | Backward string DP
+Interleaving Strings | O(m*n)    | O(m*n)  | Tabulation  | String merging
 
 ================================================================================
                         KEY LEARNING POINTS
