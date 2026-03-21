@@ -1,19 +1,62 @@
-57. INSERT INTERVAL - LeetCode 57
-   Link: https://leetcode.com/problems/insert-interval/
-   Problem Explanation:
-   - You have a list of non-overlapping intervals, sorted by start time
-   - Insert a new interval into the list
-   - Merge overlapping intervals after insertion
-   - Return the list of non-overlapping intervals
+1. INSERT INTERVAL - LeetCode 57
+Link: https://leetcode.com/problems/insert-interval/
+Problem Explanation:
 
-   Key Idea:
-   - Three cases for each existing interval:
-     1. New interval ends before current starts → add new, then add rest
-     2. New interval starts after current ends → add current interval
-     3. Intervals overlap → merge by updating newInterval bounds
-   - After loop, add the final merged newInterval
+You have a list of non-overlapping intervals, sorted by start time
+Insert a new interval into the list
+Merge overlapping intervals after insertion
+Return the list of non-overlapping intervals
 
-   Time Complexity: O(n) where n is number of intervals
-   Space Complexity: O(n) for result vector
+Key Idea:
 
-   Simple: Process intervals in three cases (before, after, overlap), merge overlapping ones, return result
+Three cases for each existing interval:
+New interval ends before current starts → add new, then add rest
+New interval starts after current ends → add current interval
+Intervals overlap → merge by updating newInterval bounds
+After loop, add the final merged newInterval
+
+Simple: Process intervals in three cases (before, after, overlap), merge overlapping ones, return result
+
+
+2. MERGE INTERVALS - LeetCode 56
+Link: https://leetcode.com/problems/merge-intervals/
+Problem Explanation:
+
+You have an array of intervals (possibly overlapping)
+Merge all overlapping intervals
+Return an array of non-overlapping intervals
+Intervals are defined as [start, end]
+
+Key Idea:
+
+Sort intervals by start time first
+Initialize result with first interval
+Iterate through remaining intervals:
+If current[0] <= last[1] → overlap detected, merge by updating last[1] = max(current[1], last[1])
+Else → no overlap, add current interval to result
+Return result with merged intervals
+
+Simple: Sort by start time, then iterate and merge overlapping intervals
+
+
+3. NON-OVERLAPPING INTERVALS - LeetCode 435
+Link: https://leetcode.com/problems/non-overlapping-intervals/
+Problem Explanation:
+
+Given an array of intervals (possibly overlapping)
+Find minimum number of intervals to remove
+So remaining intervals are non-overlapping
+Return count of intervals to remove
+
+Key Idea:
+
+Sort intervals by start time
+Use two pointers: j (last kept interval), i (current checking)
+For each interval i from 1 to n:
+If intervals[i][0] < intervals[j][1] → overlap detected
+Increment count (this interval overlaps)
+If intervals[i][1] < intervals[j][1] → update j to i (keep smaller end)
+Else → no overlap, update j to i (move to next interval)
+When overlap: keep interval with smaller end time to leave more room for future intervals
+
+Simple: Sort, then greedily keep intervals with smaller ends, count overlaps
