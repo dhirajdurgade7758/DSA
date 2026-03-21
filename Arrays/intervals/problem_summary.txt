@@ -1,0 +1,19 @@
+57. INSERT INTERVAL - LeetCode 57
+   Link: https://leetcode.com/problems/insert-interval/
+   Problem Explanation:
+   - You have a list of non-overlapping intervals, sorted by start time
+   - Insert a new interval into the list
+   - Merge overlapping intervals after insertion
+   - Return the list of non-overlapping intervals
+
+   Key Idea:
+   - Three cases for each existing interval:
+     1. New interval ends before current starts → add new, then add rest
+     2. New interval starts after current ends → add current interval
+     3. Intervals overlap → merge by updating newInterval bounds
+   - After loop, add the final merged newInterval
+
+   Time Complexity: O(n) where n is number of intervals
+   Space Complexity: O(n) for result vector
+
+   Simple: Process intervals in three cases (before, after, overlap), merge overlapping ones, return result
