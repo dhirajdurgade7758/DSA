@@ -45,3 +45,27 @@ Four-boundary pointers approach:
 - Use conditions to avoid revisiting single row/column elements
 
 Simple: Use 4 pointers for boundaries, traverse matrix in spiral pattern (top, right, bottom, left), shrinking boundaries after each direction, skip boundaries when they collapse to prevent duplicates.
+
+3. SET MATRIX ZEROES - LeetCode 73
+Link: https://leetcode.com/problems/set-matrix-zeroes/
+
+Problem Explanation:
+
+You have an m x n matrix
+If an element is 0, set its entire row and column to 0
+Modify the matrix in-place (O(1) space complexity)
+Do not use extra space for row/column tracking
+
+Key Idea:
+
+Use first row and column as markers:
+- Use matrix[0][c] to mark if column c should be zeroed
+- Use matrix[r][0] to mark if row r should be zeroed
+- Use a separate rowZero boolean flag to track if first row itself needs zeroing
+- Step 1: Scan entire matrix, mark zeros in first row/column and rowZero flag
+- Step 2: Update inner matrix (from row 1, col 1) based on first row/column markers
+- Step 3: Handle first column separately based on matrix[0][0]
+- Step 4: Handle first row separately based on rowZero flag
+- This avoids overwriting markers before using them for inner matrix
+
+Simple: Use first row and column as storage for zero markers, track first row separately with a flag, then process inner matrix first, then handle boundaries to avoid destroying marker values.
