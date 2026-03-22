@@ -1,0 +1,21 @@
+1. HAPPY NUMBER - LeetCode 202
+Link: https://leetcode.com/problems/happy-number/
+
+Problem Explanation:
+
+Starting with any positive integer, replace the number by the sum of the squares of its digits
+Repeat the process until the number equals 1 (happy) or it loops endlessly in a cycle (not happy)
+Return true if the number is happy, false otherwise
+
+Key Idea:
+
+Cycle detection approach:
+- Keep track of all numbers we've seen using a hash set (unordered_set)
+- For each number, calculate the sum of squares of its digits
+- If sum equals 1, return true (happy number found)
+- If sum is already in the set, we've detected a cycle, return false
+- Otherwise, add sum to the set and repeat with the new sum
+- Use recursion or iteration to keep transforming the number
+- The cycle detection prevents infinite loops for unhappy numbers
+
+Simple: Use a hash set to track seen numbers, repeatedly replace number with sum of digit squares, detect cycles to identify unhappy numbers, return true only when reaching 1.
