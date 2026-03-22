@@ -69,3 +69,27 @@ Use first row and column as markers:
 - This avoids overwriting markers before using them for inner matrix
 
 Simple: Use first row and column as storage for zero markers, track first row separately with a flag, then process inner matrix first, then handle boundaries to avoid destroying marker values.
+
+4. MULTIPLY STRINGS - LeetCode 43
+Link: https://leetcode.com/problems/multiply-strings/
+
+Problem Explanation:
+
+You have two non-negative integers represented as strings (num1 and num2)
+Multiply the two numbers and return the result as a string
+Cannot convert strings to integers directly (too large for standard data types)
+Both input strings do not have leading zeros except for "0"
+
+Key Idea:
+
+Grade-school multiplication algorithm using array:
+- Create a result array of size n + m (where n, m are lengths of num1, num2)
+- Traverse both strings from right to left (backward)
+- For each pair of digits, multiply and add to result at correct positions
+- Position mapping: product of digits at indices i, j contributes to positions i+j and i+j+1
+- pos1 = i + j gets the carry, pos2 = i + j + 1 gets the digit
+- Handle carry propagation: sum % 10 is the digit, sum / 10 is the carry
+- Convert result array to string, skipping leading zeros
+- Time: O(n * m), Space: O(n + m)
+
+Simple: Use array to simulate grade-school multiplication with position-based digit placement, handle carries properly, convert to string while skipping leading zeros.
