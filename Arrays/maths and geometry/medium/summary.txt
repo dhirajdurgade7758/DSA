@@ -1,0 +1,47 @@
+1. ROTATE IMAGE - LeetCode 48
+Link: https://leetcode.com/problems/rotate-image/
+
+Problem Explanation:
+
+You have an n x n matrix representing an image
+Rotate the matrix 90 degrees clockwise
+Perform the rotation in-place (do not allocate another 2D matrix)
+Return the rotated matrix
+
+Key Idea:
+
+Layer-by-layer rotation approach:
+- Process matrix in concentric square layers from outer to inner
+- For each layer, rotate a group of 4 elements at a time
+- Use 4 positions in the layer: top-left, bottom-left, bottom-right, top-right
+- Rotate by moving: bottom-left → top-left → top-right → bottom-right → bottom-left
+- Save top-left before rotation, use it at the end to complete the cycle
+- Use two pointers (l, r) to track layer boundaries
+- For each element at distance i from left: move elements and rotate
+- Increment inner pointer, decrement outer pointer to move to next layer
+
+Simple: Process matrix layer by layer, rotate 4 elements at a time by shifting them cyclically around each layer, shrinking boundaries until center is reached.
+
+2. SPIRAL MATRIX - LeetCode 54
+Link: https://leetcode.com/problems/spiral-matrix/
+
+Problem Explanation:
+
+You have an m x n matrix
+Traverse and return all elements of the matrix in spiral order (clockwise from outside to inside)
+Start from top-left, go right → down → left → up, then repeat for inner layers
+Return the result as a 1D vector
+
+Key Idea:
+
+Four-boundary pointers approach:
+- Use 4 boundaries: srow (start row), erow (end row), scol (start column), ecol (end column)
+- Traverse in 4 directions while boundaries are valid:
+  * Top: traverse left to right along srow, then increment srow
+  * Right: traverse top to bottom along ecol, then decrement ecol
+  * Bottom: traverse right to left along erow (skip if srow == erow), then decrement erow
+  * Left: traverse bottom to top along scol (skip if scol == ecol), then increment scol
+- Continue until all boundaries overlap (srow > erow or scol > ecol)
+- Use conditions to avoid revisiting single row/column elements
+
+Simple: Use 4 pointers for boundaries, traverse matrix in spiral pattern (top, right, bottom, left), shrinking boundaries after each direction, skip boundaries when they collapse to prevent duplicates.
