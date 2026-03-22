@@ -19,3 +19,24 @@ Cycle detection approach:
 - The cycle detection prevents infinite loops for unhappy numbers
 
 Simple: Use a hash set to track seen numbers, repeatedly replace number with sum of digit squares, detect cycles to identify unhappy numbers, return true only when reaching 1.
+
+2. PLUS ONE - LeetCode 66
+Link: https://leetcode.com/problems/plus-one/
+
+Problem Explanation:
+
+You have a non-empty array of digits representing a large integer
+Add one to the number represented by the array (e.g., [1,2,3] represents 123)
+Return the array representation of the incremented number
+Each element in the array is a single digit (0-9)
+
+Key Idea:
+
+Right-to-left traversal with carry handling:
+- Start from the last digit (rightmost) and iterate backwards
+- If digit is less than 9, increment it and return immediately (no carry needed)
+- If digit is 9, set it to 0 (carry propagates) and continue to previous digit
+- If all digits were 9 (loop completes), insert 1 at the beginning (e.g., [9,9,9] → [1,0,0,0])
+- Time: O(n) in worst case, Space: O(n) only when all digits are 9
+
+Simple: Iterate from right to left, increment first digit < 9 and return, or propagate carry until finding a non-9 digit, or prepend 1 if all were 9.
