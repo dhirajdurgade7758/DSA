@@ -93,3 +93,32 @@ Grade-school multiplication algorithm using array:
 - Time: O(n * m), Space: O(n + m)
 
 Simple: Use array to simulate grade-school multiplication with position-based digit placement, handle carries properly, convert to string while skipping leading zeros.
+
+5. DETECT SQUARES - LeetCode 2013
+Link: https://leetcode.com/problems/detect-squares/
+
+Problem Explanation:
+
+Design a data structure that supports adding points and counting complete squares
+A square is defined by 4 vertices where sides are axis-aligned (parallel to x and y axes)
+For a query point, count how many squares can be formed using that point as one vertex and previously added points as other vertices
+Add operation: add a point to the data structure
+Count operation: given a point, return the number of complete squares with that point as one vertex
+
+Key Idea:
+
+Hash map with point counting approach:
+- Use a map<pair<int,int>, int> to store point frequencies (allows counting duplicate points)
+- Use a vector to store all added points (for iteration during count queries)
+- For count query with point (px, py):
+  * Iterate through all previously added points (x, y)
+  * Check if (x, y) can be a diagonal opposite corner with (px, py)
+  * Diagonal condition: |py - y| == |px - x| (equal horizontal and vertical distances)
+  * Skip if x == px or y == py (would be on same side, not a diagonal)
+  * If valid diagonal, the other two corners are at (x, py) and (px, y)
+  * Count squares: multiply frequency of (x, py) * frequency of (px, y)
+  * Accumulate all counts
+- Time: O(n) per count query where n is number of added points
+- Space: O(n) for storing points
+
+Simple: Store all points with their frequencies in a hash map, for each count query iterate through all previous points to find valid diagonals, multiply counts of the other two required corners to get total squares with that diagonal.
