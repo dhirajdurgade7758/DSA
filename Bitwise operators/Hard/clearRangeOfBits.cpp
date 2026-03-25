@@ -2,9 +2,8 @@
 using namespace std;
 
 int clearRangeOfBits(int n, int i, int j){
-    int bitM1 = ~0 << (j + 1);
-    // int bitM2 = ~0>>(8-i); // this will not work becuse Undefined Behavior: Shifting a 32-bit integer by 32 or more bits is undefined in C++ according to the standard.
-    int bitM2 = (1 << i) - 1;
+    int bitM1 = ~0 << (j + 1);// shifting -1 to the left by j+1 will give us a number with all bits set to 1 except the bits from 0 to j which will be set to 0
+    int bitM2 = (1 << i) - 1; //substracting 1 from 2^i will give us a number with i bits set to 1 and the rest to 0
     int bitMask = bitM1|bitM2;
     int ans = n&bitMask;
 

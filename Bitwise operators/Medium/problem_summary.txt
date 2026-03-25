@@ -18,57 +18,6 @@ BITWISE OPERATORS - MEDIUM LEVEL PROBLEMS
 
 ---
 
-2. UPDATE ITH BIT
-   
-   Problem Explanation:
-   - Update/change the bit at position i to a specific value (0 or 1)
-   - Works regardless of the bit's current state
-   
-   Key Idea:
-   - Two-step process:
-     1. Clear the bit at position i: n & (~(1 << i))
-     2. Set it to desired value: cleared_num | (val << i)
-   - First clear ensures we're not adding an extra 1
-   - Then set based on the value parameter
-   
-   Simple: First clear the bit, then OR it with the desired value (shifted to position i).
-
----
-
-3. COUNT SET BITS
-   Link: https://leetcode.com/problems/number-of-1-bits/
-   
-   Problem Explanation:
-   - Count the total number of 1s (set bits) in the binary representation
-   - Example: 12 = 1100 → count = 2
-   
-   Key Idea:
-   - Loop through each bit using: n & 1 to check last bit
-   - Count it if it's 1
-   - Right shift to move to next bit: n >> 1
-   - Continue until n becomes 0
-   - Time: O(log n) - proportional to number of bits
-   
-   Simple: Check last bit with & 1, count if set, then right shift to next bit.
-
----
-
-4. FIND SINGLE NUMBER
-   Link: https://leetcode.com/problems/single-number/
-   
-   Problem Explanation:
-   - In array where every number appears twice except one, find the single number
-   - Example: [2, 2, 3, 4, 3, 4, 5] → answer is 5
-   
-   Key Idea:
-   - Use XOR property: a ^ a = 0 and a ^ 0 = a
-   - XOR all elements: duplicates cancel each other (2^2^3^4^3^4 = 0), leaving single number
-   - Single pass, O(n) time, O(1) space
-   - Example: 2^2 = 0, 3^3 = 0, 4^4 = 0, remaining 5
-   
-   Simple: XOR all elements. Pairs cancel out, leaving the single number.
-
----
 
 5. XOR SUM
    
