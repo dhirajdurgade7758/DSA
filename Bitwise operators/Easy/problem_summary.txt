@@ -169,3 +169,20 @@ BITWISE OPERATORS - EASY LEVEL PROBLEMS
    Simple: Extract bit from position i, place it at position (31-i), repeat for all 32 bits.
 
 ---
+
+11. MISSING NUMBER
+   Link: https://leetcode.com/problems/missing-number/
+   
+   Problem Explanation:
+   - Given array containing n distinct numbers from 0 to n (one number is missing), find the missing number
+   - Example: [3, 0, 1] → missing number is 2
+   
+   Key Idea:
+   - XOR has useful properties: a ^ a = 0 and a ^ 0 = a
+   - XOR all numbers from 0 to n: this gives XOR of all expected numbers
+   - XOR all numbers in the array: this gives XOR of all present numbers
+   - XOR the two results: duplicate numbers cancel (a ^ a = 0), leaving only the missing number
+   - Time: O(n) - two passes through data
+   - Space: O(1) - only two variables
+   
+   Simple: XOR expected numbers (0 to n) with array numbers; missing number survives.
