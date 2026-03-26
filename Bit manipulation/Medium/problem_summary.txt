@@ -18,6 +18,24 @@ BITWISE OPERATORS - MEDIUM LEVEL PROBLEMS
 
 ---
 
+2. REVERSE INTEGER
+   Link: https://leetcode.com/problems/reverse-integer/
+   
+   Problem Explanation:
+   - Reverse the digits of a signed 32-bit integer
+   - If reversed integer overflows 32-bit range, return 0
+   - Examples: 123 → 321, -123 → -321, 120 → 21
+   
+   Key Idea:
+   - Extract each digit using modulo (x % 10)
+   - Build reversed number by: res = res * 10 + digit
+   - Check overflow before adding each digit to prevent wraparound
+   - Check if res > MAX/10 or (res == MAX/10 && digit > MAX%10) before positive overflow
+   - Check if res < MIN/10 or (res == MIN/10 && digit < MIN%10) before negative overflow
+   
+   Simple: Extract digits one by one, check overflow conditions, and rebuild the number.
+
+---
 
 3. SUM OF TWO INTEGERS
    Link: https://leetcode.com/problems/sum-of-two-integers/
