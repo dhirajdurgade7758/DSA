@@ -56,6 +56,26 @@ BITWISE OPERATORS - MEDIUM LEVEL PROBLEMS
 
 ---
 
+4. POW(X, N)
+   Link: https://leetcode.com/problems/powx-n/
+   
+   Problem Explanation:
+   - Compute x raised to the power n (x^n) efficiently
+   - Handle edge cases: negative exponents, zero base, integer overflow
+   - Examples: 2^10 = 1024, 2.0^(-2) = 0.25
+   
+   Key Idea:
+   - Use fast exponentiation with bit manipulation approach
+   - Instead of multiplying x by itself n times, use binary representation of n
+   - For each bit in n: if bit is 1, multiply result by current power of x
+   - Square x for each bit position (x → x^2 → x^4 → x^8, etc)
+   - Time complexity: O(log n) instead of O(n)
+   - Example: 2^13 = 2^(1101) = 2^8 * 2^4 * 2^1
+   
+   Simple: Use bit manipulation of exponent. For each bit, multiply if bit=1, then square base.
+
+---
+
 5. XOR SUM
    
    Problem Explanation:
