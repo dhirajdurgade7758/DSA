@@ -19,6 +19,25 @@ BITWISE OPERATORS - MEDIUM LEVEL PROBLEMS
 ---
 
 
+3. SUM OF TWO INTEGERS
+   Link: https://leetcode.com/problems/sum-of-two-integers/
+   
+   Problem Explanation:
+   - Add two integers without using the + operator
+   - Must use bitwise operations to implement addition
+   - Examples: 5 + 3 = 8, -2 + 5 = 3
+   
+   Key Idea:
+   - XOR (^) gives sum without carry: a ^ b
+   - AND (&) gives carry: (a & b) << 1
+   - Repeat: a = a ^ b (sum), b = (a & b) << 1 (carry)
+   - Continue until carry (b) becomes 0
+   - Use temp variable to store carry before updating a
+   
+   Simple: Use XOR for sum and AND<<1 for carry. Loop until no carry left.
+
+---
+
 5. XOR SUM
    
    Problem Explanation:
