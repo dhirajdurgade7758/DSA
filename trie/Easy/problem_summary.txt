@@ -76,3 +76,23 @@ EASY LEVEL - PROBLEM SUMMARIES
    
    Time Complexity: O(m) per word where m = word length
    Space Complexity: O(n * m) for Trie storage
+
+
+5. LONGEST COMMON PREFIX
+   Link: https://leetcode.com/problems/longest-common-prefix/
+   LeetCode: 14
+   
+   Problem Explanation:
+   - Find the longest common prefix string amongst an array of strings
+   - Return empty string if no common prefix exists
+   - Handle single word and multiple words
+   
+   Key Idea:
+   - Insert all strings into Trie
+   - Traverse from root: stop when node has >1 child OR endOfWord = true
+   - Path taken = longest common prefix (branching point = divergence)
+   
+   Simple: Common prefix is the path before any branching or end-of-word occurs.
+   
+   Time Complexity: O(n * m) where n = number of strings, m = average string length
+   Space Complexity: O(n * m) for Trie storage
