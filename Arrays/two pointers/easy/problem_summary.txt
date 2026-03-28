@@ -104,6 +104,25 @@ EASY LEVEL - PROBLEM SUMMARIES
 
 ---
 
+7. REMOVE ELEMENT - LeetCode 27
+    Link: https://leetcode.com/problems/remove-element/
+    Problem Explanation:
+    - Given an integer array nums and an integer val
+    - Remove all occurrences of val in-place
+    - Return the number of elements in nums which are not equal to val
+    - Array must be modified such that first k elements do not contain val
+    
+    Key Idea:
+    - Use pointer k to track position for next non-val element
+    - Iterate through array with pointer i
+    - When element != val, place at position k and increment both k and i
+    - When element == val, just increment i to skip it
+    - On completion, k represents count of non-val elements
+    
+    Simple: Overwrite elements equal to val with next non-val elements, return count
+
+---
+
 TIME COMPLEXITY SUMMARY:
 - Two Sum II: O(n)
 - Intersection: O(n*m) naive, O(n+m) with sorted arrays
@@ -111,3 +130,4 @@ TIME COMPLEXITY SUMMARY:
 - Remove Duplicates: O(n)
 - Union: O(n+m)
 - Valid Palindrome: O(n)
+- Remove Element: O(n)
