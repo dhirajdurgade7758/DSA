@@ -60,3 +60,23 @@ MEDIUM - SLIDING WINDOW PROBLEMS
     
     Simple: Fixed-size sliding window, compare character frequencies between s1 and current window
 
+
+4. MINIMUM SIZE SUBARRAY SUM - LeetCode 209
+    Link: https://leetcode.com/problems/minimum-size-subarray-sum/
+    
+    Problem Explanation:
+    - Given an array of positive integers and a target sum
+    - Find the minimal length of a subarray whose sum is >= target
+    - Return the minimum length, or 0 if no such subarray exists
+    - Elements are positive integers only
+    
+    Key Idea:
+    - Use sliding window with two pointers (left and right)
+    - Expand window by moving right pointer and adding elements to sum
+    - When sum >= target, shrink window from left side to minimize length
+    - Track the minimum length found during the process
+    - Once sum becomes < target, expand again from right
+    - Time: O(n), Space: O(1)
+    
+    Simple: Two pointers track a window, expand right to increase sum and shrink left to minimize length while maintaining sum >= target
+
