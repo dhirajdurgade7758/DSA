@@ -123,6 +123,25 @@ EASY LEVEL - PROBLEM SUMMARIES
 
 ---
 
+8. MERGE STRINGS ALTERNATELY - LeetCode 1768
+    Link: https://leetcode.com/problems/merge-strings-alternately/
+    Problem Explanation:
+    - Given two strings word1 and word2
+    - Merge them by adding letters alternately starting with word1
+    - If one string is longer, append remaining characters at the end
+    - Return the merged string
+    
+    Key Idea:
+    - Use two pointers i and j for word1 and word2 respectively
+    - Iterate while both pointers are within bounds
+    - Alternatively add characters from word1 and word2
+    - After loop, append remaining characters from the longer string
+    - Time efficient: single pass through both strings
+    
+    Simple: Alternate characters from both strings, then append remainder
+
+---
+
 TIME COMPLEXITY SUMMARY:
 - Two Sum II: O(n)
 - Intersection: O(n*m) naive, O(n+m) with sorted arrays
@@ -131,3 +150,4 @@ TIME COMPLEXITY SUMMARY:
 - Union: O(n+m)
 - Valid Palindrome: O(n)
 - Remove Element: O(n)
+- Merge Strings Alternately: O(n + m)
