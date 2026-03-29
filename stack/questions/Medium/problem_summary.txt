@@ -138,3 +138,21 @@
    - Build final path by joining stack contents with "/"
    
    Simple: Stack for dirs, ".." pops, "." ignored. Join with "/".
+
+
+10. ASTEROID COLLISION
+   Link: https://leetcode.com/problems/asteroid-collision/
+   
+   Problem Explanation:
+   - Given array of asteroids moving in a line with different velocities
+   - Positive value = moving right, Negative value = moving left
+   - When two asteroids collide, smaller explodes (or both if equal)
+   - Return final state of asteroids after all collisions
+   
+   Key Idea:
+   - Use vector/stack to track surviving asteroids
+   - For each asteroid: if moving right, add it (potential collisions later)
+   - If moving left, check collision with rightward asteroids on stack
+   - Three outcomes: smaller destroyed, larger destroyed, or both destroyed
+   
+   Simple: Use stack for rightward asteroids. Check collisions with leftward ones.
