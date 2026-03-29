@@ -36,4 +36,26 @@
    
    Simple: For each number, binary search for its complement in the elements before it. Return indices when complement is found.
 
+3. SEARCH INSERT POSITION - LeetCode 35
+   Link: https://leetcode.com/problems/search-insert-position/
+   Problem Explanation:
+   - Given a sorted array of distinct integers and a target value
+   - Return the index if the target is found in the array
+   - If not found, return the index where it would be if it were inserted in order
+   - Array is sorted in ascending order
+   
+   Key Idea:
+   - Use binary search to find the target or its insertion position
+   - If target is found, return its index
+   - If not found, left pointer will be at the position where target should be inserted
+   - Return (right + 1) which is the insertion position
+   - Time Complexity: O(log n)
+   
+   Simple: Binary search to find target. If not found, return (right + 1) as the insertion position.
+   
+   Test Cases:
+   - nums = [1,3,5,6], target = 5 → Output: 2
+   - nums = [1,3,5,6], target = 2 → Output: 1 (insert between 1 and 3)
+   - nums = [1,3,5,6], target = 7 → Output: 4 (insert at end)
+
 ====== END OF EASY PROBLEMS ======
