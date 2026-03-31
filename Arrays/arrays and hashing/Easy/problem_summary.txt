@@ -164,3 +164,33 @@ EASY LEVEL PROBLEMS - SUMMARY
     Simple: Use prefix sum with hash map to store first occurrence of each sum, when sum repeats the subarray between has sum zero
 
 ================================================================================
+8. DESIGN HASHSET - LeetCode 705
+    Link: https://leetcode.com/problems/design-hashset/
+    
+    Problem Explanation:
+    - Design a HashSet data structure that supports add, remove, and contains operations
+    - All values will be in the range [0, 10^6]
+    - Implement the following functions:
+      * add(key): Adds a value key to the HashSet, do nothing if key already exists
+      * remove(key): Removes a value key from the HashSet, do nothing if key does not exist
+      * contains(key): Returns whether the value key exists in the HashSet or not
+    - You must not use any built-in hash table libraries
+    
+    Key Idea:
+    - Use a hash function to map keys to indices in an array: index = key % size
+    - To handle collisions, use separate chaining with linked lists
+    - Each bucket is a linked list of (key, Node*) pairs
+    - For add: Check if key exists, if not insert at head of the linked list
+    - For remove: Traverse the linked list and remove the node containing the key
+    - For contains: Traverse the linked list to search for the key
+    - Hash function: index = key % size (size = 1000 is a good choice)
+    
+    Alternative Approaches:
+    - Double Hashing: Use two hash functions to handle collisions
+    - Open Addressing: Probe for the next available slot
+    - Quadratic Probing: Use quadratic function to find next slot
+    
+    Time Complexity: O(1) average, O(n) worst case (all elements hash to same bucket)
+    Space Complexity: O(n) where n is number of elements added
+    
+    Simple: Create an array of linked lists (buckets), use modulo hash function to find bucket, use linked list to handle collisions
