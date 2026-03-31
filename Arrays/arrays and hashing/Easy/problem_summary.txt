@@ -194,3 +194,35 @@ EASY LEVEL PROBLEMS - SUMMARY
     Space Complexity: O(n) where n is number of elements added
     
     Simple: Create an array of linked lists (buckets), use modulo hash function to find bucket, use linked list to handle collisions
+
+================================================================================
+9. DESIGN HASHMAP - LeetCode 706
+    Link: https://leetcode.com/problems/design-hashmap/
+    
+    Problem Explanation:
+    - Design a HashMap data structure that supports put, get, and remove operations
+    - All keys and values will be in the range [0, 10^6]
+    - Implement the following functions:
+      * put(key, value): Inserts a (key, value) pair into the HashMap, updates if key already exists
+      * get(key): Returns the value to which the specified key is mapped, or -1 if no mapping
+      * remove(key): Removes the key and its value from the HashMap, do nothing if key doesn't exist
+    - You must not use any built-in hash table libraries
+    
+    Key Idea:
+    - Similar to Design HashSet, but stores (key, value) pairs instead of just keys
+    - Use separate chaining with linked lists to handle hash collisions
+    - Each bucket stores a list of pairs: list<pair<int, int>>
+    - Hash function: index = key % size (size = 1000 is a good choice)
+    - For put: Traverse bucket to check if key exists → update value or insert new pair
+    - For get: Traverse bucket to find key and return corresponding value (or -1)
+    - For remove: Find and remove the pair with specified key from bucket
+    
+    Alternative Approaches:
+    - Double Hashing: Use two hash functions
+    - Open Addressing with Probing: Linear, quadratic, or double hashing
+    - Dynamic Resizing: Increase table size when load factor exceeds threshold
+    
+    Time Complexity: O(1) average, O(n) worst case
+    Space Complexity: O(n) where n is number of (key, value) pairs stored
+    
+    Simple: Similar to HashSet but stores pairs, use modulo hash function to find bucket, traverse linked list to find/update/remove pairs
