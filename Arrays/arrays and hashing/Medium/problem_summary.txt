@@ -204,3 +204,34 @@ MEDIUM LEVEL PROBLEMS - SUMMARY
     Simple: Encode: prepend each string with its length and delimiter '#'; Decode: parse length, extract that many characters, repeat until end
 
 ================================================================================
+9. SORT COLORS - LeetCode 75
+    Link: https://leetcode.com/problems/sort-colors/
+    
+    Problem Explanation:
+    - Given an array nums with n objects colored red (0), white (1), or blue (2)
+    - Sort the array in-place so that objects of the same color are adjacent
+    - Constraint: 0 <= nums.length <= 300, nums[i] is either 0, 1, or 2
+    - Example: [2,0,2,1,1,0] -> [0,0,1,1,2,2]
+    - In-place modification required, O(1) space preferred
+    
+    Key Idea - DUTCH NATIONAL FLAG ALGORITHM:
+    - Use three pointers: low (for 0s), mid (current), high (for 2s)
+    - low starts at 0, mid starts at 0, high starts at n-1
+    - Partition into three regions: [0...low-1] = 0s, [low...high] = unsorted, [high+1...n-1] = 2s
+    - Iterate while mid <= high:
+      * If nums[mid] == 0: swap with nums[low], increment both low and mid
+      * If nums[mid] == 1: just increment mid (already in correct region)
+      * If nums[mid] == 2: swap with nums[high], decrement high (don't increment mid yet)
+    - Why not increment mid after swapping with high: swapped element could be 0 and needs processing
+    
+    Time Complexity: O(n) - single pass through array
+    Space Complexity: O(1) - only three pointers, in-place modification
+    
+    Alternative Approach - COUNTING:
+    - Count all 0s, 1s, and 2s
+    - Overwrite array: first count0 positions with 0, then count1 with 1, then count2 with 2
+    - Time: O(n), Space: O(1), but two passes instead of one
+    
+    Simple: Three pointers (low, mid, high) partition array into 0s (left), 1s (middle), 2s (right) in single pass
+
+================================================================================
