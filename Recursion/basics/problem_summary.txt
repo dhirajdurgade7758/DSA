@@ -1,0 +1,113 @@
+BASICS PROBLEMS SUMMARY
+=======================
+
+1. FACTORIAL
+   Link: https://www.geeksforgeeks.org/factorial-of-a-number/
+   
+   Problem Explanation:
+   - Calculate the factorial of a number n
+   - Factorial is the product of all positive integers less than or equal to n
+   - Example: factorial(5) = 5 * 4 * 3 * 2 * 1 = 120
+   
+   Key Idea:
+   - Base case: if n == 0, return 1
+   - Recursive case: return n * factorial(n-1)
+   - Each recursive call reduces n by 1 until reaching base case
+   - Multiply current value with result of smaller subproblem
+   
+   Simple: To find factorial of n, multiply n with factorial of n-1. Stop when n reaches 0.
+
+
+2. SUM OF N NATURAL NUMBERS
+   Link: https://www.geeksforgeeks.org/sum-of-first-n-natural-numbers/
+   
+   Problem Explanation:
+   - Calculate the sum of first n natural numbers
+   - Example: sum(5) = 5 + 4 + 3 + 2 + 1 = 15
+   - Find total by adding all numbers from 1 to n
+   
+   Key Idea:
+   - Base case: if n == 1, return 1
+   - Recursive case: return n + sum(n-1)
+   - Each recursive call adds current number and then recurses for smaller n
+   - Continue until reaching base case of 1
+   
+   Simple: To find sum of n natural numbers, add n to sum of first n-1 natural numbers.
+
+
+3. PRINT NUMBERS IN DECREASING AND INCREASING ORDER
+   Link: https://www.geeksforgeeks.org/print-numbers-1-to-n-without-using-loops/
+   
+   Problem Explanation:
+   - Print numbers from 1 to n or n to 1 using recursion (no loops)
+   - Can print in decreasing or increasing order based on when print statement is placed
+   - Example: print(3) can output "3 2 1" or "1 2 3" depending on implementation
+   
+   Key Idea:
+   - Base case: if n == 0, return (stop recursion)
+   - For decreasing order: print n, then recurse with n-1
+   - For increasing order: recurse with n-1, then print n
+   - The position of print statement relative to recursive call determines order
+   - Backtracking happens naturally due to recursion call order
+   
+   Simple: Place print before recursion for decreasing order (n, n-1, ..., 1). Place print after recursion for increasing order (1, 2, ..., n).
+
+
+4. POWER OF X TO THE N
+   Link: https://www.geeksforgeeks.org/power-of-a-number-using-recursion/
+   
+   Problem Explanation:
+   - Calculate x raised to the power n (x^n)
+   - Example: pow(2, 10) = 1024
+   - Find the result efficiently using optimal approach
+   
+   Key Idea:
+   - Base case: if n == 0, return 1 (any number to power 0 is 1)
+   - Optimization: Calculate halfpow = pow(x, n/2)
+   - Then halfPowSquare = halfpow * halfpow
+   - If n is odd: return halfPowSquare * x (multiply by x once more)
+   - If n is even: return halfPowSquare
+   - This reduces time complexity from O(n) to O(log n) using exponentiation by squaring
+   
+   Simple: Instead of multiplying x n times, calculate x^(n/2) and square it. Handle odd powers by multiplying by x once more. This achieves O(log n) complexity.
+
+
+5. FIRST AND LAST OCCURRENCE
+   Link: https://www.geeksforgeeks.org/find-first-and-last-positions-of-element-in-sorted-array/
+   
+   Problem Explanation:
+   - Find the first occurrence of a target value in an array
+   - Also find the last occurrence of the target value
+   - Return the index if found, or -1 if not found
+   - Example: array = {1,2,3,3,3,4,5,6}, target = 3 returns first index 2 and last index 4
+   
+   Key Idea:
+   - First Occurrence: Check current element first
+     - Base case: if i == n, return -1 (not found)
+     - If arr[i] == target: immediately return i
+     - Else: recurse with i+1
+   - Last Occurrence: Recurse first, then check
+     - Recurse with i+1 to reach end of array
+     - Check current element only if recursion returned -1
+     - This way last matching element is found
+   
+   Simple: For first occurrence, check immediately and return if found. For last occurrence, recurse first to ensure backtracking finds the rightmost element.
+
+
+6. CHECK IF ARRAY IS SORTED
+   Link: https://www.geeksforgeeks.org/given-an-array-arr-of-length-n-check-if-it-is-sorted-in-ascending-order/
+   
+   Problem Explanation:
+   - Check if an array is sorted in ascending order
+   - Return true if every element is less than or equal to the next element
+   - Return false if any element is greater than the next
+   - Example: {1,2,6,8,9,10} is sorted, {12,34,5,7,2,50} is not sorted
+   
+   Key Idea:
+   - Base case: if i == n-1, return true (reached last element, array is sorted)
+   - If arr[i] > arr[i+1]: return false immediately (unsorted found)
+   - Else: recurse with i+1 to check remaining elements
+   - Early termination if any unsorted pair is found
+   - Continue checking until end of array
+   
+   Simple: Recursively compare each element with the next. If any element is greater than the next, array is unsorted. If we reach the last element, array is sorted.
