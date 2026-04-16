@@ -138,3 +138,31 @@ MEDIUM PROBLEMS - LINKED LIST
    Simple: Use reverse and split operations to rearrange list in zigzag pattern.
 
 ================================================================================
+10. REVERSE LINKED LIST II
+   Link: https://leetcode.com/problems/reverse-linked-list-ii/
+   
+   Problem Explanation:
+   - Reverse a sublist from position left to right (1-indexed)
+   - Keep the rest of the list unchanged
+   - [1,2,3,4,5] with left=2, right=4 becomes [1,4,3,2,5]
+   
+   Key Idea:
+   - Use dummy node to handle potential head reversal
+   - Find the node before left position (prev)
+   - Find the end node at right position
+   - Reverse the sublist between left and right
+   - Reconnect: prev->newHead, start->nextRight
+   
+   Approach:
+   - Create dummy node pointing to head for easier manipulation
+   - Traverse to position before left (O(n) in worst case)
+   - Cut the sublist by setting end->next to nullptr
+   - Reverse the sublist using standard reversal algorithm
+   - Reconnect the reversed sublist back to the main list
+   
+   Time Complexity: O(n) where n is number of nodes
+   Space Complexity: O(1) for reversal (only pointers)
+   
+   Simple: Navigate to left position, reverse the sublist, reconnect everything.
+
+================================================================================
