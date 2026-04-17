@@ -93,3 +93,25 @@ MEDIUM LEVEL PROBLEMS - SUMMARY
    Simple: Maintain tweet/follow maps, merge recent tweets from followees using max-heap.
 
 ================================================================================
+
+   6. SINGLE-THREADED CPU
+      Link: https://leetcode.com/problems/single-threaded-cpu/
+   
+      Problem Explanation:
+      - Given tasks as [enqueueTime, processingTime]
+      - CPU can process only one task at a time
+      - If multiple tasks are available, pick smallest processing time
+      - If tie, pick smaller original index
+      - Return order of processed task indices
+   
+      Key Idea:
+      - Sort tasks by enqueueTime (or keep them in min-heap by enqueueTime)
+      - Use another min-heap for available tasks by (processingTime, index)
+      - Simulate current time:
+        - Push all tasks whose enqueueTime <= current time into available heap
+        - If no task is available, jump time to next enqueueTime
+        - Pop best available task, process it, and advance time
+   
+      Simple: Use two min-heaps (pending by enqueue time, available by processing time/index) and simulate CPU timeline.
+
+   ================================================================================
