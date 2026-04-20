@@ -115,3 +115,24 @@ MEDIUM LEVEL PROBLEMS - SUMMARY
       Simple: Use two min-heaps (pending by enqueue time, available by processing time/index) and simulate CPU timeline.
 
    ================================================================================
+
+   7. K CLOSEST ELEMENTS
+      Link: https://leetcode.com/problems/find-k-closest-elements/
+   
+      Problem Explanation:
+      - Given a sorted array arr, integer k, and integer x
+      - Find k closest elements to x in the array
+      - Return result sorted in ascending order
+      - If two elements have same distance, choose the smaller one
+   
+      Key Idea:
+      - Use priority queue with custom comparator
+      - Store (distance, value) pairs with (abs(arr[i]-x), arr[i])
+      - Comparator: prioritize by distance first, then by value
+      - Extract k closest elements from priority queue
+      - Sort result before returning
+      - Alternative: Use binary search + two-pointer approach for optimal solution
+   
+      Simple: Create priority queue with (distance, value) pairs, extract k smallest by distance, sort and return.
+
+   ================================================================================

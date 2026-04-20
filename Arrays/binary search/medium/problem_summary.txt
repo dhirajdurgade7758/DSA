@@ -85,4 +85,28 @@
    
    Simple: Binary search on eating speed. For each speed, calculate hours needed using ceiling division. Find minimum speed that fits within h hours.
 
+---
+
+5. K CLOSEST ELEMENTS - LeetCode 658
+   Link: https://leetcode.com/problems/find-k-closest-elements/
+   Problem Explanation:
+   - Given a sorted array and two integers k and x
+   - Find k closest elements to x in the array
+   - Return them in sorted order
+   - Ties are broken by choosing elements with smaller values
+   - Example: arr = [1,2,3,4,5], k = 4, x = 3 → [1,2,3,4]
+   - Must have O(log n) time complexity
+   
+   Key Idea:
+   - Use binary search to find the best starting position for a window of k elements
+   - Search space is from 0 to arr.size() - k (leftmost positions for valid windows)
+   - For each window position, compare distances of left and right edges from x
+   - If distance from x to left edge is greater than distance from x to right edge:
+     - Right edge is closer, move left = mid + 1 to try windows further right
+   - Otherwise, left edge is closer or equal, move right = mid to keep current window
+   - Continue until left == right to find optimal window position
+   - Time Complexity: O(log n) for binary search
+   
+   Simple: Binary search on window position. Compare distances of window edges from x. Find position where left edge is closest to or closer than right edge.
+
 ====== END OF MEDIUM PROBLEMS ======
