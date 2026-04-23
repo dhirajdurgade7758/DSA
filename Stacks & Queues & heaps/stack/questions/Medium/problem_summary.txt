@@ -156,3 +156,36 @@
    - Three outcomes: smaller destroyed, larger destroyed, or both destroyed
    
    Simple: Use stack for rightward asteroids. Check collisions with leftward ones.
+
+
+11. STOCK SPAN PROBLEM - MONOTONIC STACK APPROACH (Optimized)
+   Link: https://leetcode.com/problems/online-stock-span/
+   File: monotonicStack.cpp
+   
+   Problem Explanation:
+   - For each day i, find span = consecutive days with price <= current price
+   - Span includes the current day itself
+   - Optimized approach storing (price, span) pairs in stack
+   
+   Key Idea:
+   - Store pairs of (price, span) instead of just indices
+   - When current price > top price: accumulate spans and pop
+   - Use stack to compress consecutive periods with equal/lower prices
+   - Span accumulation avoids re-iteration
+   
+   Time Complexity: O(n) - each element pushed/popped once
+   Space Complexity: O(n) for stack
+   
+   Advantage Over Index Approach:
+   - More efficient span calculation by accumulating previous spans
+   - Fewer iterations needed when prices increase
+   - Better cache locality with price comparison
+   
+   Example: [100, 80, 60, 70, 60, 75, 85]
+   - Day 0: price=100, span=1, stack=[(100,1)]
+   - Day 1: price=80, span=1, stack=[(100,1), (80,1)]
+   - Day 2: price=60, span=1, stack=[(100,1), (80,1), (60,1)]
+   - Day 3: price=70, pop (60,1), span=2, stack=[(100,1), (80,1), (70,2)]
+   - Day 4: price=60, span=1, stack=[(100,1), (80,1), (70,2), (60,1)]
+   - Day 5: price=75, pop (60,1), pop (70,2), span=1+2+1=4, stack=[(100,1), (80,1), (75,4)]
+   - Day 6: price=85, pop (75,4), pop (80,1), span=1+4+1=6, stack=[(100,1), (85,6)]
