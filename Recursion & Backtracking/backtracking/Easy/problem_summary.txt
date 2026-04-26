@@ -16,6 +16,30 @@
    - Remove element after recursion, add it back (backtrack)
    - Base case: when all elements are used, print result
    
+      "abc"
+
+   Start: ""
+
+   Level 0:
+   ""
+   ├── a → "a"
+   │   ├── b → "ab"
+   │   │   └── c → "abc" ✅
+   │   └── c → "ac"
+   │       └── b → "acb" ✅
+   │
+   ├── b → "b"
+   │   ├── a → "ba"
+   │   │   └── c → "bac" ✅
+   │   └── c → "bc"
+   │       └── a → "bca" ✅
+   │
+   └── c → "c"
+      ├── a → "ca"
+      │   └── b → "cab" ✅
+      └── b → "cb"
+         └── a → "cba" ✅
+
    Simple: Pick an element → Recurse with remaining → Remove element → Backtrack
    
    Time Complexity: O(n! * n) - n! permutations, each takes O(n) time
@@ -36,15 +60,32 @@
    - Use vector.insert() to restore during backtracking
    - Collect results in 2D vector
    
+      [1,2,3]
+
+   Start: []
+
+   Level 0:
+   []
+   ├── 1 → [1]
+   │   ├── 2 → [1,2]
+   │   │   └── 3 → [1,2,3] ✅
+   │   └── 3 → [1,3]
+   │       └── 2 → [1,3,2] ✅
+   │
+   ├── 2 → [2]
+   │   ├── 1 → [2,1]
+   │   │   └── 3 → [2,1,3] ✅
+   │   └── 3 → [2,3]
+   │       └── 1 → [2,3,1] ✅
+   │
+   └── 3 → [3]
+      ├── 1 → [3,1]
+      │   └── 2 → [3,1,2] ✅
+      └── 2 → [3,2]
+         └── 1 → [3,2,1] ✅
+
    Simple: Generate all orderings of distinct numbers using backtracking
    
    Time Complexity: O(n! * n)
    Space Complexity: O(n! * n)
 
-═══════════════════════════════════════════════════════════════════════════════
-LEARNING TIPS FOR EASY PROBLEMS:
-- These are entry points to backtracking
-- Focus on understanding the choice-explore-unchoose pattern
-- Try tracing through small examples (2-3 elements) by hand
-- The pattern here is the foundation for all harder problems
-═══════════════════════════════════════════════════════════════════════════════

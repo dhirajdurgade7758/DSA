@@ -23,7 +23,7 @@ void largestRectangleArea(vector<int>& heights) {
         if (s.empty())
         {
             nsl[i] = -1;
-        }
+        } 
         else{
             nsl[i] = s.top();
         }

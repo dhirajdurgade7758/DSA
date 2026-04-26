@@ -33,7 +33,7 @@ MEDIUM PROBLEMS SUMMARY
    - When both indices are valid: compare str[i] and str[j]
    - If characters match: increment count
    - Recurse with j+1 to continue checking
-   - Combine results from recursive calls
+   - Combine results from recursivde calls
    
    Simple: Use nested recursion to compare characters at different positions, counting how many times a pattern or matching sequence occurs.
 
