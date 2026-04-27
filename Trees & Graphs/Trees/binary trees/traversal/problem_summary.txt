@@ -1,0 +1,134 @@
+================================================================================
+TRAVERSAL CONCEPTS - BINARY TREES
+================================================================================
+
+1. INORDER TRAVERSAL (RECURSIVE)
+   File: inorder.cpp
+   Reference: Left -> Root -> Right
+   
+   Problem Explanation:
+   - Visit all tree nodes in inorder sequence
+   - For each node: first left subtree, then current node, then right subtree
+   
+   Key Idea:
+   - Base case: if node is null, return
+   - Recursively traverse left subtree
+   - Print current node
+   - Recursively traverse right subtree
+   - Time: O(n), Space: O(h)
+   
+   Simple: Recursively process left, print node, then process right.
+
+================================================================================
+
+2. INORDER TRAVERSAL (ITERATIVE)
+   File: iterative_inorder.cpp
+   Reference: Stack-based simulation of recursion
+   
+   Problem Explanation:
+   - Perform inorder traversal without recursion
+   - Use a stack to track nodes while moving to leftmost branch
+   
+   Key Idea:
+   - Push nodes while going left
+   - When null is reached, pop top node, print it, move to its right child
+   - Repeat until stack is empty and current node becomes null
+   - Time: O(n), Space: O(h)
+   
+   Simple: Use stack to emulate recursive inorder traversal.
+
+================================================================================
+
+3. PREORDER TRAVERSAL (RECURSIVE)
+   File: preorder.cpp
+   Reference: Root -> Left -> Right
+   
+   Problem Explanation:
+   - Visit nodes in preorder order
+   - Print current node before visiting children
+   
+   Key Idea:
+   - Base case: null node returns
+   - Print current node first
+   - Recurse on left child, then right child
+   - Time: O(n), Space: O(h)
+   
+   Simple: Print node first, then recursively visit left and right.
+
+================================================================================
+
+4. PREORDER TRAVERSAL (ITERATIVE)
+   File: iterative_preorder.cpp
+   Reference: Stack with right-first push
+   
+   Problem Explanation:
+   - Perform preorder traversal without recursion
+   - Preserve Root -> Left -> Right order using stack
+   
+   Key Idea:
+   - Push root in stack
+   - Pop top node, print it
+   - Push right child first, then left child (so left is processed first)
+   - Continue until stack is empty
+   - Time: O(n), Space: O(h)
+   
+   Simple: Stack pop-print, then push right before left to maintain preorder.
+
+================================================================================
+
+5. POSTORDER TRAVERSAL (RECURSIVE)
+   File: postorder.cpp
+   Reference: Left -> Right -> Root
+   
+   Problem Explanation:
+   - Visit nodes in postorder sequence
+   - Current node is printed only after both children are processed
+   
+   Key Idea:
+   - Base case: null node returns
+   - Traverse left subtree
+   - Traverse right subtree
+   - Print current node
+   - Time: O(n), Space: O(h)
+   
+   Simple: Recursively process children first, then print node.
+
+================================================================================
+
+6. LEVEL ORDER TRAVERSAL (RETURN LEVELS)
+   File: level_order.cpp
+   Reference: BFS by levels
+   
+   Problem Explanation:
+   - Traverse tree level-by-level from top to bottom
+   - Store each level in a separate vector
+   
+   Key Idea:
+   - Use queue for BFS
+   - For each loop, process exactly queue size nodes (one level)
+   - Collect nodes of that level, then push left and right children
+   - Append each level vector to final answer
+   - Time: O(n), Space: O(w)
+   
+   Simple: Use queue BFS and process one level at a time.
+
+================================================================================
+
+7. LEVEL ORDER TRAVERSAL (PRINT FLAT)
+   File: level_orderTraversal.cpp
+   Reference: Standard BFS output
+   
+   Problem Explanation:
+   - Traverse nodes level-by-level and print in BFS order
+   - Output is a flat sequence, not grouped level vectors
+   
+   Key Idea:
+   - Start with root in queue
+   - Repeatedly pop front node, print it
+   - Push its left and right children if present
+   - Continue until queue is empty
+   - Time: O(n), Space: O(w)
+   
+   Simple: BFS using queue, print nodes in visit order.
+
+================================================================================

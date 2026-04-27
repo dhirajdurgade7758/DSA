@@ -1,0 +1,76 @@
+================================================================================
+BASIC BINARY TREE CONCEPTS
+================================================================================
+
+1. TREE REPRESENTATION
+   File: representation.cpp
+   Reference: Basic binary tree node creation and linking
+   
+   Problem Explanation:
+   - Define a `Node` structure with data, left, and right pointers
+   - Build a sample binary tree manually using dynamic allocation
+   - Understand parent-child pointer connections
+   
+   Key Idea:
+   - Every node stores value + pointers to left and right children
+   - Root pointer is the entry point of the whole tree
+   - Children are connected by assigning `root->left` and `root->right`
+   - Missing child pointers should be set to `nullptr`
+   
+   Simple: Build the tree by creating nodes and linking them with left/right pointers.
+
+================================================================================
+
+2. COUNT OF NODES IN A BINARY TREE
+   File: count_of_nodes.cpp
+   Reference: Recursive DFS counting
+   
+   Problem Explanation:
+   - Find total number of nodes present in the binary tree
+   - Include every node exactly once
+   
+   Key Idea:
+   - Base case: null node contributes 0
+   - Recursively count nodes in left and right subtrees
+   - Total nodes = left_count + right_count + 1 (current node)
+   - Time: O(n), Space: O(h)
+   
+   Simple: Count nodes in left and right recursively, then add 1 for current node.
+
+================================================================================
+
+3. HEIGHT OF A BINARY TREE
+   File: height_of_tree.cpp
+   Reference: Recursive height calculation
+   
+   Problem Explanation:
+   - Compute the height (maximum depth) of the tree
+   - Height is number of nodes on longest root-to-leaf path
+   
+   Key Idea:
+   - Base case: null node has height 0
+   - Compute left and right subtree heights recursively
+   - Height of current node = 1 + max(left_height, right_height)
+   - Time: O(n), Space: O(h)
+   
+   Simple: Height is 1 plus the larger height of left and right subtrees.
+
+================================================================================
+
+4. SUM OF ALL NODES
+   File: sumOfNodes.cpp
+   Reference: Recursive DFS aggregation
+   
+   Problem Explanation:
+   - Find the sum of all node values in the tree
+   - Add each node's value once
+   
+   Key Idea:
+   - Base case: null node contributes 0
+   - Recursively compute sum of left and right subtrees
+   - Total sum = root->data + left_sum + right_sum
+   - Time: O(n), Space: O(h)
+   
+   Simple: Add current node value with recursive sums of left and right.
+
+================================================================================
