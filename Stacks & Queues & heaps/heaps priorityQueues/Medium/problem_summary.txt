@@ -136,3 +136,20 @@ MEDIUM LEVEL PROBLEMS - SUMMARY
       Simple: Create priority queue with (distance, value) pairs, extract k smallest by distance, sort and return.
 
    ================================================================================
+
+8. REORGANIZE STRING
+   Link: https://leetcode.com/problems/reorganize-string/ (LeetCode 767)
+   
+   Problem Explanation:
+   - Rearrange characters in string so that no two adjacent characters are the same.
+   - Return any valid rearrangement or empty string if impossible.
+   
+   Key Idea:
+   - Count frequencies of characters.
+   - Use max-heap of (frequency, char). Repeatedly pop two most frequent chars, append them, decrement counts, and reinsert if still >0.
+   - If one char left with count >1, impossible.
+   - Time: O(n log σ), Space: O(σ) where σ is alphabet size.
+
+   Simple: Use max-heap to greedily place most frequent characters apart.
+
+================================================================================

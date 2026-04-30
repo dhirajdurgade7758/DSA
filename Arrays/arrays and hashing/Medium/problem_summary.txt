@@ -235,3 +235,26 @@ MEDIUM LEVEL PROBLEMS - SUMMARY
     Simple: Three pointers (low, mid, high) partition array into 0s (left), 1s (middle), 2s (right) in single pass
 
 ================================================================================
+10. VERIFY ALIEN DICTIONARY - LeetCode 953
+    Link: https://leetcode.com/problems/verifying-an-alien-dictionary/
+    
+    Problem Explanation:
+    - Given a list of words and a custom alphabet order
+    - Check if the words are sorted according to that alien order
+    - Compare each adjacent pair of words in the list
+    - Example: words = ["hello","leetcode"], order = "hlabcdefgijkmnopqrstuvwxyz" -> true
+    - Example: words = ["word","world","row"], order = "worldabcefghijkmnpqstuvxyz" -> false
+    
+    Key Idea:
+    - Create a mapping from each character to its position in the alien order
+    - Compare adjacent words character by character
+    - At the first different character, use the custom order mapping to decide which word is smaller
+    - If all compared characters are equal, the shorter word should come first
+    - This is the same idea as normal lexicographic comparison, but with a custom alphabet
+    
+    Time Complexity: O(total characters compared)
+    Space Complexity: O(1) - only a fixed-size character order map
+    
+    Simple: Map each alien character to its rank, compare adjacent words using that order, and handle prefix cases by requiring the shorter word to come first
+
+================================================================================
