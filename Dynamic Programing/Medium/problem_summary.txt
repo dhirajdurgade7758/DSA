@@ -398,6 +398,29 @@
     - For each center, expand left and right while characters match
     - Count each valid palindrome found during expansion
     - Stop expanding when characters don't match or reach boundary
+
+================================================================================
+
+21. EXTRA CHARACTERS IN STRING
+    File: ExtraCharectorsInString.cpp
+    Link: https://leetcode.com/problems/extra-characters-in-a-string/
+
+    Problem Explanation:
+    - Given a string s and a dictionary of words, partition s into a sequence
+       of dictionary words minimizing the number of leftover characters.
+    - Return the minimum number of characters that cannot be part of any
+       dictionary word after optimal partitioning.
+
+    Key Idea:
+    - Use DP from the end: dp[i] = minimum extra chars for substring s[i:]
+    - Initialize dp[n] = 0. For i from n-1 down to 0:
+       - Set dp[i] = 1 + dp[i+1] (treat s[i] as extra char)
+       - Build substrings s[i..j]; if substring in dictionary, dp[i] = min(dp[i], dp[j+1])
+    - Use an unordered_set for O(1) word lookups; building substrings costs O(length)
+    - Time: O(n^2 * k) in worst case (k = average substring build cost), Space: O(n)
+
+    Simple: Try every cut starting at i; if matched word, take dp after the word,
+    otherwise count the char as extra and move on.
     - Time: O(n²), Space: O(1) (only storing count)
     
     Algorithm:
