@@ -89,3 +89,48 @@
    Time Complexity: O(n! * n)
    Space Complexity: O(n! * n)
 
+
+3. PERMUTATIONS II (WITH DUPLICATES)
+   Link: https://leetcode.com/problems/permutations-ii/
+   File: permutationsII.cpp
+   
+   Problem Explanation:
+   - Given an array with duplicates, generate ALL unique permutations
+   - For [1,1,2]: Output should have UNIQUE permutations only, not duplicates
+   - Key difference: Need to handle duplicate elements smartly
+   
+   Key Idea:
+   - Use unordered_map to track frequency of each unique number
+   - For each unique number, if its count > 0, we can use it
+   - Decrement count before recursing, increment after (backtrack)
+   - Avoids generating duplicate permutations
+   
+   Example: [1,1,2]
+   
+   Map: {1: 2, 2: 1}
+   
+   Start: []
+   
+   Level 0:
+   []
+   ├── 1 (freq=2) → [1]
+   │   ├── 1 (freq=1) → [1,1]
+   │   │   └── 2 (freq=1) → [1,1,2] ✅
+   │   └── 2 (freq=1) → [1,2]
+   │       └── 1 (freq=1) → [1,2,1] ✅
+   │
+   └── 2 (freq=1) → [2]
+       └── 1 (freq=2) → [2,1]
+           └── 1 (freq=1) → [2,1,1] ✅
+   
+   Key Steps:
+   1. Create frequency map of all elements
+   2. For each unique number with count > 0:
+      - Choose: Decrement its count
+      - Explore: Recurse to next position
+      - Unchoose: Increment its count back (backtrack)
+   3. When combination size == array size, add to result
+   
+   Time Complexity: O(n! * n) - but fewer branches due to duplicates
+   Space Complexity: O(n!) for storing unique permutations
+
