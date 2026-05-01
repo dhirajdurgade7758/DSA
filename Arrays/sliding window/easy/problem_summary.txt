@@ -20,3 +20,16 @@ EASY - SLIDING WINDOW PROBLEMS
     
     Simple: Keep track of minimum price seen so far, calculate profit at each step, return max profit
 
+2. CONTAINS DUPLICATE II - LeetCode 219
+    Link: https://leetcode.com/problems/contains-duplicate-ii/
+
+    Problem Explanation:
+    - Given an array of integers and an integer k
+    - Return true if there are two distinct indices i and j such that nums[i] == nums[j] and |i - j| <= k
+
+    Key Idea (sliding window):
+    - Maintain an `unordered_set` containing the last up-to-k elements (current window)
+    - For each element, check if it's already in the set — if yes, return true
+    - Insert current element; if set size exceeds k, erase the element that fell out of the window (`nums[i-k]`)
+    - Time: O(n), Space: O(k)
+
