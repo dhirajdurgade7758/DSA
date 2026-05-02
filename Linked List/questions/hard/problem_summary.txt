@@ -1,6 +1,30 @@
 HARD PROBLEMS - LINKED LIST
 
 ================================================================================
+
+5. LFU CACHE
+   Link: https://leetcode.com/problems/lfu-cache/
+   
+   Problem Explanation:
+   - Design LFU (Least Frequently Used) Cache with fixed capacity
+   - `get(key)`: Return value if exists and update its frequency
+   - `put(key, value)`: Insert or update key; if capacity exceeded, evict the least frequently used key. If multiple keys have the same lowest frequency, evict the least recently used among them.
+   
+   Key Idea:
+   - Maintain a hashmap `key -> (value, freq)` for O(1) access to value and frequency
+   - Maintain a hashmap `freq -> list<keys>` storing keys with that frequency in recency order
+   - Maintain a hashmap `key -> iterator` to each key's position in its frequency list for O(1) removal
+   - Track `minFreq` — the smallest frequency currently present; when evicting, remove from the front of `freq -> list[minFreq]`
+   - On `get`/`put` (update case): remove key from current freq list, increment its freq, append to the back of new freq list, and update `minFreq` if needed
+   
+   Time & Space Complexity:
+   - `get` / `put`: O(1) average time
+   - Space: O(capacity) for the maps and lists
+   
+   Notes:
+   - Be careful to update `minFreq` when the last key with that frequency is moved or evicted.
+   - Using lists for frequency buckets preserves recency order within the same frequency.
+
 1. LRU CACHE
    Link: https://leetcode.com/problems/lru-cache/
    
