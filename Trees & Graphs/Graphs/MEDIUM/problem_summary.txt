@@ -263,7 +263,26 @@
 
 ================================================================================
 
-15. WORD LADDER
+15. WALLS AND GATES
+    Link: https://leetcode.com/problems/walls-and-gates/
+    
+    Problem Explanation:
+    - Fill each empty room with distance to its nearest gate
+    - Gate = 0, wall = -1, empty room = INT_MAX
+    - Distances are measured using 4-directional movement
+    
+    Key Idea:
+    - Multi-source BFS starting from all gates at once
+    - Push every gate into the queue first
+    - Expand outward level by level and set each unfilled room to current distance + 1
+    - Only visit rooms with value INT_MAX so each room is updated once
+    - Time: O(m × n), Space: O(m × n)
+    
+    Simple: BFS from all gates simultaneously. Each empty room gets the shortest distance to any gate.
+
+================================================================================
+
+16. WORD LADDER
     Link: https://leetcode.com/problems/word-ladder/
     
     Problem Explanation:
@@ -283,7 +302,7 @@
 
 ================================================================================
 
-16. TOPOLOGICAL SORT (DFS-BASED)
+17. TOPOLOGICAL SORT (DFS-BASED)
     Link: https://www.geeksforgeeks.org/topological-sorting/
     
     Problem Explanation:
@@ -301,7 +320,7 @@
 
 ================================================================================
 
-17. TOPOLOGICAL SORT (KAHN'S ALGORITHM - INDEGREE)
+18. TOPOLOGICAL SORT (KAHN'S ALGORITHM - INDEGREE)
     Link: https://www.geeksforgeeks.org/topological-sorting-indegree-based-solution/
     
     Problem Explanation:
@@ -321,7 +340,7 @@
 
 ================================================================================
 
-18. REDUNDANT CONNECTIONS (UNION-FIND)
+19. REDUNDANT CONNECTIONS (UNION-FIND)
     Link: https://leetcode.com/problems/redundant-connection/
     
     Problem Explanation:
@@ -340,7 +359,7 @@
 
 ================================================================================
 
-19. DISJOINT SET (UNION-FIND DATA STRUCTURE)
+20. DISJOINT SET (UNION-FIND DATA STRUCTURE)
     Link: https://www.geeksforgeeks.org/union-find/
     
     Problem Explanation:
@@ -359,7 +378,7 @@
 
 ================================================================================
 
-20. DIJKSTRA'S SHORTEST PATH ALGORITHM
+21. DIJKSTRA'S SHORTEST PATH ALGORITHM
     Link: https://www.geeksforgeeks.org/dijkstras-shortest-path-algorithm-greedy-algo-7/
     
     Problem Explanation:
@@ -378,7 +397,7 @@
 
 ================================================================================
 
-21. MINIMUM COST TO CONNECT ALL POINTS
+22. MINIMUM COST TO CONNECT ALL POINTS
     Link: https://leetcode.com/problems/minimum-cost-to-connect-all-points/
     
     Problem Explanation:
