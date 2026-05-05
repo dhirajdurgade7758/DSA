@@ -153,3 +153,23 @@ MEDIUM LEVEL PROBLEMS - SUMMARY
    Simple: Use max-heap to greedily place most frequent characters apart.
 
 ================================================================================
+
+9. LONGEST HAPPY STRING
+   Link: https://leetcode.com/problems/longest-happy-string/
+   
+   Problem Explanation:
+   - Given counts of three characters (a, b, c)
+   - Build the longest string where no two adjacent characters are the same
+   - Return the longest possible "happy string"
+   
+   Key Idea:
+   - Use max-heap with (frequency, character) pairs
+   - Always try to pick the most frequent character
+   - Check if adding it would create 3+ consecutive same characters (last 2 are already the same)
+   - If yes, pick the second most frequent character instead
+   - Decrement frequency and reinsert if still > 0
+   - Greedy approach ensures maximum string length
+   
+   Simple: Max-heap picks most frequent character; if would repeat, use second most frequent instead.
+
+================================================================================
