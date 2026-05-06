@@ -457,9 +457,34 @@
 
 ═══════════════════════════════════════════════════════════════════════════════
 
-📋 SECTION 7: 2D WORD SEARCH
+📋 SECTION 7: MATCHSTICKS TO SQUARE
+   Link: https://leetcode.com/problems/matchsticks-to-square/
+   File: matchSticksTOSqare.cpp
 
-15. WORD SEARCH
+   Problem Explanation:
+   - Given an array of matchsticks, determine if they can form a square
+   - Every matchstick must be used exactly once
+   - All 4 sides of the square must have equal length
+
+   Key Idea:
+   - First check if total sum is divisible by 4
+   - Target side length = sum / 4
+   - Sort matchsticks in descending order so larger sticks are placed first
+   - Use backtracking to try placing each stick on one of the 4 sides
+   - If a side exceeds target, skip that choice
+   - If one empty side fails, do not try other empty sides (pruning)
+
+   Simple: Place sticks one by one on 4 sides, backtrack when a side becomes invalid
+
+   Time Complexity: O(4^n) in the worst case
+   Space Complexity: O(n) recursion depth
+
+
+═══════════════════════════════════════════════════════════════════════════════
+
+📋 SECTION 8: 2D WORD SEARCH
+
+16. WORD SEARCH
     Link: https://leetcode.com/problems/word-search/
     
     Problem Explanation:
@@ -482,9 +507,9 @@
 
 ═══════════════════════════════════════════════════════════════════════════════
 
-📋 SECTION 8: GRID OPTIMIZATION
+📋 SECTION 9: GRID OPTIMIZATION
 
-16. GRID WAYS OPTIMIZATION
+17. GRID WAYS OPTIMIZATION
     File: grid_ways_optimization.cpp
     
     Problem Explanation:
