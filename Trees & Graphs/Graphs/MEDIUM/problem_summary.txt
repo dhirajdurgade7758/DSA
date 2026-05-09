@@ -415,3 +415,22 @@
     Simple: Prim's MST with on-the-fly edge generation. Manhattan distance as weight.
 
 ================================================================================
+
+23. OPEN THE LOCK
+    Link: https://leetcode.com/problems/open-the-lock/
+    
+    Problem Explanation:
+    - Start from "0000" and reach target combination using minimum moves
+    - Each move rotates exactly one wheel by +1 or -1 (with wrap-around)
+    - Some combinations are deadends and cannot be visited
+    
+    Key Idea:
+    - Model each lock state as a node in an unweighted graph
+    - Use BFS from "0000" because BFS gives shortest path in unweighted graphs
+    - For each state, generate 8 neighbors (4 wheels x 2 rotations)
+    - Skip deadend states and already visited states
+    - Time: O(10^4), Space: O(10^4)
+    
+    Simple: BFS over lock combinations. First time we reach target is the minimum number of moves.
+
+================================================================================
