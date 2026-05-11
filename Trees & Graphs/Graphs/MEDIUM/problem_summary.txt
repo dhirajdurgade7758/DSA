@@ -434,3 +434,23 @@
     Simple: BFS over lock combinations. First time we reach target is the minimum number of moves.
 
 ================================================================================
+
+24. GRAPH VALID TREE
+    Link: https://leetcode.com/problems/graph-valid-tree/
+    
+    Problem Explanation:
+    - Determine if given edges form a valid tree
+    - Valid tree must have exactly n-1 edges, be connected, and have no cycles
+    - Given n nodes (0 to n-1) and a list of edges
+    
+    Key Idea:
+    - Build adjacency list representation
+    - Check condition 1: edges.size() must equal n-1 (necessary for tree)
+    - DFS cycle detection: track parent node to distinguish back edges
+    - When revisiting a visited node that's not the parent = cycle found
+    - Check condition 2: all n nodes are visited (connectivity)
+    - Time: O(V + E), Space: O(V)
+    
+    Simple: Verify edge count = n-1, detect cycles via parent-aware DFS, check all nodes visited.
+
+================================================================================
