@@ -454,3 +454,22 @@
     Simple: Verify edge count = n-1, detect cycles via parent-aware DFS, check all nodes visited.
 
 ================================================================================
+
+25. COURSE SCHEDULE IV (PREREQUISITE QUERIES)
+    Link: https://leetcode.com/problems/course-schedule-iv/
+    
+    Problem Explanation:
+    - Answer multiple queries asking whether one course is a prerequisite of another
+    - Given prerequisite pairs and queries over course pairs
+    - Need fast lookup for reachability between courses
+    
+    Key Idea:
+    - Build a reachability matrix for all course pairs
+    - Initialize direct prerequisite relationships
+    - Use Floyd-Warshall style transitive closure to propagate indirect prerequisites
+    - For each query, return whether reach[q[0]][q[1]] is true
+    - Time: O(N^3 + Q), Space: O(N^2)
+    
+    Simple: Precompute prerequisite reachability for all courses, then answer each query in O(1).
+
+================================================================================
